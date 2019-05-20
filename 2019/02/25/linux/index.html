@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="cd  进入指定目录12345cd dir          // 进入当前目录的子目录cd ..           // 进入当前目录的上一级目录cd /            // 进入系统根目录cd ~            // 进入当前用户主目录cd /usr/local   // 进入特定目录 ls 列出当前目录文件123456ls -a   // 列出当前目录所有文件，包含隐藏文件">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux命令速查笔记">
+<meta property="og:url" content="http://dullnull.org/2019/02/25/linux/index.html">
+<meta property="og:site_name" content="iisheng">
+<meta property="og:description" content="cd  进入指定目录12345cd dir          // 进入当前目录的子目录cd ..           // 进入当前目录的上一级目录cd /            // 进入系统根目录cd ~            // 进入当前用户主目录cd /usr/local   // 进入特定目录 ls 列出当前目录文件123456ls -a   // 列出当前目录所有文件，包含隐藏文件">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-05-20T16:15:11.459Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux命令速查笔记">
+<meta name="twitter:description" content="cd  进入指定目录12345cd dir          // 进入当前目录的子目录cd ..           // 进入当前目录的上一级目录cd /            // 进入系统根目录cd ~            // 进入当前用户主目录cd /usr/local   // 进入特定目录 ls 列出当前目录文件123456ls -a   // 列出当前目录所有文件，包含隐藏文件">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"hide"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://dullnull.org/2019/02/25/linux/">
+
+
+
+
+
+  <title>Linux命令速查笔记 | iisheng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">iisheng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/02/25/linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux命令速查笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-25T09:50:00+08:00">
+                2019-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index">
+                    <span itemprop="name">Tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="cd-进入指定目录"><a href="#cd-进入指定目录" class="headerlink" title="cd  进入指定目录"></a>cd  进入指定目录</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd dir          <span class="comment">// 进入当前目录的子目录</span></span><br><span class="line">cd ..           <span class="comment">// 进入当前目录的上一级目录</span></span><br><span class="line">cd /            <span class="comment">// 进入系统根目录</span></span><br><span class="line">cd ~            <span class="comment">// 进入当前用户主目录</span></span><br><span class="line">cd /usr/local   <span class="comment">// 进入特定目录</span></span><br></pre></td></tr></table></figure>
+<h3 id="ls-列出当前目录文件"><a href="#ls-列出当前目录文件" class="headerlink" title="ls 列出当前目录文件"></a>ls 列出当前目录文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ls -a   <span class="comment">// 列出当前目录所有文件，包含隐藏文件</span></span><br><span class="line">ls -l   <span class="comment">// 列出长数据串，包含文件的权限和属性 相当于 ll</span></span><br><span class="line">ls -i   <span class="comment">// 显示文件节点索引号</span></span><br><span class="line">ls -t   <span class="comment">// 按照修改时间，降序显示</span></span><br><span class="line">ls -rt  <span class="comment">// 按照修改时间，升序显示</span></span><br><span class="line">ls -alht  <span class="comment">// 按照修改时间，降序显示 h显示文件大小</span></span><br></pre></td></tr></table></figure>
+<font color="red" size="3" face="“Consolas”">个人感觉 ll -h 比较好用</font>
+
+<h3 id="mv-修改文件名字或移动位置"><a href="#mv-修改文件名字或移动位置" class="headerlink" title="mv  修改文件名字或移动位置"></a>mv  修改文件名字或移动位置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv file newname         <span class="comment">// 更改文件名字</span></span><br><span class="line">mv /dir/file /otherdir  <span class="comment">// 移动文件位置</span></span><br></pre></td></tr></table></figure>
+<h3 id="rm-删除"><a href="#rm-删除" class="headerlink" title="rm 删除"></a>rm 删除</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf dir  <span class="comment">// 递归删除指定目录中的所有文件</span></span><br><span class="line">rm file     <span class="comment">// 删除指定文件</span></span><br><span class="line">rm -rf *    <span class="comment">// 递归删除当前目录中的所有文件</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="cp-复制"><a href="#cp-复制" class="headerlink" title="cp 复制"></a>cp 复制</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -r /dir /other-dir    <span class="comment">// 将dir目录下所有文件，移动到other-dir目录中</span></span><br><span class="line">cp fileA fileB           <span class="comment">// 备份A文件，并改名</span></span><br></pre></td></tr></table></figure>
+<h3 id="kill-杀进程"><a href="#kill-杀进程" class="headerlink" title="kill 杀进程"></a>kill 杀进程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kill -<span class="number">9</span>  PID   <span class="comment">// 将PID进程结束</span></span><br><span class="line">kill -<span class="number">17</span> PID   <span class="comment">// 将PID进程暂停</span></span><br></pre></td></tr></table></figure>
+<h3 id="chown-修改文件所属用户或用户组"><a href="#chown-修改文件所属用户或用户组" class="headerlink" title="chown 修改文件所属用户或用户组"></a>chown 修改文件所属用户或用户组</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown -R root:root /tmp    <span class="comment">// 修改 tmp 目录所属用户为 root，用户组为 root</span></span><br><span class="line">chown iisheng file  <span class="comment">// 将file的所有者设置为iisheng</span></span><br></pre></td></tr></table></figure>
+<h3 id="chmod-给文件设置别人访问权限"><a href="#chmod-给文件设置别人访问权限" class="headerlink" title="chmod 给文件设置别人访问权限"></a>chmod 给文件设置别人访问权限</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod <span class="number">766</span> file <span class="comment">// 给某个文件别人访问权限</span></span><br><span class="line">chmod <span class="number">777</span> * <span class="comment">// 当前文件夹所有文件所有用户都可以读写</span></span><br></pre></td></tr></table></figure>
+<h3 id="cat-查看文件或写到指定文件内容"><a href="#cat-查看文件或写到指定文件内容" class="headerlink" title="cat  查看文件或写到指定文件内容"></a>cat  查看文件或写到指定文件内容</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat file                                  <span class="comment">// 显示整个文件内容</span></span><br><span class="line">cat -n file                               <span class="comment">// 显示整个文件内容，并由1开始对行数编号</span></span><br><span class="line">cat file &gt; newFile                        <span class="comment">// 将文件的内容写到新文件里面</span></span><br><span class="line">cat file | head -n <span class="number">3000</span> | tail -n +<span class="number">1000</span>   <span class="comment">// 查看文件的1000-3000行</span></span><br><span class="line">cat /proc/PID/status                      <span class="comment">// 查看指定进程的相关信息</span></span><br></pre></td></tr></table></figure>
+<h3 id="scp-终端远程下载上传文件"><a href="#scp-终端远程下载上传文件" class="headerlink" title="scp 终端远程下载上传文件"></a>scp 终端远程下载上传文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scp  root<span class="meta">@dullnull</span>.org:/path/filename ./                              <span class="comment">// 文件下载到本地当前目录</span></span><br><span class="line">scp  -P  <span class="number">2222</span>  /home/jdk.tar.gz   root<span class="meta">@dullnull</span>.org:/root/jdk.tar.gz  <span class="comment">// 上传文件</span></span><br><span class="line">scp  -P  <span class="number">2222</span>  -r /home/jdk/ root<span class="meta">@isheng</span>.me                        <span class="comment">// 上传文件目录</span></span><br><span class="line">scp  -P  <span class="number">2222</span>  -r /home/jdk/ root<span class="meta">@isheng</span>.me                        <span class="comment">// 使用IPV6寻址上传文件目录</span></span><br></pre></td></tr></table></figure>
+<h3 id="netstat-打印网络信息状态"><a href="#netstat-打印网络信息状态" class="headerlink" title="netstat  打印网络信息状态"></a>netstat  打印网络信息状态</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">netstat -at                <span class="comment">// 列出所有TCP端口</span></span><br><span class="line">netstat -au                <span class="comment">// 列出所有UDP端口</span></span><br><span class="line">netstat -lt                <span class="comment">// 列出所有监听TCP的端口</span></span><br><span class="line">netstat -lu                <span class="comment">// 列出所有监听UDP的端口</span></span><br><span class="line">netstat -r                 <span class="comment">// 显示核心路由信息</span></span><br><span class="line">netstat -anl | grep <span class="number">8888</span>   <span class="comment">// 查看相关端口号信息</span></span><br></pre></td></tr></table></figure>
+<h3 id="top-实时系统的查看系统运行情况"><a href="#top-实时系统的查看系统运行情况" class="headerlink" title="top  实时系统的查看系统运行情况"></a>top  实时系统的查看系统运行情况</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">top              <span class="comment">// 动态查看系统的整体运行情况</span></span><br><span class="line">top -p PID       <span class="comment">// 查看指定进程的运行情况</span></span><br><span class="line">top -u user      <span class="comment">// 查看指定用户的相关进程的运行情况</span></span><br></pre></td></tr></table></figure>
+<font color="red" size="3" face="“Consolas”">htop 和top类似功能</font>
+
+<h3 id="sed-处理文件并在控制台打印"><a href="#sed-处理文件并在控制台打印" class="headerlink" title="sed  处理文件并在控制台打印"></a>sed  处理文件并在控制台打印</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">'s/book/books/'</span> file   <span class="comment">// s 替换指定 字符，将book替换为books</span></span><br><span class="line">sed -i <span class="string">'s/book/books/g'</span> file  <span class="comment">// g 替换文本中内容 -i 直接编辑文本选项 匹配文件中第一个book替换为books</span></span><br></pre></td></tr></table></figure>
+<font color="red" size="3" face="“Consolas”">这个东西很多功能的，暂时不详细学习</font>
+
+<h3 id="less-从头查看日志"><a href="#less-从头查看日志" class="headerlink" title="less 从头查看日志"></a>less 从头查看日志</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">shift+g 跳转到文件底部</span><br><span class="line">按f键,是向前(下)查看  forword</span><br><span class="line">按b键,是向后(上)查看  backword</span><br><span class="line">q  退出</span><br></pre></td></tr></table></figure>
+<h3 id="more-从头查看日志"><a href="#more-从头查看日志" class="headerlink" title="more 从头查看日志"></a>more 从头查看日志</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">more file</span><br><span class="line">按ctrl+f键,是向前(下)查看  forword</span><br><span class="line">按ctrl+b键,是向后(上)查看 backword</span><br></pre></td></tr></table></figure>
+<h3 id="tail-动态查看文件尾部内容"><a href="#tail-动态查看文件尾部内容" class="headerlink" title="tail 动态查看文件尾部内容"></a>tail 动态查看文件尾部内容</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -<span class="number">500f</span> file  <span class="comment">// 动态查看文件尾部500行</span></span><br></pre></td></tr></table></figure>
+<h3 id="head-显示文件开头内容"><a href="#head-显示文件开头内容" class="headerlink" title="head 显示文件开头内容"></a>head 显示文件开头内容</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head -<span class="number">100f</span> file  <span class="comment">// 查看文件前100行</span></span><br></pre></td></tr></table></figure>
+<h3 id="rar-解压rar文件或压缩为rar文件"><a href="#rar-解压rar文件或压缩为rar文件" class="headerlink" title="rar 解压rar文件或压缩为rar文件"></a>rar 解压rar文件或压缩为rar文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rar x -ep2 filename    <span class="comment">// 将Windows rar文件 解压 utf-8编码的文件</span></span><br></pre></td></tr></table></figure>
+<h3 id="unzip-解压zip文件或压缩为zip文件"><a href="#unzip-解压zip文件或压缩为zip文件" class="headerlink" title="unzip 解压zip文件或压缩为zip文件"></a>unzip 解压zip文件或压缩为zip文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">unzip -d fileDir file.zip   <span class="comment">// zip 文件 解压</span></span><br><span class="line">unzip fileName <span class="comment">// 文件解压缩到当前目录</span></span><br><span class="line">unzip -O cp936 file.zip <span class="comment">//将Windows文件以utf-8编码解压缩</span></span><br></pre></td></tr></table></figure>
+<h3 id="service-启动查看进程状态"><a href="#service-启动查看进程状态" class="headerlink" title="service 启动查看进程状态"></a>service 启动查看进程状态</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service sshd status        <span class="comment">// 查看sshd的运行状态</span></span><br><span class="line">service sshd start        <span class="comment">// 启动服务</span></span><br></pre></td></tr></table></figure>
+<h3 id="systemctl-启动查看进程状态"><a href="#systemctl-启动查看进程状态" class="headerlink" title="systemctl 启动查看进程状态"></a>systemctl 启动查看进程状态</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl status httpd.service <span class="comment">// 查看httpd服务状态</span></span><br><span class="line">systemctl enable httpd.service <span class="comment">// 启动服务</span></span><br></pre></td></tr></table></figure>
+<h3 id="安装、卸载软件"><a href="#安装、卸载软件" class="headerlink" title="安装、卸载软件"></a>安装、卸载软件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo agt-get install git  <span class="comment">// 安装git</span></span><br><span class="line">sudo apt-get --purge remove git  <span class="comment">// 卸载git</span></span><br></pre></td></tr></table></figure>
+<h3 id="dpkg"><a href="#dpkg" class="headerlink" title="dpkg"></a>dpkg</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i *.deb    <span class="comment">// 安装.deb文件的软件</span></span><br><span class="line">sudo dpkg -P *.deb    <span class="comment">// 卸载.deb文件的软件</span></span><br></pre></td></tr></table></figure>
+<h3 id="shutdown"><a href="#shutdown" class="headerlink" title="shutdown"></a>shutdown</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now    <span class="comment">// 关机</span></span><br><span class="line">shutdown -r now    <span class="comment">// 重启</span></span><br></pre></td></tr></table></figure>
+<h3 id="df"><a href="#df" class="headerlink" title="df"></a>df</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -lh   <span class="comment">// 查看系统硬盘使用情况</span></span><br></pre></td></tr></table></figure>
+<h3 id="du"><a href="#du" class="headerlink" title="du"></a>du</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">du -sh     <span class="comment">// 查看文件目录大小</span></span><br><span class="line">du -ah     <span class="comment">// 查看文件目录下面各个文件大小</span></span><br><span class="line">du -h --max-depth=<span class="number">1</span> ./  <span class="comment">// 查看当前目录大小</span></span><br></pre></td></tr></table></figure>
+<h3 id="find-查找"><a href="#find-查找" class="headerlink" title="find 查找"></a>find 查找</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find . -name <span class="string">"*.c"</span> | xargs grep -H <span class="string">"intern("</span>  <span class="comment">// 查找当前目录指定文件后缀包含指定字符的结果</span></span><br><span class="line">find /home -name <span class="string">'*.md'</span> <span class="comment">// 查找指定目录包含指定字符串 的文件名路径</span></span><br></pre></td></tr></table></figure>
+<h3 id="grep-全面搜索正则表达式并把行打印出来"><a href="#grep-全面搜索正则表达式并把行打印出来" class="headerlink" title="grep 全面搜索正则表达式并把行打印出来"></a>grep 全面搜索正则表达式并把行打印出来</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -rn <span class="string">"hello,world!"</span> *  <span class="comment">// 在当前目录查找 hello,world 字符串</span></span><br><span class="line">grep <span class="string">'model name'</span> /proc/cpuinfo | wc -l  <span class="comment">// 查看系统有几个CPU</span></span><br></pre></td></tr></table></figure>
+<font color="red" size="3" face="“Consolas”">一般配合别的命令一起使用效果很强大</font>
+
+<h3 id="ps-显示当前进程状态"><a href="#ps-显示当前进程状态" class="headerlink" title="ps  显示当前进程状态"></a>ps  显示当前进程状态</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep nginx     <span class="comment">// 根据名字查找进程</span></span><br><span class="line">ps -ef | grep elastic   <span class="comment">// 根据名字查找进程</span></span><br></pre></td></tr></table></figure>
+<h3 id="lsof-查看进程打开的端口，查看打开文件的进程"><a href="#lsof-查看进程打开的端口，查看打开文件的进程" class="headerlink" title="lsof  查看进程打开的端口，查看打开文件的进程"></a>lsof  查看进程打开的端口，查看打开文件的进程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:<span class="number">8888</span>      <span class="comment">// 根据端口号查看相关进程信息</span></span><br></pre></td></tr></table></figure>
+<h3 id="iconv-转换文件编码"><a href="#iconv-转换文件编码" class="headerlink" title="iconv  转换文件编码"></a>iconv  转换文件编码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iconv -f gb2312 file -o newFile  <span class="comment">// 将Windows文件转换为Linux识别的文件</span></span><br><span class="line">iconv -f gbk -t utf8 file &gt; bewFile  <span class="comment">// 将Windows文件转换为Linux识别的文件</span></span><br></pre></td></tr></table></figure>
+<h3 id="curl-文本传输工具"><a href="#curl-文本传输工具" class="headerlink" title="curl 文本传输工具"></a>curl 文本传输工具</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">'Content-Type:application/json'</span> https:<span class="comment">//api.github.com -s | python -m json.tool  // GET请求</span></span><br><span class="line">curl -X PUT <span class="number">127.0</span>.0.1:<span class="number">9200</span>/job_index/_mapping/job -d <span class="string">'&#123;"properties":&#123;"new_field":&#123;"type":"integer"&#125;&#125;&#125;'</span>  <span class="comment">// PUT请求</span></span><br><span class="line">curl -X DELETE <span class="number">127.0</span>.0.1:<span class="number">9200</span>/agent_job_index  <span class="comment">// DELETE请求</span></span><br><span class="line">curl -X POST <span class="number">127.0</span>.0.1:<span class="number">9200</span>/job_index/job/_search -d <span class="string">'&#123;"query":&#123;"term":&#123;"id":"1"&#125;&#125;&#125;'</span> <span class="comment">// POST请求</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/git/" rel="prev" title="Git命令速查笔记">
+                Git命令速查笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="iisheng">
+            
+              <p class="site-author-name" itemprop="name">iisheng</p>
+              <p class="site-description motion-element" itemprop="description">Do the best of yourself.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/iisheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-blockks">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tech.meituan.com/" title="美团点评" target="_blank">美团点评</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.importnew.com/" title="ImportNew" target="_blank">ImportNew</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jm.taobao.org/" title="阿里中间件" target="_blank">阿里中间件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://howtodoinjava.com/" title="How to do in Java" target="_blank">How to do in Java</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#cd-进入指定目录"><span class="nav-number">1.</span> <span class="nav-text">cd  进入指定目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls-列出当前目录文件"><span class="nav-number">2.</span> <span class="nav-text">ls 列出当前目录文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mv-修改文件名字或移动位置"><span class="nav-number">3.</span> <span class="nav-text">mv  修改文件名字或移动位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rm-删除"><span class="nav-number">4.</span> <span class="nav-text">rm 删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cp-复制"><span class="nav-number">5.</span> <span class="nav-text">cp 复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kill-杀进程"><span class="nav-number">6.</span> <span class="nav-text">kill 杀进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chown-修改文件所属用户或用户组"><span class="nav-number">7.</span> <span class="nav-text">chown 修改文件所属用户或用户组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chmod-给文件设置别人访问权限"><span class="nav-number">8.</span> <span class="nav-text">chmod 给文件设置别人访问权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cat-查看文件或写到指定文件内容"><span class="nav-number">9.</span> <span class="nav-text">cat  查看文件或写到指定文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scp-终端远程下载上传文件"><span class="nav-number">10.</span> <span class="nav-text">scp 终端远程下载上传文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#netstat-打印网络信息状态"><span class="nav-number">11.</span> <span class="nav-text">netstat  打印网络信息状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#top-实时系统的查看系统运行情况"><span class="nav-number">12.</span> <span class="nav-text">top  实时系统的查看系统运行情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sed-处理文件并在控制台打印"><span class="nav-number">13.</span> <span class="nav-text">sed  处理文件并在控制台打印</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less-从头查看日志"><span class="nav-number">14.</span> <span class="nav-text">less 从头查看日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#more-从头查看日志"><span class="nav-number">15.</span> <span class="nav-text">more 从头查看日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tail-动态查看文件尾部内容"><span class="nav-number">16.</span> <span class="nav-text">tail 动态查看文件尾部内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#head-显示文件开头内容"><span class="nav-number">17.</span> <span class="nav-text">head 显示文件开头内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rar-解压rar文件或压缩为rar文件"><span class="nav-number">18.</span> <span class="nav-text">rar 解压rar文件或压缩为rar文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unzip-解压zip文件或压缩为zip文件"><span class="nav-number">19.</span> <span class="nav-text">unzip 解压zip文件或压缩为zip文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#service-启动查看进程状态"><span class="nav-number">20.</span> <span class="nav-text">service 启动查看进程状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#systemctl-启动查看进程状态"><span class="nav-number">21.</span> <span class="nav-text">systemctl 启动查看进程状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装、卸载软件"><span class="nav-number">22.</span> <span class="nav-text">安装、卸载软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dpkg"><span class="nav-number">23.</span> <span class="nav-text">dpkg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shutdown"><span class="nav-number">24.</span> <span class="nav-text">shutdown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#df"><span class="nav-number">25.</span> <span class="nav-text">df</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#du"><span class="nav-number">26.</span> <span class="nav-text">du</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find-查找"><span class="nav-number">27.</span> <span class="nav-text">find 查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grep-全面搜索正则表达式并把行打印出来"><span class="nav-number">28.</span> <span class="nav-text">grep 全面搜索正则表达式并把行打印出来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ps-显示当前进程状态"><span class="nav-number">29.</span> <span class="nav-text">ps  显示当前进程状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lsof-查看进程打开的端口，查看打开文件的进程"><span class="nav-number">30.</span> <span class="nav-text">lsof  查看进程打开的端口，查看打开文件的进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iconv-转换文件编码"><span class="nav-number">31.</span> <span class="nav-text">iconv  转换文件编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#curl-文本传输工具"><span class="nav-number">32.</span> <span class="nav-text">curl 文本传输工具</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mysql,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="启动1service mysql start 范式（1）第一范式（每列都保持原子性)（2）第二范式（非主属性不部分依赖于候选码）（3）第三范式（非主属性不传递依赖于候选码）（4）BC范式（任何属性不部分依赖与候选码，不传递依赖与候选码） 创建表SQL123456CREATE TABLE user (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,`name` V">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql语句学习总结">
+<meta property="og:url" content="http://dullnull.org/2019/04/22/mysql/index.html">
+<meta property="og:site_name" content="iisheng">
+<meta property="og:description" content="启动1service mysql start 范式（1）第一范式（每列都保持原子性)（2）第二范式（非主属性不部分依赖于候选码）（3）第三范式（非主属性不传递依赖于候选码）（4）BC范式（任何属性不部分依赖与候选码，不传递依赖与候选码） 创建表SQL123456CREATE TABLE user (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,`name` V">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-05-20T16:21:36.877Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql语句学习总结">
+<meta name="twitter:description" content="启动1service mysql start 范式（1）第一范式（每列都保持原子性)（2）第二范式（非主属性不部分依赖于候选码）（3）第三范式（非主属性不传递依赖于候选码）（4）BC范式（任何属性不部分依赖与候选码，不传递依赖与候选码） 创建表SQL123456CREATE TABLE user (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,`name` V">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"hide"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://dullnull.org/2019/04/22/mysql/">
+
+
+
+
+
+  <title>Mysql语句学习总结 | iisheng</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">iisheng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/04/22/mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mysql语句学习总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T09:50:00+08:00">
+                2019-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index">
+                    <span itemprop="name">Database</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br></pre></td></tr></table></figure>
+<h3 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h3><p>（1）第一范式（每列都保持原子性)<br>（2）第二范式（非主属性不部分依赖于候选码）<br>（3）第三范式（非主属性不传递依赖于候选码）<br>（4）BC范式（任何属性不部分依赖与候选码，不传递依赖与候选码）</p>
+<h3 id="创建表SQL"><a href="#创建表SQL" class="headerlink" title="创建表SQL"></a>创建表SQL</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> (</span><br><span class="line"><span class="string">`id`</span> <span class="built_in">INT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line"><span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">10</span>),</span><br><span class="line"><span class="string">`age`</span> <span class="built_in">INT</span> ,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">)<span class="keyword">ENGINE</span> = <span class="keyword">INNODB</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> = utf8</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="更新表中数据SQL"><a href="#更新表中数据SQL" class="headerlink" title="更新表中数据SQL"></a>更新表中数据SQL</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> user.name = <span class="string">"lisheng"</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="查询表中数据的SQL"><a href="#查询表中数据的SQL" class="headerlink" title="查询表中数据的SQL"></a>查询表中数据的SQL</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> user.name , user.age <span class="keyword">from</span> <span class="keyword">user</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="插入表中数据的SQL"><a href="#插入表中数据的SQL" class="headerlink" title="插入表中数据的SQL"></a>插入表中数据的SQL</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span> (<span class="keyword">id</span> ,<span class="keyword">name</span> ,age) <span class="keyword">values</span> (<span class="number">1</span>,<span class="string">"lisheng"</span>,<span class="number">12</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> user.name ,good.name <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">join</span> good <span class="keyword">on</span> user.id = good.user_id;</span><br></pre></td></tr></table></figure>
+<h3 id="删除表中数据的SQL"><a href="#删除表中数据的SQL" class="headerlink" title="删除表中数据的SQL"></a>删除表中数据的SQL</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="keyword">id</span> =<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="导出数据库"><a href="#导出数据库" class="headerlink" title="导出数据库"></a>导出数据库</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u dbuser -p dbname &gt; dbname.sql   <span class="comment">// 在/usr/local/mysql/bin目录执行</span></span><br></pre></td></tr></table></figure>
+<h3 id="导入sql数据库"><a href="#导入sql数据库" class="headerlink" title="导入sql数据库"></a>导入sql数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /home/abc/abc.sql;  // 登录到数据库内执行</span><br></pre></td></tr></table></figure>
+<h3 id="查看数据库表的编码格式"><a href="#查看数据库表的编码格式" class="headerlink" title="查看数据库表的编码格式"></a>查看数据库表的编码格式</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">table</span>-<span class="keyword">name</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="设置字段默认值"><a href="#设置字段默认值" class="headerlink" title="设置字段默认值"></a>设置字段默认值</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> <span class="keyword">ALTER</span>  <span class="keyword">COLUMN</span> <span class="keyword">name</span> <span class="keyword">SET</span> <span class="keyword">DEFAULT</span> <span class="string">""</span> ;</span><br></pre></td></tr></table></figure>
+<h3 id="修改表字段"><a href="#修改表字段" class="headerlink" title="修改表字段"></a>修改表字段</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> address <span class="keyword">MODIFY</span> <span class="keyword">COLUMN</span> city <span class="built_in">CHAR</span>(<span class="number">30</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="增加一个表的一个字段"><a href="#增加一个表的一个字段" class="headerlink" title="增加一个表的一个字段"></a>增加一个表的一个字段</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> wechat_auth <span class="keyword">ADD</span> user_id <span class="built_in">VARCHAR</span>(<span class="number">255</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="时间日期格式化"><a href="#时间日期格式化" class="headerlink" title="时间日期格式化"></a>时间日期格式化</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DATE_FORMAT(t1.create_time,'%Y-%c-%d %h:%i:%s') </span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">### 创建索引</span></span><br><span class="line"></span><br><span class="line">```sql</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> index_name</span><br><span class="line"><span class="keyword">ON</span> table_name (column_name)</span><br></pre></td></tr></table></figure>
+<h3 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">INDEX</span> index_name <span class="keyword">ON</span> tbl_name</span><br></pre></td></tr></table></figure>
+<h3 id="导入cvs文件"><a href="#导入cvs文件" class="headerlink" title="导入cvs文件"></a>导入cvs文件</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">INFILE</span> <span class="string">'[FILE]'</span>  </span><br><span class="line"><span class="keyword">INTO</span> <span class="keyword">TABLE</span> [<span class="keyword">TABLE</span>]；  </span><br><span class="line">或者  </span><br><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">INFILE</span> <span class="string">'[FILE]'</span>  </span><br><span class="line"><span class="keyword">INTO</span> <span class="keyword">TABLE</span> [<span class="keyword">TABLE</span>]  </span><br><span class="line"><span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">','</span>   </span><br><span class="line"><span class="keyword">OPTIONALLY</span> <span class="keyword">ENCLOSED</span> <span class="keyword">BY</span> <span class="string">'"'</span>   </span><br><span class="line"><span class="keyword">LINES</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\n'</span>；</span><br></pre></td></tr></table></figure>
+<h3 id="导出cvs文件"><a href="#导出cvs文件" class="headerlink" title="导出cvs文件"></a>导出cvs文件</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> [<span class="keyword">TABLE</span>]  </span><br><span class="line"><span class="keyword">INTO</span> <span class="keyword">OUTFILE</span> <span class="string">'[FILE]'</span>；  </span><br><span class="line">或者  </span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> [<span class="keyword">TABLE</span>]  </span><br><span class="line"><span class="keyword">INTO</span> <span class="keyword">OUTFILE</span> <span class="string">'[FILE]'</span>  </span><br><span class="line"><span class="keyword">FIELDS</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">','</span>   </span><br><span class="line"><span class="keyword">OPTIONALLY</span> <span class="keyword">ENCLOSED</span> <span class="keyword">BY</span> <span class="string">'"'</span>   </span><br><span class="line"><span class="keyword">LINES</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\n'</span>；</span><br></pre></td></tr></table></figure>
+<h3 id="查询指定字段重复的记录"><a href="#查询指定字段重复的记录" class="headerlink" title="查询指定字段重复的记录"></a>查询指定字段重复的记录</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">users</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> mobile <span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(mobile)&gt;<span class="number">1</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> create_time <span class="keyword">DESC</span> ;</span><br></pre></td></tr></table></figure>
+<h3 id="当数据库中不存在该记录的时候插入"><a href="#当数据库中不存在该记录的时候插入" class="headerlink" title="当数据库中不存在该记录的时候插入"></a>当数据库中不存在该记录的时候插入</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`table`</span> (value1, value2)</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"><span class="string">'stuff for value1'</span>,</span><br><span class="line"><span class="string">'stuff for value2'</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(<span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`table`</span></span><br><span class="line"><span class="keyword">WHERE</span> value1 = <span class="string">'stuff for value1'</span> <span class="keyword">AND</span> value2 = <span class="string">'stuff for value2'</span>)</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>例子<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`t_test`</span> (<span class="keyword">id</span>, <span class="keyword">name</span>)</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"><span class="number">1</span>,</span><br><span class="line"><span class="string">'李胜'</span></span><br><span class="line"><span class="keyword">FROM</span> DUAL</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(<span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`t_test`</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span> = <span class="number">1</span> <span class="keyword">AND</span> <span class="keyword">name</span> = <span class="string">'李胜'</span>)</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="给表中两个字段添加唯一性约束"><a href="#给表中两个字段添加唯一性约束" class="headerlink" title="给表中两个字段添加唯一性约束"></a>给表中两个字段添加唯一性约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`table`</span> <span class="keyword">ADD</span> <span class="keyword">unique</span> <span class="keyword">unique</span>-<span class="keyword">name</span> (column1,column2);</span><br></pre></td></tr></table></figure>
+<h3 id="删除唯一性约束"><a href="#删除唯一性约束" class="headerlink" title="删除唯一性约束"></a>删除唯一性约束</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 DROP KEY 约束名;</span><br></pre></td></tr></table></figure>
+<h3 id="inner-join-和left-join区别"><a href="#inner-join-和left-join区别" class="headerlink" title="inner join 和left join区别"></a>inner join 和left join区别</h3><p>left join (左连接) 返回包括左表中所有记录和右表中连接字段相等的记录<br><br>right join (右连接) 返回包括右表中所有记录和左表中连接字段相等的记录<br><br>inner join (等值连接) 只返回两个表中连接字段相等的记录</p>
+<h3 id="SQL-优化"><a href="#SQL-优化" class="headerlink" title="SQL 优化"></a>SQL 优化</h3><ol>
+<li>查询 seeker_job  去掉 seeker_job_suggest  关联</li>
+<li>优化模糊查询 改用单 like% reverse函数建立反向索引</li>
+<li>范围模糊查询 自增id优于uuid  使用count(1)也是自增id更好</li>
+<li>在适当的地方添加索引   （MySQL仅能对索引最左边的前缀进行有效的查找）</li>
+<li>where语句后面的顺序 以及 建立 索引的顺序  （最左前缀匹配原则）</li>
+<li>（尽量选择区分度高的列作为索引。）( = 和 in 可以乱序)</li>
+<li>（尽量扩展索引，少去新建索引）</li>
+<li>不以通配符开头的sql语句 like “%aaa” ALL 全表扫描 like “aaaa%” range 索引</li>
+<li>尽量避免 null值判断 应该使用 0 默认值的 方法</li>
+<li>避免 select * </li>
+<li>order by语句后面跟索引   排序的顺序 很重要 很重要</li>
+<li>提高GROUP BY 语句的效率, 可以通过将不需要的记录在GROUP BY 之前过滤掉</li>
+<li>能用DISTINCT的就不用GROUP BY</li>
+</ol>
+<h3 id="查看编码"><a href="#查看编码" class="headerlink" title="查看编码"></a>查看编码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like <span class="string">'%char%'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="查看表编码"><a href="#查看表编码" class="headerlink" title="查看表编码"></a>查看表编码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show create table &lt;表名&gt;;</span><br><span class="line"></span><br><span class="line">例：show create table user;</span><br></pre></td></tr></table></figure>
+<h3 id="查看字段编码"><a href="#查看字段编码" class="headerlink" title="查看字段编码"></a>查看字段编码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show full columns from &lt;表名&gt;;</span><br><span class="line"></span><br><span class="line">例： show full column from user;</span><br></pre></td></tr></table></figure>
+<h3 id="修改数据库编码格式"><a href="#修改数据库编码格式" class="headerlink" title="修改数据库编码格式"></a>修改数据库编码格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter database &lt;数据库名&gt; character set utf8mb4;</span><br><span class="line">例：alter database db_user character set utf8mb4;</span><br></pre></td></tr></table></figure>
+<h3 id="修改表编码"><a href="#修改表编码" class="headerlink" title="修改表编码"></a>修改表编码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table &lt;表名&gt; character set utf8mb4;</span><br><span class="line">例：alter table user character set utf8mb4;</span><br></pre></td></tr></table></figure>
+<h3 id="修改字段编码"><a href="#修改字段编码" class="headerlink" title="修改字段编码"></a>修改字段编码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;表名&gt; MODIFY COLUMN &lt;字段名&gt; &lt;字段类型&gt; CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</span><br><span class="line">例：<span class="function">ALTER TABLE comment MODIFY COLUMN content <span class="title">VARCHAR</span><span class="params">(<span class="number">512</span>)</span> CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="查询sql不走缓存"><a href="#查询sql不走缓存" class="headerlink" title="查询sql不走缓存"></a>查询sql不走缓存</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT SQL_NO_CACHE * FROM users;</span><br></pre></td></tr></table></figure>
+<h3 id="修改表字符集和校对集"><a href="#修改表字符集和校对集" class="headerlink" title="修改表字符集和校对集"></a>修改表字符集和校对集</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER  TABLE user</span><br><span class="line">CHARACTER SET utf8mb4</span><br><span class="line">COLLATE utf8mb4_general_ci;</span><br></pre></td></tr></table></figure>
+<h3 id="修改数据库字符集和校对集"><a href="#修改数据库字符集和校对集" class="headerlink" title="修改数据库字符集和校对集"></a>修改数据库字符集和校对集</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE mydata</span><br><span class="line">CHARACTER SET utf8mb4</span><br><span class="line">COLLATE utf8mb4_general_ci;</span><br></pre></td></tr></table></figure>
+<h3 id="修改表字段相关信息"><a href="#修改表字段相关信息" class="headerlink" title="修改表字段相关信息"></a>修改表字段相关信息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE `job_auth_record` CHANGE `id` `id` VARCHAR(<span class="number">32</span>) CHARACTER SET utf8mb4 NOT NULL COMMENT <span class="string">'主键id'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="Mysql-ASC-和-DESC-索引-怎么走的-？？？"><a href="#Mysql-ASC-和-DESC-索引-怎么走的-？？？" class="headerlink" title="Mysql ASC 和 DESC 索引 怎么走的 ？？？"></a>Mysql ASC 和 DESC 索引 怎么走的 ？？？</h3><h3 id="分组差查询数量-超级吊"><a href="#分组差查询数量-超级吊" class="headerlink" title="分组差查询数量  超级吊"></a>分组差查询数量  超级吊</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">company_id,</span><br><span class="line">count(*) AS counts</span><br><span class="line">FROM seeker_job</span><br><span class="line"><span class="function">WHERE company_id <span class="title">IN</span> <span class="params">(<span class="string">"8a9c889c5dcbe37c015dcf16e284001f"</span>, <span class="string">"04be17537c5e4b299c135eeaadb5e131"</span>)</span></span></span><br><span class="line"><span class="function">GROUP BY company_id</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="修改校验集"><a href="#修改校验集" class="headerlink" title="修改校验集"></a>修改校验集</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE insurance_insured CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;</span><br><span class="line"></span><br><span class="line">ALTER  TABLE insurance_insured CHARACTER SET utf8mb4;</span><br><span class="line"></span><br><span class="line">ALTER TABLE `insurance_insured` CHANGE `name` `name`  varchar(<span class="number">64</span>) COLLATE utf8mb4_general_ci DEFAULT NULL;</span><br></pre></td></tr></table></figure>
+<h3 id="忽略某个索引"><a href="#忽略某个索引" class="headerlink" title="忽略某个索引"></a>忽略某个索引</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * <span class="function">FROM seeker_job IGNORE <span class="title">INDEX</span><span class="params">(idx_modify_time)</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="DISTINCT-COUNT"><a href="#DISTINCT-COUNT" class="headerlink" title="DISTINCT COUNT"></a>DISTINCT COUNT</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SELECT  <span class="title">count</span><span class="params">(DISTINCT j1.job_id,j1.agent_company_id)</span></span></span><br><span class="line"><span class="function">FROM job_agent j1 INNER JOIN job_agent j2 ON j1.job_id </span>= j2.job_id AND j1.agent_company_id = j2.agent_company_id AND j1.id != j2.id ;</span><br></pre></td></tr></table></figure>
+<h4 id="DISTINCT"><a href="#DISTINCT" class="headerlink" title="DISTINCT"></a>DISTINCT</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT  DISTINCT j1.job_id,j1.agent_company_id</span><br><span class="line">FROM job_agent j1 INNER JOIN job_agent j2 ON j1.job_id = j2.job_id AND j1.agent_company_id = j2.agent_company_id AND j1.id != j2.id ;</span><br></pre></td></tr></table></figure>
+<h4 id="查找重复字段记录"><a href="#查找重复字段记录" class="headerlink" title="查找重复字段记录"></a>查找重复字段记录</h4><p><a href="https://www.cnblogs.com/jiangxiaobo/p/6589541.html" target="_blank" rel="noopener">https://www.cnblogs.com/jiangxiaobo/p/6589541.html</a></p>
+<h3 id="修改表编码个字符集"><a href="#修改表编码个字符集" class="headerlink" title="修改表编码个字符集"></a>修改表编码个字符集</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ALTER  TABLE apply_stencil CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;</span><br><span class="line"></span><br><span class="line"><span class="function">ALTER TABLE apply_stencil MODIFY COLUMN id <span class="title">VARCHAR</span><span class="params">(<span class="number">32</span>)</span> CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">ALTER TABLE apply_stencil MODIFY COLUMN apply_id <span class="title">VARCHAR</span><span class="params">(<span class="number">32</span>)</span> CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="查询一个库里面有多少表"><a href="#查询一个库里面有多少表" class="headerlink" title="查询一个库里面有多少表"></a>查询一个库里面有多少表</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SELECT <span class="title">COUNT</span><span class="params">(*)</span> TABLES, table_schema FROM information_schema.TABLES  WHERE table_schema </span>= <span class="string">'goabroad'</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/15/vim/" rel="next" title="vim学习">
+                <i class="fa fa-chevron-left"></i> vim学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/29/redis/" rel="prev" title="Redis基础知识">
+                Redis基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="iisheng">
+            
+              <p class="site-author-name" itemprop="name">iisheng</p>
+              <p class="site-description motion-element" itemprop="description">Do the best of yourself.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/iisheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-blockks">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tech.meituan.com/" title="美团点评" target="_blank">美团点评</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.importnew.com/" title="ImportNew" target="_blank">ImportNew</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jm.taobao.org/" title="阿里中间件" target="_blank">阿里中间件</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://howtodoinjava.com/" title="How to do in Java" target="_blank">How to do in Java</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-number">1.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范式"><span class="nav-number">2.</span> <span class="nav-text">范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表SQL"><span class="nav-number">3.</span> <span class="nav-text">创建表SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新表中数据SQL"><span class="nav-number">4.</span> <span class="nav-text">更新表中数据SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询表中数据的SQL"><span class="nav-number">5.</span> <span class="nav-text">查询表中数据的SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入表中数据的SQL"><span class="nav-number">6.</span> <span class="nav-text">插入表中数据的SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接"><span class="nav-number">7.</span> <span class="nav-text">连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除表中数据的SQL"><span class="nav-number">8.</span> <span class="nav-text">删除表中数据的SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导出数据库"><span class="nav-number">9.</span> <span class="nav-text">导出数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入sql数据库"><span class="nav-number">10.</span> <span class="nav-text">导入sql数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看数据库表的编码格式"><span class="nav-number">11.</span> <span class="nav-text">查看数据库表的编码格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置字段默认值"><span class="nav-number">12.</span> <span class="nav-text">设置字段默认值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表字段"><span class="nav-number">13.</span> <span class="nav-text">修改表字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加一个表的一个字段"><span class="nav-number">14.</span> <span class="nav-text">增加一个表的一个字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间日期格式化"><span class="nav-number">15.</span> <span class="nav-text">时间日期格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除索引"><span class="nav-number">16.</span> <span class="nav-text">删除索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入cvs文件"><span class="nav-number">17.</span> <span class="nav-text">导入cvs文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导出cvs文件"><span class="nav-number">18.</span> <span class="nav-text">导出cvs文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询指定字段重复的记录"><span class="nav-number">19.</span> <span class="nav-text">查询指定字段重复的记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当数据库中不存在该记录的时候插入"><span class="nav-number">20.</span> <span class="nav-text">当数据库中不存在该记录的时候插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给表中两个字段添加唯一性约束"><span class="nav-number">21.</span> <span class="nav-text">给表中两个字段添加唯一性约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除唯一性约束"><span class="nav-number">22.</span> <span class="nav-text">删除唯一性约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inner-join-和left-join区别"><span class="nav-number">23.</span> <span class="nav-text">inner join 和left join区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-优化"><span class="nav-number">24.</span> <span class="nav-text">SQL 优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看编码"><span class="nav-number">25.</span> <span class="nav-text">查看编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看表编码"><span class="nav-number">26.</span> <span class="nav-text">查看表编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看字段编码"><span class="nav-number">27.</span> <span class="nav-text">查看字段编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改数据库编码格式"><span class="nav-number">28.</span> <span class="nav-text">修改数据库编码格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表编码"><span class="nav-number">29.</span> <span class="nav-text">修改表编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改字段编码"><span class="nav-number">30.</span> <span class="nav-text">修改字段编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询sql不走缓存"><span class="nav-number">31.</span> <span class="nav-text">查询sql不走缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表字符集和校对集"><span class="nav-number">32.</span> <span class="nav-text">修改表字符集和校对集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改数据库字符集和校对集"><span class="nav-number">33.</span> <span class="nav-text">修改数据库字符集和校对集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表字段相关信息"><span class="nav-number">34.</span> <span class="nav-text">修改表字段相关信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql-ASC-和-DESC-索引-怎么走的-？？？"><span class="nav-number">35.</span> <span class="nav-text">Mysql ASC 和 DESC 索引 怎么走的 ？？？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组差查询数量-超级吊"><span class="nav-number">36.</span> <span class="nav-text">分组差查询数量  超级吊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改校验集"><span class="nav-number">37.</span> <span class="nav-text">修改校验集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#忽略某个索引"><span class="nav-number">38.</span> <span class="nav-text">忽略某个索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DISTINCT-COUNT"><span class="nav-number">38.1.</span> <span class="nav-text">DISTINCT COUNT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DISTINCT"><span class="nav-number">38.2.</span> <span class="nav-text">DISTINCT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找重复字段记录"><span class="nav-number">38.3.</span> <span class="nav-text">查找重复字段记录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表编码个字符集"><span class="nav-number">39.</span> <span class="nav-text">修改表编码个字符集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询一个库里面有多少表"><span class="nav-number">40.</span> <span class="nav-text">查询一个库里面有多少表</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iisheng</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
