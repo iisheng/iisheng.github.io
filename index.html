@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="Do the best of yourself.">
+<meta name="description" content="男儿当知耻而后勇。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="iisheng">
-<meta property="og:url" content="http://dullnull.org/index.html">
+<meta property="og:url" content="https//iisheng.cn/index.html">
 <meta property="og:site_name" content="iisheng">
-<meta property="og:description" content="Do the best of yourself.">
+<meta property="og:description" content="男儿当知耻而后勇。">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iisheng">
-<meta name="twitter:description" content="Do the best of yourself.">
+<meta name="twitter:description" content="男儿当知耻而后勇。">
 
 
 
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://dullnull.org/">
+  <link rel="canonical" href="https//iisheng.cn/">
 
 
 
@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/05/13/sort/">
+    <link itemprop="mainEntityOfPage" href="https//iisheng.cn/2019/05/13/sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
@@ -389,7 +389,7 @@
           <h3 id="一、冒泡排序"><a href="#一、冒泡排序" class="headerlink" title="一、冒泡排序"></a>一、冒泡排序</h3><p>临近的数字两两进行比较，按照从小到大或者从大到小的顺序交换，这样一趟后，最大或者最小的数字被交换到最后一位。<br>然后再从头开始两两进行比较交换，直到排序完成。</p>
 <p>　　交换数组中两个元素的方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> swap=arr[i];</span><br><span class="line">	arr[i]=arr[j];</span><br><span class="line">	arr[j]=swap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>冒泡排序算法代码实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> len = arr.length;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (arr[j + <span class="number">1</span>] &lt; arr[j])</span><br><span class="line">				swap(arr, j + <span class="number">1</span>, j);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j + <span class="number">1</span>] &lt; arr[j])</span><br><span class="line">		swap(arr, j + <span class="number">1</span>, j);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/05/13/sort/#more" rel="contents">
@@ -443,7 +443,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/05/06/uml/">
+    <link itemprop="mainEntityOfPage" href="https//iisheng.cn/2019/05/06/uml/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
@@ -594,7 +594,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/04/29/redis/">
+    <link itemprop="mainEntityOfPage" href="https//iisheng.cn/2019/04/29/redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
@@ -746,7 +746,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/04/22/mysql/">
+    <link itemprop="mainEntityOfPage" href="https//iisheng.cn/2019/04/22/mysql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
@@ -894,7 +894,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/04/15/vim/">
+    <link itemprop="mainEntityOfPage" href="https//iisheng.cn/2019/04/15/vim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
@@ -1043,7 +1043,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/04/08/curl/">
+    <link itemprop="mainEntityOfPage" href="https//iisheng.cn/2019/04/08/curl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
@@ -1191,7 +1191,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/04/01/restful/">
+    <link itemprop="mainEntityOfPage" href="https//iisheng.cn/2019/04/01/restful/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
@@ -1347,7 +1347,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/03/25/servlet/">
+    <link itemprop="mainEntityOfPage" href="https//iisheng.cn/2019/03/25/servlet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
@@ -1520,7 +1520,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/03/18/arraylist/">
+    <link itemprop="mainEntityOfPage" href="https//iisheng.cn/2019/03/18/arraylist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
@@ -1668,7 +1668,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://dullnull.org/2019/03/11/elasticsearch/">
+    <link itemprop="mainEntityOfPage" href="https//iisheng.cn/2019/03/11/elasticsearch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
@@ -1846,7 +1846,7 @@
               <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="iisheng">
             
               <p class="site-author-name" itemprop="name">iisheng</p>
-              <p class="site-description motion-element" itemprop="description">Do the best of yourself.</p>
+              <p class="site-description motion-element" itemprop="description">男儿当知耻而后勇。</p>
           </div>
 
           <nav class="site-state motion-element">
