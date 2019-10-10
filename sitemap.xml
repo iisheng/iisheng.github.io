@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iisheng.cn/404.html</loc>
+    
+    <lastmod>2019-10-10T03:50:52.060Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://iisheng.cn/2019/09/03/divide-conquer/</loc>
     
     <lastmod>2019-10-09T18:15:39.502Z</lastmod>
@@ -117,13 +124,6 @@
     <loc>https://iisheng.cn/categories/index.html</loc>
     
     <lastmod>2019-02-18T06:18:04.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://iisheng.cn/404.html</loc>
-    
-    <lastmod>2017-11-24T16:22:38.000Z</lastmod>
     
   </url>
   
