@@ -261,6 +261,435 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/20/interview-mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/10/20/interview-mysql/" class="post-title-link" itemprop="url">面试准备系列之MySQL</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-20 09:50:00 / 修改时间：17:23:59" itemprop="dateCreated datePublished" datetime="2019-10-20T09:50:00+08:00">2019-10-20</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😜面试系列/" itemprop="url" rel="index">
+                    <span itemprop="name">😜面试系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="MySQL范式与反模式"><a href="#MySQL范式与反模式" class="headerlink" title="MySQL范式与反模式"></a>MySQL范式与反模式</h3><h4 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h4><p>第一范式，强调属性的原子性约束，要求属性具有原子性，不可再分解。</p>
+<p>举个例子，活动表（活动编码，活动名称，活动地址），假设这个场景中，活动地址可以细分为国家、省份、城市、市区、位置，那么就没有达到第一范式。</p>
+<h4 id="第二范式"><a href="#第二范式" class="headerlink" title="第二范式"></a>第二范式</h4><p>第二范式，强调记录的唯一性约束，表必须有一个主键，并且没有包含在主键中的列必须完全依赖于主键，而不能只依赖于主键的一部分。</p>
+<p>举个例子，版本表（版本编码，版本名称，产品编码，产品名称），其中主键是（版本编码，产品编码），这个场景中，数据库设计并不符合第二范式，因为产品名称只依赖于产品编码。存在部分依赖。所以，为了使其满足第二范式，可以改造成两个表：版本表（版本编码，产品编码）和产品表（产品编码，产品名称）。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/10/20/interview-mysql/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/19/interview-java-jvm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/10/19/interview-java-jvm/" class="post-title-link" itemprop="url">面试准备系列之Java虚拟机</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-19 09:50:00" itemprop="dateCreated datePublished" datetime="2019-10-19T09:50:00+08:00">2019-10-19</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-20 15:23:20" itemprop="dateModified" datetime="2019-10-20T15:23:20+08:00">2019-10-20</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😜面试系列/" itemprop="url" rel="index">
+                    <span itemprop="name">😜面试系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="什么是Java虚拟机？"><a href="#什么是Java虚拟机？" class="headerlink" title="什么是Java虚拟机？"></a>什么是Java虚拟机？</h3><p>Java虚拟机是一个可以执行Java字节码（Java 源文件被编译成能被 Java 虚拟机执行的字节码文件( .class )）的虚拟机进程。</p>
+<p>Java 被设计成允许应用程序可以运行在任意的平台，而不需要程序员为每一个平台单独重写或者是重新编译。Java 虚拟机让这个变为可能，因为它知道底层硬件平台的指令长度和其他特性。</p>
+<p>但是，跨平台的是 Java 程序(包括字节码文件)，，而不是 JVM。JVM 是用 C/C++ 开发的，是编译后的机器码，不能跨平台，不同平台下需要安装不同版本的 JVM 。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/10/19/interview-java-jvm/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/18/interview-java-concurrency/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/10/18/interview-java-concurrency/" class="post-title-link" itemprop="url">面试准备系列之Java并发</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-18 09:50:00" itemprop="dateCreated datePublished" datetime="2019-10-18T09:50:00+08:00">2019-10-18</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-20 15:23:30" itemprop="dateModified" datetime="2019-10-20T15:23:30+08:00">2019-10-20</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😜面试系列/" itemprop="url" rel="index">
+                    <span itemprop="name">😜面试系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Java中用到的线程调度算法是什么"><a href="#Java中用到的线程调度算法是什么" class="headerlink" title="Java中用到的线程调度算法是什么"></a>Java中用到的线程调度算法是什么</h4><p>有两种调度模型：分时调度模型和抢占式调度模型。</p>
+<ul>
+<li><p>分时调度模型是指让所有的线程轮流获得 CPU 的使用权,并且平均分配每个线程占用的 CPU 的时间片这个也比较好理解。</p>
+</li>
+<li><p>Java 虚拟机采用抢占式调度模型，是指优先让可运行池中优先级高的线程占用 CPU ，如果可运行池中的线程优先级相同，那么就随机选择一个线程，使其占用 CPU 。处于运行状态的线程会一直运行，直至它不得不放弃 CPU 。</p>
+</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/10/18/interview-java-concurrency/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/17/interview-spring-mvc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/10/17/interview-spring-mvc/" class="post-title-link" itemprop="url">面试准备系列之Spring MVC</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-17 09:50:00" itemprop="dateCreated datePublished" datetime="2019-10-17T09:50:00+08:00">2019-10-17</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-20 15:25:35" itemprop="dateModified" datetime="2019-10-20T15:25:35+08:00">2019-10-20</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😜面试系列/" itemprop="url" rel="index">
+                    <span itemprop="name">😜面试系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Spring-MVC-各组件以及功能"><a href="#Spring-MVC-各组件以及功能" class="headerlink" title="Spring MVC 各组件以及功能"></a>Spring MVC 各组件以及功能</h3><ul>
+<li>MultipartResolver：内容类型( Content-Type )为 <code>multipart/*</code> 的请求的解析器接口</li>
+<li>LocaleResolver：本地化( 国际化 )解析器接口</li>
+<li>ThemeResolver：主题解析器接口(例如，从请求头 User-Agent ，判断使用 PC 端，还是移动端的主题)</li>
+<li>HandlerMapping：处理器匹配接口，根据请求( handler )获得其的处理器( handler )和拦截器们( HandlerInterceptor 数组 )</li>
+<li>HandlerAdapter：处理器适配器接口</li>
+<li>HandlerExceptionResolver：处理器异常解析器接口，将处理器( handler )执行时发生的异常，解析( 转换 )成对应的 ModelAndView 结果</li>
+<li>RequestToViewNameTranslator：请求到视图名的转换器接口</li>
+<li>ViewResolver：实体解析器接口，根据视图名和国际化，获得最终的视图 View 对象</li>
+<li>FlashMapManager：FlashMap 管理器接口，负责重定向时，保存参数到临时存储中</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/10/17/interview-spring-mvc/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/09/time-mgt/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -276,7 +705,7 @@
         <h1 class="post-title" itemprop="name headline">
           
             
-            <a href="/2019/10/09/time-mgt/" class="post-title-link" itemprop="url">时间管理：如何充分利用你的24小时</a>
+            <a href="/2019/10/09/time-mgt/" class="post-title-link" itemprop="url">如何充分利用你的24小时</a>
           
         </h1>
 
@@ -291,11 +720,19 @@
                 
               
 
-              <time title="创建时间：2019-10-09 01:47:00 / 修改时间：02:29:59" itemprop="dateCreated datePublished" datetime="2019-10-09T01:47:00+08:00">2019-10-09</time>
+              <time title="创建时间：2019-10-09 01:47:00" itemprop="dateCreated datePublished" datetime="2019-10-09T01:47:00+08:00">2019-10-09</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-20 17:26:25" itemprop="dateModified" datetime="2019-10-20T17:26:25+08:00">2019-10-20</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -305,8 +742,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/心得/" itemprop="url" rel="index">
-                    <span itemprop="name">心得</span>
+                  <a href="/categories/😮心得体会/" itemprop="url" rel="index">
+                    <span itemprop="name">😮心得体会</span>
                   </a>
                 </span>
 
@@ -396,6 +833,438 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/02/interview-java-collection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/10/02/interview-java-collection/" class="post-title-link" itemprop="url">面试准备系列之Java集合</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-02 09:50:00" itemprop="dateCreated datePublished" datetime="2019-10-02T09:50:00+08:00">2019-10-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-20 18:58:43" itemprop="dateModified" datetime="2019-10-20T18:58:43+08:00">2019-10-20</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😜面试系列/" itemprop="url" rel="index">
+                    <span itemprop="name">😜面试系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Java集合框架都有哪些？"><a href="#Java集合框架都有哪些？" class="headerlink" title="Java集合框架都有哪些？"></a>Java集合框架都有哪些？</h3><h4 id="实现Collection接口的，存放特定元素的集合的对象"><a href="#实现Collection接口的，存放特定元素的集合的对象" class="headerlink" title="实现Collection接口的，存放特定元素的集合的对象"></a>实现<code>Collection</code>接口的，存放特定元素的集合的对象</h4><p><img src="https://static001.geekbang.org/resource/image/67/c7/675536edf1563b11ab7ead0def1215c7.png" alt></p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/10/02/interview-java-collection/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/09/24/interview-java-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/09/24/interview-java-basic/" class="post-title-link" itemprop="url">面试准备系列之Java基础</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-24 09:50:00" itemprop="dateCreated datePublished" datetime="2019-09-24T09:50:00+08:00">2019-09-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-20 15:23:00" itemprop="dateModified" datetime="2019-10-20T15:23:00+08:00">2019-10-20</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😜面试系列/" itemprop="url" rel="index">
+                    <span itemprop="name">😜面试系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="什么是面向对象？"><a href="#什么是面向对象？" class="headerlink" title="什么是面向对象？"></a>什么是面向对象？</h3><p><strong>面向过程</strong>是分析出实现需求所需要的步骤，通过函数一步一步实现这些步骤，然后依次调用。<strong>将实现步骤化</strong>。</p>
+<p><strong>面向对象</strong>是把整个需求按照特点、功能划分，将这些存在共性的部分封装成对象。创建对象不是为了完成某一个步骤，而是描述某个事物在解决问题中的行文。<strong>将实现行为化</strong>。</p>
+<h4 id="面向对象的特征"><a href="#面向对象的特征" class="headerlink" title="面向对象的特征"></a>面向对象的特征</h4><ul>
+<li>封装：隐藏对象内部的特性和行为。</li>
+<li>继承：子类继承父类的特性和行为。</li>
+<li>多态：不同类的对象，对同一消息，做出不同响应。</li>
+<li>抽象：把一类事物共有的属性和行为提出来，形成一个模板。</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/09/24/interview-java-basic/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/09/17/greedy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/09/17/greedy/" class="post-title-link" itemprop="url">常用算法总结之贪心算法</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-17 09:50:00" itemprop="dateCreated datePublished" datetime="2019-09-17T09:50:00+08:00">2019-09-17</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-20 23:42:29" itemprop="dateModified" datetime="2019-10-20T23:42:29+08:00">2019-10-20</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😒算法/" itemprop="url" rel="index">
+                    <span itemprop="name">😒算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="贪心算法思想"><a href="#贪心算法思想" class="headerlink" title="贪心算法思想"></a>贪心算法思想</h3><p><strong>贪心算法</strong>就是这样的算法，它在每一步都做出当时看起来最佳的选择。也就是说<strong>它总是做出局部最优的选择，寄希望这样的选择导致全局最优解。</strong></p>
+<blockquote>
+<p>贪心算法并不保证得到最优解，但很多问题确实可以求得最优解。</p>
+</blockquote>
+<h3 id="我们可以按如下步骤设计贪心算法："><a href="#我们可以按如下步骤设计贪心算法：" class="headerlink" title="我们可以按如下步骤设计贪心算法："></a>我们可以按如下步骤设计贪心算法：</h3><ol>
+<li>将最优化问题转化为这样的形式：对其做出一次选择后，只剩下一个子问题需要求解。</li>
+<li>证明做出贪心选择后，原问题总是存在最优解，即贪心选择总是安全的。</li>
+<li>证明做出选择后，剩余的子问题满足性质：其最优解与贪心选择组合即可得到原问题的最优解，这样就得到了最优子结构。</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/09/17/greedy/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/09/10/dp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/09/10/dp/" class="post-title-link" itemprop="url">常用算法总结之动态规划</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-10 09:50:00" itemprop="dateCreated datePublished" datetime="2019-09-10T09:50:00+08:00">2019-09-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-20 22:49:42" itemprop="dateModified" datetime="2019-10-20T22:49:42+08:00">2019-10-20</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😒算法/" itemprop="url" rel="index">
+                    <span itemprop="name">😒算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="动态规划算法思想"><a href="#动态规划算法思想" class="headerlink" title="动态规划算法思想"></a>动态规划算法思想</h4><p>动态规划（dynamic programming）与分治方法相似，都是通过组合子问题的解来求解原问题（在这里，programming 指的是一种表格法）。分治法将问题划分为互不相交的子问题，再将他们的解组合起来，求出原问题的解。与之相反，动态规划应用于子问题重叠的情况，即<strong>不同的子问题具有公共的子问题</strong>（子问题的求解释递归进行的，将其划分为更小的子子问题）。在这种情况下，分治法会做许多不必要的工作，它会反复求解那些公共子问题。而动态规划算法对每个子问题只求解一次，将其解保存在一个表格中，从而无需每次求解一个子问题时都重新计算，避免了这种不必要的计算工作。</p>
+<h4 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h4><p>动态规划方法通常用来求解<strong>最优化问题</strong>。这类问题可以有很多可行解，每个解都有一个值，我们希望寻找具有最优值（最小值或最大值）的解。我们称这样的解为问题的一个最优解（an optimal solution），而不是最优解（the optimal solution），因为可能有多个解都达到最优值。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/09/10/dp/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/09/03/divide-conquer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -411,7 +1280,7 @@
         <h1 class="post-title" itemprop="name headline">
           
             
-            <a href="/2019/09/03/divide-conquer/" class="post-title-link" itemprop="url">五大算法之分治</a>
+            <a href="/2019/09/03/divide-conquer/" class="post-title-link" itemprop="url">常用算法总结之分治算法</a>
           
         </h1>
 
@@ -437,7 +1306,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-10 02:15:39" itemprop="dateModified" datetime="2019-10-10T02:15:39+08:00">2019-10-10</time>
+                <time title="修改时间：2019-10-21 15:21:39" itemprop="dateModified" datetime="2019-10-21T15:21:39+08:00">2019-10-21</time>
               </span>
             
           
@@ -448,8 +1317,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/😒算法/" itemprop="url" rel="index">
+                    <span itemprop="name">😒算法</span>
                   </a>
                 </span>
 
@@ -506,885 +1375,11 @@
   
 
     
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/05/13/sort/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="男儿当知耻而后勇。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2019/05/13/sort/" class="post-title-link" itemprop="url">常用排序算法总结</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-13 13:54:04" itemprop="dateCreated datePublished" datetime="2019-05-13T13:54:04+08:00">2019-05-13</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-09 02:13:29" itemprop="dateModified" datetime="2019-10-09T02:13:29+08:00">2019-10-09</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="一、冒泡排序"><a href="#一、冒泡排序" class="headerlink" title="一、冒泡排序"></a>一、冒泡排序</h3><p>临近的数字两两进行比较，按照从小到大或者从大到小的顺序交换，这样一趟后，最大或者最小的数字被交换到最后一位。<br>然后再从头开始两两进行比较交换，直到排序完成。</p>
-<p>　　交换数组中两个元素的方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> swap=arr[i];</span><br><span class="line">	arr[i]=arr[j];</span><br><span class="line">	arr[j]=swap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>冒泡排序算法代码实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j + <span class="number">1</span>] &lt; arr[j])</span><br><span class="line">		swap(arr, j + <span class="number">1</span>, j);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/05/13/sort/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/05/06/uml/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="男儿当知耻而后勇。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2019/05/06/uml/" class="post-title-link" itemprop="url">UML九种图关系总结</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-06 13:54:04" itemprop="dateCreated datePublished" datetime="2019-05-06T13:54:04+08:00">2019-05-06</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-09 02:27:16" itemprop="dateModified" datetime="2019-10-09T02:27:16+08:00">2019-10-09</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是UML"><a href="#什么是UML" class="headerlink" title="什么是UML"></a>什么是UML</h3><p>UML是Unified Model Language的缩写，是一种建模语言。通过使用UML使得在软件开发之前，<br>对整个软件设计有更好的可读性，可理解性，从而降低开发风险。同时，也能方便各个开发人员之间的交流。</p>
-<h3 id="UML九种图"><a href="#UML九种图" class="headerlink" title="UML九种图"></a>UML九种图</h3><p>如下图所示，UML图分为，用例图、静态图、交互图、行为图、实现图。静态图包括类图和对象图，<br>交互图包括序列图和协作图，行为图包括状态图和活动图，实现图包括构件图和部署图。</p>
-<h4 id="用例图"><a href="#用例图" class="headerlink" title="用例图"></a>用例图</h4><pre><code>【概念】描述用户的需求，从用户的角度描述系统的功能
-【描述方式】椭圆表示某个用例，人形符号表示角色
-【目的】帮助开发团队以一种可视化的方式理解系统的功能需求
-</code></pre>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/05/06/uml/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/04/29/redis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="男儿当知耻而后勇。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2019/04/29/redis/" class="post-title-link" itemprop="url">Redis基础知识</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-29 09:50:00" itemprop="dateCreated datePublished" datetime="2019-04-29T09:50:00+08:00">2019-04-29</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-09 02:27:47" itemprop="dateModified" datetime="2019-10-09T02:27:47+08:00">2019-10-09</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/中间件/" itemprop="url" rel="index">
-                    <span itemprop="name">中间件</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Redis基本数据类型"><a href="#Redis基本数据类型" class="headerlink" title="Redis基本数据类型"></a>Redis基本数据类型</h3><h4 id="Binary-safe-strings"><a href="#Binary-safe-strings" class="headerlink" title="Binary-safe strings"></a>Binary-safe strings</h4><p>string 类型是二进制安全的.意思是redis的string可以包含任意数据,比如jgp图片或者已经序列化的的对象.</p>
-<h4 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h4><p>实质是每一个都是string类型的双向链表,push和pop的命令算法的时间复杂度都是O(1),list还会记录链表的长度,所以llen操作也是O(1).</p>
-<h4 id="Sets"><a href="#Sets" class="headerlink" title="Sets"></a>Sets</h4><p>是string类型的无序集合.set是通过 hash table实现的,所以添加,查找,删除的复杂度都是O(1),hash table 会随着添加或者删除自动调整大小.</p>
-<h4 id="Sorted-sets"><a href="#Sorted-sets" class="headerlink" title="Sorted sets"></a>Sorted sets</h4><p>sorted sets 也是string类型元素的集合,不同的是每个元素都会关联一个double类型的score,元素顺序有score决定.sorted sets的实现是skip list和hash table的混合体.</p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/04/29/redis/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/04/22/mysql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="男儿当知耻而后勇。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2019/04/22/mysql/" class="post-title-link" itemprop="url">MySQL语句学习总结</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-22 09:50:00" itemprop="dateCreated datePublished" datetime="2019-04-22T09:50:00+08:00">2019-04-22</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-09 02:23:46" itemprop="dateModified" datetime="2019-10-09T02:23:46+08:00">2019-10-09</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br></pre></td></tr></table></figure>
-<h3 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h3><p>（1）第一范式（每列都保持原子性)<br>（2）第二范式（非主属性不部分依赖于候选码）<br>（3）第三范式（非主属性不传递依赖于候选码）<br>（4）BC范式（任何属性不部分依赖与候选码，不传递依赖与候选码）</p>
-<h3 id="创建表SQL"><a href="#创建表SQL" class="headerlink" title="创建表SQL"></a>创建表SQL</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">user</span> (</span><br><span class="line"><span class="string">`id`</span> <span class="built_in">INT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line"><span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">10</span>),</span><br><span class="line"><span class="string">`age`</span> <span class="built_in">INT</span> ,</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">)<span class="keyword">ENGINE</span> = <span class="keyword">INNODB</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> = utf8</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/04/22/mysql/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/04/15/vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="男儿当知耻而后勇。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2019/04/15/vim/" class="post-title-link" itemprop="url">Vim学习</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-15 09:50:00" itemprop="dateCreated datePublished" datetime="2019-04-15T09:50:00+08:00">2019-04-15</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-09 02:19:50" itemprop="dateModified" datetime="2019-10-09T02:19:50+08:00">2019-10-09</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="Vim学习笔记"><a href="#Vim学习笔记" class="headerlink" title="Vim学习笔记"></a>Vim学习笔记</h4><h4 id="Vim三种模式"><a href="#Vim三种模式" class="headerlink" title="Vim三种模式"></a>Vim三种模式</h4><p>基本上vi分为三种模式，分别是一般模式、编辑模式与命令行模式</p>
-<h5 id="一般模式"><a href="#一般模式" class="headerlink" title="一般模式"></a>一般模式</h5><p>打开一个文件默认就进入到一般模式（这是默认的模式）。在这个模式中你可以使用上下左右了来移动光标，你可以删除字符或者删除整行，也可以复制粘贴你的文件数据。</p>
-<h5 id="编辑模式"><a href="#编辑模式" class="headerlink" title="编辑模式"></a>编辑模式</h5><p>在vi一般模式下，不能进行编辑。等到按下a、s、i、o、c之后，就会进入编辑模式。左下方会出现INSERT或REPLAC的字样，此时才可以进行编辑。若想要退出编辑模式，需要按ESC。</p>
-<h5 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h5><p>在一般模式中输入，“:、/、？”3个中的任何一个按钮，就可以将光标移动到最下面那一行。</p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/04/15/vim/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/04/08/curl/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="男儿当知耻而后勇。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2019/04/08/curl/" class="post-title-link" itemprop="url">CURL工具学习</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-08 09:50:00" itemprop="dateCreated datePublished" datetime="2019-04-08T09:50:00+08:00">2019-04-08</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-09 02:23:08" itemprop="dateModified" datetime="2019-10-09T02:23:08+08:00">2019-10-09</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="curl是什么"><a href="#curl是什么" class="headerlink" title="curl是什么"></a>curl是什么</h3><p>curl (Command Line URL viewer)是一种命令行工具，作用是发出网络请求，然后得到和提取数据，显示在“标准输出”（stdout）上面。</p>
-<h4 id="查看网页源码"><a href="#查看网页源码" class="headerlink" title="查看网页源码"></a>查看网页源码</h4><p>直接在curl后面加上网址，就可以看到网页源码。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl dullnull.org</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML PUBLIC <span class="string">"-//IETF//DTD HTML 2.0//EN"</span>&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body bgcolor=<span class="string">"white"</span>&gt;</span><br><span class="line">&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;</span><br><span class="line">&lt;p&gt;The requested resource has been assigned a new permanent URI.&lt;/p&gt;</span><br><span class="line">&lt;hr/&gt;Powered by Tengine&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/04/08/curl/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/04/01/restful/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="男儿当知耻而后勇。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2019/04/01/restful/" class="post-title-link" itemprop="url">RestFul API设计指南</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-01 09:50:00" itemprop="dateCreated datePublished" datetime="2019-04-01T09:50:00+08:00">2019-04-01</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-09 02:21:51" itemprop="dateModified" datetime="2019-10-09T02:21:51+08:00">2019-10-09</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="RESTful是什么"><a href="#RESTful是什么" class="headerlink" title="RESTful是什么"></a>RESTful是什么</h3><p>REST（Representational State Transfe）是一种架构风格，遵循REST原则的架构我们就称为RESTful架构。Representational State Transfe 直译过来就是【表现层状态转化】，其实它省略了主语，表现层指的是【资源】的表现层，通俗的讲就是：资源在网络中以某种形式进行状态转移。</p>
-<h3 id="为什么要用RESTful"><a href="#为什么要用RESTful" class="headerlink" title="为什么要用RESTful"></a>为什么要用RESTful</h3><p>RESTful 给人的感觉是优雅、规范、易懂，一个结构清晰、易于理解的API完全可以省略许多无意义的沟通和文档。大家都使用相同的标准，有利于团队的整体效率。</p>
-<h3 id="接口设计"><a href="#接口设计" class="headerlink" title="接口设计"></a>接口设计</h3><p>一般接口就是增删改查，RESTful API就像通用的模板，我们以文章（Article）举例，那么基础的URL就有一下几种：</p>
-<ul>
-<li><code>GET /articles:</code> 文章列表</li>
-<li><code>GET /articles/id:</code> 文章详情</li>
-<li><code>POST /articles:</code> 创建文章</li>
-<li><code>PUT /articles/id:</code> 修改文章</li>
-<li><code>DELETE /articles/id:</code> 删除文章</li>
-</ul>
-<p>RESTful 中使用GET、POST、PUT和DELETE来分别表示资源的查询、创建、更新和删除，并且除了POST其他三种都具备幂等性（多次请求效果相同），POST和PUT最大的区别就是幂等性，所以PUT也可以用于创建，只要在创建前就确定好资源的id。</p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/04/01/restful/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/03/25/servlet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="男儿当知耻而后勇。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2019/03/25/servlet/" class="post-title-link" itemprop="url">Servlet源码解析</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-25 09:50:00" itemprop="dateCreated datePublished" datetime="2019-03-25T09:50:00+08:00">2019-03-25</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-09 02:28:35" itemprop="dateModified" datetime="2019-10-09T02:28:35+08:00">2019-10-09</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/源码/" itemprop="url" rel="index">
-                    <span itemprop="name">源码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="一个简单的Servlet请求"><a href="#一个简单的Servlet请求" class="headerlink" title="一个简单的Servlet请求"></a>一个简单的Servlet请求</h3><ol>
-<li>新建HelloController继承HttpServlet</li>
-<li>在web.xml中，注册HelloController，或者使用@WebServlet注解注册HelloController</li>
-<li>重写doGet()，doPost()或者其他doXxx()方法</li>
-</ol>
-<h3 id="Servlet请求参数"><a href="#Servlet请求参数" class="headerlink" title="Servlet请求参数"></a>Servlet请求参数</h3><p>HttpServletRequest和HttpServletResponse是doXxx()方法的默认参数。</p>
-<h3 id="HttpServletRequest"><a href="#HttpServletRequest" class="headerlink" title="HttpServletRequest"></a>HttpServletRequest</h3><p>HttpServletRequest代表浏览器发送给服务器的请求报文。该对象由web服务器创建（如Tomcat），最终作为参数传递到doXxx()或者其他方法中，我们可以在doXxx()方法中直接使用</p>
-<ol>
-<li><p>获取用户发送的请求参数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getParmater(<span class="string">"name"</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>获取项目的名字</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getContextPath();</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/03/25/servlet/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1430,7 +1425,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1443,7 +1438,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1456,7 +1451,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

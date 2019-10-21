@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Java集合框架都有哪些？实现Collection接口的，存放特定元素的集合的对象">
+<meta name="keywords" content="Java集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试准备系列之Java集合">
+<meta property="og:url" content="https://iisheng.cn/2019/10/02/interview-java-collection/index.html">
+<meta property="og:site_name" content="iisheng">
+<meta property="og:description" content="Java集合框架都有哪些？实现Collection接口的，存放特定元素的集合的对象">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://static001.geekbang.org/resource/image/67/c7/675536edf1563b11ab7ead0def1215c7.png">
+<meta property="og:image" content="https://static001.geekbang.org/resource/image/26/7c/266cfaab2573c9777b1157816784727c.png">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0017/7479/3f05dd61-955e-3eb2-bf8e-31da8a361148.jpg">
+<meta property="og:updated_time" content="2019-10-20T10:58:43.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试准备系列之Java集合">
+<meta name="twitter:description" content="Java集合框架都有哪些？实现Collection接口的，存放特定元素的集合的对象">
+<meta name="twitter:image" content="https://static001.geekbang.org/resource/image/67/c7/675536edf1563b11ab7ead0def1215c7.png">
+  <link rel="canonical" href="https://iisheng.cn/2019/10/02/interview-java-collection/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>面试准备系列之Java集合 | iisheng</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">iisheng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/02/interview-java-collection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            面试准备系列之Java集合
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-02 09:50:00" itemprop="dateCreated datePublished" datetime="2019-10-02T09:50:00+08:00">2019-10-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-20 18:58:43" itemprop="dateModified" datetime="2019-10-20T18:58:43+08:00">2019-10-20</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😜面试系列/" itemprop="url" rel="index">
+                    <span itemprop="name">😜面试系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Java集合框架都有哪些？"><a href="#Java集合框架都有哪些？" class="headerlink" title="Java集合框架都有哪些？"></a>Java集合框架都有哪些？</h3><h4 id="实现Collection接口的，存放特定元素的集合的对象"><a href="#实现Collection接口的，存放特定元素的集合的对象" class="headerlink" title="实现Collection接口的，存放特定元素的集合的对象"></a>实现<code>Collection</code>接口的，存放特定元素的集合的对象</h4><p><img src="https://static001.geekbang.org/resource/image/67/c7/675536edf1563b11ab7ead0def1215c7.png" alt></p>
+<a id="more"></a>
+<h4 id="实现Map接口的，将键映射到值的对象"><a href="#实现Map接口的，将键映射到值的对象" class="headerlink" title="实现Map接口的，将键映射到值的对象"></a>实现<code>Map</code>接口的，将键映射到值的对象</h4><p><img src="https://static001.geekbang.org/resource/image/26/7c/266cfaab2573c9777b1157816784727c.png" alt></p>
+<h4 id="集合框架底层数据结构总结"><a href="#集合框架底层数据结构总结" class="headerlink" title="集合框架底层数据结构总结"></a>集合框架底层数据结构总结</h4><h5 id="List"><a href="#List" class="headerlink" title="List"></a>List</h5><ul>
+<li>ArrayList ：Object 数组。</li>
+<li>Vector ：Object 数组。</li>
+<li>LinkedList ：双向链表(JDK6 之前为循环链表，JDK7 取消了循环)。</li>
+</ul>
+<h5 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h5><ul>
+<li>HashSet ：无序，唯一，基于 HashMap 实现的，底层采用 HashMap 来保存元素。（）</li>
+<li>LinkedHashSet ：LinkedHashSet 继承自 HashSet，并且其内部是通过 LinkedHashMap 来实现的。有点类似于我们之前说的LinkedHashMap 其内部是基于 HashMap 实现一样，不过还是有一点点区别的。</li>
+<li>TreeSet ：有序，唯一，红黑树(自平衡的排序二叉树)。</li>
+</ul>
+<h5 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h5><ul>
+<li>HashMap：HashMap 由数组+链表组成的，数组是HashMap的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）。</li>
+</ul>
+<p>JDK8 以后，在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8 ）时，将链表转化为红黑树，以减少搜索时间。</p>
+<ul>
+<li>LinkedHashMap：LinkedHashMap 继承自 HashMap，所以它的底层仍然是基于拉链式散列结构即由数组和链表或红黑树组成。另外，LinkedHashMap 在上面结构的基础上，增加了一条双向链表，使得上面的结构可以保持键值对的插入顺序。同时通过对链表进行相应的操作，实现了访问顺序相关逻辑。</li>
+<li>Hashtable ：数组+链表组成的，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的。</li>
+<li>TreeMap ：红黑树（自平衡的排序二叉树）。</li>
+</ul>
+<h4 id="List-和-Set-区别？"><a href="#List-和-Set-区别？" class="headerlink" title="List 和 Set 区别？"></a>List 和 Set 区别？</h4><p>List，Set 都是继承自 Collection 接口。</p>
+<ul>
+<li>List 特点：元素有放入顺序，元素可重复。可以用下标遍历或者迭代器遍历。</li>
+<li>Set 特点：元素无放入顺序，元素不可重复，重复元素会覆盖掉。只能用迭代器遍历。</li>
+</ul>
+<h4 id="ArrayList-与-LinkedList-区别？"><a href="#ArrayList-与-LinkedList-区别？" class="headerlink" title="ArrayList 与 LinkedList 区别？"></a>ArrayList 与 LinkedList 区别？</h4><h5 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h5><ul>
+<li>优点：ArrayList 是实现了基于动态数组的数据结构，因为地址连续，一旦数据存储好了，查询操作效率会比较高（在内存里是连着放的）。</li>
+<li>缺点：因为地址连续，ArrayList 要移动数据，所以插入和删除操作效率比较低。</li>
+</ul>
+<h5 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h5><ul>
+<li>优点：LinkedList 基于链表的数据结构，地址是任意的，所以在开辟内存空间的时候不需要等一个连续的地址。对于新增和删除操作 add 和 remove ，LinedList 比较占优势。LinkedList 适用于要头尾操作或插入指定位置的场景。</li>
+<li>缺点：因为 LinkedList 要移动指针，所以查询操作性能比较低。</li>
+</ul>
+<h5 id="适用场景分析："><a href="#适用场景分析：" class="headerlink" title="适用场景分析："></a>适用场景分析：</h5><ul>
+<li>当需要对数据进行对随机访问的情况下，选用 ArrayList 。</li>
+<li>当需要对数据进行多次增加删除修改时，采用 LinkedList 。</li>
+</ul>
+<h4 id="ArrayList-是如何扩容的？"><a href="#ArrayList-是如何扩容的？" class="headerlink" title="ArrayList 是如何扩容的？"></a>ArrayList 是如何扩容的？</h4><p>如果通过无参构造的话，初始数组容量为 0 ，当真正对数组进行添加时，才真正分配容量。每次按照 1.5 倍（位运算）的比率通过 copeOf 的方式扩容。</p>
+<h4 id="HashSet-和-TreeSet-的区别？"><a href="#HashSet-和-TreeSet-的区别？" class="headerlink" title="HashSet 和 TreeSet 的区别？"></a>HashSet 和 TreeSet 的区别？</h4><ul>
+<li>HashSet底层用HashMap实现的</li>
+<li>TreeSet底层用TreeMap实现的</li>
+</ul>
+<h4 id="HashMap-和-TreeMap-的区别？"><a href="#HashMap-和-TreeMap-的区别？" class="headerlink" title="HashMap 和 TreeMap 的区别？"></a>HashMap 和 TreeMap 的区别？</h4><ul>
+<li>HashMap底层实现是数组+链表或者红黑树，TreeMap底层实现是红黑树</li>
+<li>Map 中插入、删除和定位元素这类操作，HashMap 比较适合</li>
+<li>假如你需要对一个有序的 key 集合进行遍历， TreeMap 更适合。</li>
+</ul>
+<h4 id="HashMap-和-ConcurrentHashMap-的区别？"><a href="#HashMap-和-ConcurrentHashMap-的区别？" class="headerlink" title="HashMap 和 ConcurrentHashMap 的区别？"></a>HashMap 和 ConcurrentHashMap 的区别？</h4><p>ConcurrentHashMap 是线程安全的 HashMap 的实现。</p>
+<h3 id="HashMap原理"><a href="#HashMap原理" class="headerlink" title="HashMap原理"></a>HashMap原理</h3><p>我们知道在 Java 中最常用的两种结构是数组和模拟指针（引用），几乎所有的数据结构都可以利用这两种来组合实现，HashMap 也是如此。实际上 HashMap 是一个<strong>链表散列</strong>。</p>
+<p>HashMap 是基于 hashing 的原理。</p>
+<p><img src="http://dl2.iteye.com/upload/attachment/0017/7479/3f05dd61-955e-3eb2-bf8e-31da8a361148.jpg" alt></p>
+<h4 id="HashMap-的长度为什么是-2-的幂次方？"><a href="#HashMap-的长度为什么是-2-的幂次方？" class="headerlink" title="HashMap 的长度为什么是 2 的幂次方？"></a>HashMap 的长度为什么是 2 的幂次方？</h4><p>为了能让 HashMap 存取高效，尽量较少碰撞，也就是要尽量把数据分配均匀，每个链表/红黑树长度大致相同。这个实现就是把数据存到哪个链表/红黑树中的算法。</p>
+<p>这个算法应该如何设计呢？我们首先可能会想到采用 % 取余的操作来实现。但是，重点来了：</p>
+<ul>
+<li>取余(%)操作中如果除数是 2 的幂次则等价于与其除数减一的与(&amp;)操作（也就是说 <code>hash % length == hash &amp; (length - 1)</code> 的前提是 length 是 2 的 n 次方；）。</li>
+<li>并且，采用二进制位操作 &amp;，相对于 % 能够提高运算效率，<br>这就解释了 HashMap 的长度为什么是 2 的幂次方。</li>
+</ul>
+<h3 id="什么是迭代器-Iterator-？"><a href="#什么是迭代器-Iterator-？" class="headerlink" title="什么是迭代器(Iterator)？"></a>什么是迭代器(Iterator)？</h3><p>Iterator 接口，提供了很多对集合元素进行迭代的方法。每一个集合类都包含了可以返回迭代器实例的迭代方法。迭代器可以在迭代的过程中删除底层集合的元素，但是不可以直接调用集合的 <code>#remove(Object Obj)</code> 方法删除，可以通过迭代器的 <code>#remove()</code> 方法删除。</p>
+<h4 id="Iterator-和-ListIterator-的区别是什么？"><a href="#Iterator-和-ListIterator-的区别是什么？" class="headerlink" title="Iterator 和 ListIterator 的区别是什么？"></a>Iterator 和 ListIterator 的区别是什么？</h4><ul>
+<li>Iterator 可用来遍历 Set 和 List 集合，但是 ListIterator 只能用来遍历 List。</li>
+<li>Iterator 对集合只能是前向遍历，ListIterator 既可以前向也可以后向。</li>
+<li>ListIterator 实现了 Iterator 接口，并包含其他的功能。比如：增加元素，替换元素，获取前一个和后一个元素的索引等等。</li>
+</ul>
+<h4 id="快速失败（fail-fast）和安全失败（fail-safe）的区别是什么？"><a href="#快速失败（fail-fast）和安全失败（fail-safe）的区别是什么？" class="headerlink" title="快速失败（fail-fast）和安全失败（fail-safe）的区别是什么？"></a>快速失败（fail-fast）和安全失败（fail-safe）的区别是什么？</h4><p>差别在于 ConcurrentModification 异常：</p>
+<ul>
+<li>快速失败：当你在迭代一个集合的时候，如果有另一个线程正在修改你正在访问的那个集合时，就会抛出一个 ConcurrentModification 异常。 在 <code>java.util</code> 包下的都是快速失败。</li>
+<li>安全失败：你在迭代的时候会去底层集合做一个拷贝，所以你在修改上层集合的时候是不会受影响的，不会抛出 <code>ConcurrentModification</code> 异常。在 <code>java.util.concurrent</code> 包下的全是安全失败的。</li>
+</ul>
+<h4 id="如何删除-List-中的某个元素？"><a href="#如何删除-List-中的某个元素？" class="headerlink" title="如何删除 List 中的某个元素？"></a>如何删除 List 中的某个元素？</h4><p>有两种方式，分别如下：</p>
+<ul>
+<li>方式一，使用 Iterator ，顺序向下，如果找到元素，则使用 remove 方法进行移除。</li>
+<li>方式二，倒序遍历 List ，如果找到元素，则使用 remove 方法进行移除。</li>
+</ul>
+<h3 id="Comparable-和-Comparator-的区别"><a href="#Comparable-和-Comparator-的区别" class="headerlink" title="Comparable 和 Comparator 的区别?"></a>Comparable 和 Comparator 的区别?</h3><ul>
+<li>Comparable 接口，<code>在 java.lang</code> 包下，用于当前对象和其它对象的比较，所以它有一个 <code>#compareTo(Object obj)</code> 方法用来排序，该方法只有一个参数。</li>
+<li>Comparator 接口，在 <code>java.util</code> 包下，用于传入的两个对象的比较，所以它有一个 <code>#compare(Object obj1, Object obj2)</code> 方法用来排序，该方法有两个参数。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Java集合/" rel="tag"><i class="fa fa-tag"></i> Java集合</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/24/interview-java-basic/" rel="next" title="面试准备系列之Java基础">
+                  <i class="fa fa-chevron-left"></i> 面试准备系列之Java基础
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/09/time-mgt/" rel="prev" title="如何充分利用你的24小时">
+                  如何充分利用你的24小时 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java集合框架都有哪些？"><span class="nav-number">1.</span> <span class="nav-text">Java集合框架都有哪些？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现Collection接口的，存放特定元素的集合的对象"><span class="nav-number">1.1.</span> <span class="nav-text">实现Collection接口的，存放特定元素的集合的对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现Map接口的，将键映射到值的对象"><span class="nav-number">1.2.</span> <span class="nav-text">实现Map接口的，将键映射到值的对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合框架底层数据结构总结"><span class="nav-number">1.3.</span> <span class="nav-text">集合框架底层数据结构总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#List"><span class="nav-number">1.3.1.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Set"><span class="nav-number">1.3.2.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Map"><span class="nav-number">1.3.3.</span> <span class="nav-text">Map</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List-和-Set-区别？"><span class="nav-number">1.4.</span> <span class="nav-text">List 和 Set 区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList-与-LinkedList-区别？"><span class="nav-number">1.5.</span> <span class="nav-text">ArrayList 与 LinkedList 区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ArrayList"><span class="nav-number">1.5.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LinkedList"><span class="nav-number">1.5.2.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#适用场景分析："><span class="nav-number">1.5.3.</span> <span class="nav-text">适用场景分析：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList-是如何扩容的？"><span class="nav-number">1.6.</span> <span class="nav-text">ArrayList 是如何扩容的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashSet-和-TreeSet-的区别？"><span class="nav-number">1.7.</span> <span class="nav-text">HashSet 和 TreeSet 的区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-和-TreeMap-的区别？"><span class="nav-number">1.8.</span> <span class="nav-text">HashMap 和 TreeMap 的区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-和-ConcurrentHashMap-的区别？"><span class="nav-number">1.9.</span> <span class="nav-text">HashMap 和 ConcurrentHashMap 的区别？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap原理"><span class="nav-number">2.</span> <span class="nav-text">HashMap原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-的长度为什么是-2-的幂次方？"><span class="nav-number">2.1.</span> <span class="nav-text">HashMap 的长度为什么是 2 的幂次方？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是迭代器-Iterator-？"><span class="nav-number">3.</span> <span class="nav-text">什么是迭代器(Iterator)？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Iterator-和-ListIterator-的区别是什么？"><span class="nav-number">3.1.</span> <span class="nav-text">Iterator 和 ListIterator 的区别是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速失败（fail-fast）和安全失败（fail-safe）的区别是什么？"><span class="nav-number">3.2.</span> <span class="nav-text">快速失败（fail-fast）和安全失败（fail-safe）的区别是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何删除-List-中的某个元素？"><span class="nav-number">3.3.</span> <span class="nav-text">如何删除 List 中的某个元素？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparable-和-Comparator-的区别"><span class="nav-number">4.</span> <span class="nav-text">Comparable 和 Comparator 的区别?</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="iisheng">
+  <p class="site-author-name" itemprop="name">iisheng</p>
+  <div class="site-description" itemprop="description">男儿当知耻而后勇。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/iisheng" title="GitHub &rarr; https://github.com/iisheng" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://iisheng.cn" title="https://iisheng.cn">后端成长之路</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://tech.meituan.com/" title="https://tech.meituan.com/" rel="noopener" target="_blank">美团点评</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://howtodoinjava.com/" title="https://howtodoinjava.com/" rel="noopener" target="_blank">How to do in Java</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iisheng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">
+      
+    主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+<script src="/js/utils.js?v=7.4.1"></script>
+<script src="/js/schemes/muse.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+
+
+<script type="text/javascript" src="/js/src/snow.js"></script>
+
+<!-- 样式二（飘动的彩带） -->
+<script src="https://g.joyinshare.com/hc/piao.js" type="text/javascript"></script>

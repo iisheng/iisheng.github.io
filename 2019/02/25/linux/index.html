@@ -56,14 +56,14 @@
 </script>
 
   <meta name="description" content="cd  进入指定目录12345cd dir          // 进入当前目录的子目录cd ..           // 进入当前目录的上一级目录cd /            // 进入系统根目录cd ~            // 进入当前用户主目录cd /usr/local   // 进入特定目录 ls 列出当前目录文件123456ls -a   // 列出当前目录所有文件，包含隐藏文件">
-<meta name="keywords" content="Linux">
+<meta name="keywords" content="Linux命令">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux命令速查笔记">
 <meta property="og:url" content="https://iisheng.cn/2019/02/25/linux/index.html">
 <meta property="og:site_name" content="iisheng">
 <meta property="og:description" content="cd  进入指定目录12345cd dir          // 进入当前目录的子目录cd ..           // 进入当前目录的上一级目录cd /            // 进入系统根目录cd ~            // 进入当前用户主目录cd /usr/local   // 进入特定目录 ls 列出当前目录文件123456ls -a   // 列出当前目录所有文件，包含隐藏文件">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-08T18:13:45.591Z">
+<meta property="og:updated_time" content="2019-10-20T08:49:43.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux命令速查笔记">
 <meta name="twitter:description" content="cd  进入指定目录12345cd dir          // 进入当前目录的子目录cd ..           // 进入当前目录的上一级目录cd /            // 进入系统根目录cd ~            // 进入当前用户主目录cd /usr/local   // 进入特定目录 ls 列出当前目录文件123456ls -a   // 列出当前目录所有文件，包含隐藏文件">
@@ -304,7 +304,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-09 02:13:45" itemprop="dateModified" datetime="2019-10-09T02:13:45+08:00">2019-10-09</time>
+                <time title="修改时间：2019-10-20 16:49:43" itemprop="dateModified" datetime="2019-10-20T16:49:43+08:00">2019-10-20</time>
               </span>
             
           
@@ -315,8 +315,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/😳工具/" itemprop="url" rel="index">
+                    <span itemprop="name">😳工具</span>
                   </a>
                 </span>
 
@@ -349,7 +349,7 @@
 <h3 id="chown-修改文件所属用户或用户组"><a href="#chown-修改文件所属用户或用户组" class="headerlink" title="chown 修改文件所属用户或用户组"></a>chown 修改文件所属用户或用户组</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown -R root:root /tmp    <span class="comment">// 修改 tmp 目录所属用户为 root，用户组为 root</span></span><br><span class="line">chown iisheng file  <span class="comment">// 将file的所有者设置为iisheng</span></span><br></pre></td></tr></table></figure>
 <h3 id="chmod-给文件设置别人访问权限"><a href="#chmod-给文件设置别人访问权限" class="headerlink" title="chmod 给文件设置别人访问权限"></a>chmod 给文件设置别人访问权限</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod <span class="number">766</span> file <span class="comment">// 给某个文件别人访问权限</span></span><br><span class="line">chmod <span class="number">777</span> * <span class="comment">// 当前文件夹所有文件所有用户都可以读写</span></span><br></pre></td></tr></table></figure>
 <h3 id="cat-查看文件或写到指定文件内容"><a href="#cat-查看文件或写到指定文件内容" class="headerlink" title="cat  查看文件或写到指定文件内容"></a>cat  查看文件或写到指定文件内容</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat file                                  <span class="comment">// 显示整个文件内容</span></span><br><span class="line">cat -n file                               <span class="comment">// 显示整个文件内容，并由1开始对行数编号</span></span><br><span class="line">cat file &gt; newFile                        <span class="comment">// 将文件的内容写到新文件里面</span></span><br><span class="line">cat file | head -n <span class="number">3000</span> | tail -n +<span class="number">1000</span>   <span class="comment">// 查看文件的1000-3000行</span></span><br><span class="line">cat /proc/PID/status                      <span class="comment">// 查看指定进程的相关信息</span></span><br></pre></td></tr></table></figure>
-<h3 id="scp-终端远程下载上传文件"><a href="#scp-终端远程下载上传文件" class="headerlink" title="scp 终端远程下载上传文件"></a>scp 终端远程下载上传文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scp  root<span class="meta">@dullnull</span>.org:/path/filename ./                              <span class="comment">// 文件下载到本地当前目录</span></span><br><span class="line">scp  -P  <span class="number">2222</span>  /home/jdk.tar.gz   root<span class="meta">@dullnull</span>.org:/root/jdk.tar.gz  <span class="comment">// 上传文件</span></span><br><span class="line">scp  -P  <span class="number">2222</span>  -r /home/jdk/ root<span class="meta">@isheng</span>.me                        <span class="comment">// 上传文件目录</span></span><br><span class="line">scp  -P  <span class="number">2222</span>  -r /home/jdk/ root<span class="meta">@isheng</span>.me                        <span class="comment">// 使用IPV6寻址上传文件目录</span></span><br></pre></td></tr></table></figure>
+<h3 id="scp-终端远程下载上传文件"><a href="#scp-终端远程下载上传文件" class="headerlink" title="scp 终端远程下载上传文件"></a>scp 终端远程下载上传文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scp  root<span class="meta">@iisheng</span>.cn:/path/filename ./                              <span class="comment">// 文件下载到本地当前目录</span></span><br><span class="line">scp  -P  <span class="number">2222</span>  /home/jdk.tar.gz   root<span class="meta">@iisheng</span>.cn:/root/jdk.tar.gz  <span class="comment">// 上传文件</span></span><br><span class="line">scp  -P  <span class="number">2222</span>  -r /home/jdk/ root<span class="meta">@isheng</span>.me                        <span class="comment">// 上传文件目录</span></span><br><span class="line">scp  -P  <span class="number">2222</span>  -r /home/jdk/ root<span class="meta">@isheng</span>.me                        <span class="comment">// 使用IPV6寻址上传文件目录</span></span><br></pre></td></tr></table></figure>
 <h3 id="netstat-打印网络信息状态"><a href="#netstat-打印网络信息状态" class="headerlink" title="netstat  打印网络信息状态"></a>netstat  打印网络信息状态</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">netstat -at                <span class="comment">// 列出所有TCP端口</span></span><br><span class="line">netstat -au                <span class="comment">// 列出所有UDP端口</span></span><br><span class="line">netstat -lt                <span class="comment">// 列出所有监听TCP的端口</span></span><br><span class="line">netstat -lu                <span class="comment">// 列出所有监听UDP的端口</span></span><br><span class="line">netstat -r                 <span class="comment">// 显示核心路由信息</span></span><br><span class="line">netstat -anl | grep <span class="number">8888</span>   <span class="comment">// 查看相关端口号信息</span></span><br></pre></td></tr></table></figure>
 <h3 id="top-实时系统的查看系统运行情况"><a href="#top-实时系统的查看系统运行情况" class="headerlink" title="top  实时系统的查看系统运行情况"></a>top  实时系统的查看系统运行情况</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">top              <span class="comment">// 动态查看系统的整体运行情况</span></span><br><span class="line">top -p PID       <span class="comment">// 查看指定进程的运行情况</span></span><br><span class="line">top -u user      <span class="comment">// 查看指定用户的相关进程的运行情况</span></span><br></pre></td></tr></table></figure>
 <font color="red" size="3" face="“Consolas”">htop 和top类似功能</font>
@@ -393,7 +393,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+              <a href="/tags/Linux命令/" rel="tag"><i class="fa fa-tag"></i> Linux命令</a>
             
           </div>
         
@@ -474,7 +474,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -487,7 +487,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -500,7 +500,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
