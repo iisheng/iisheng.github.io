@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://iisheng.cn/2019/10/19/interview-java-jvm/</loc>
+    <lastmod>2019-10-24</lastmod>
+  </url>  <url>
+    <loc>https://iisheng.cn/2019/09/24/interview-java-basic/</loc>
+    <lastmod>2019-10-24</lastmod>
+  </url>  <url>
+    <loc>https://iisheng.cn/2019/10/22/java-memory-area/</loc>
+    <lastmod>2019-10-24</lastmod>
+  </url>  <url>
     <loc>https://iisheng.cn/2019/10/20/interview-mysql/</loc>
     <lastmod>2019-10-23</lastmod>
   </url>  <url>
@@ -74,12 +83,6 @@
     <lastmod>2019-10-20</lastmod>
   </url>  <url>
     <loc>https://iisheng.cn/2019/10/18/interview-java-concurrency/</loc>
-    <lastmod>2019-10-20</lastmod>
-  </url>  <url>
-    <loc>https://iisheng.cn/2019/10/19/interview-java-jvm/</loc>
-    <lastmod>2019-10-20</lastmod>
-  </url>  <url>
-    <loc>https://iisheng.cn/2019/09/24/interview-java-basic/</loc>
     <lastmod>2019-10-20</lastmod>
   </url>  <url>
     <loc>https://iisheng.cn/2019/05/13/sort/</loc>

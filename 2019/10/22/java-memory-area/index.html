@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="JVM 内存区域模型JVM 内存区域基本上由4个区域组成：  类加载器：在JVM启动时或者类运行时，将需要的class加载到JVM中。 运行时数据区：将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块。 执行引擎：负责执行class文件中包含的字节码指令，相当于实际机器上的CPU。 本地方法调用：执行C/C++实现的本地方法的代码，并返回结果。">
+<meta name="keywords" content="Java内存区域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JVM之Java内存区域">
+<meta property="og:url" content="https://iisheng.cn/2019/10/22/java-memory-area/index.html">
+<meta property="og:site_name" content="iisheng">
+<meta property="og:description" content="JVM 内存区域模型JVM 内存区域基本上由4个区域组成：  类加载器：在JVM启动时或者类运行时，将需要的class加载到JVM中。 运行时数据区：将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块。 执行引擎：负责执行class文件中包含的字节码指令，相当于实际机器上的CPU。 本地方法调用：执行C/C++实现的本地方法的代码，并返回结果。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://iisheng.cn/images/jvm-composition.png">
+<meta property="og:image" content="https://iisheng.cn/images/handle-visit-object.png">
+<meta property="og:image" content="https://iisheng.cn/images/direct-pointer-visit-object.png">
+<meta property="og:updated_time" content="2019-10-24T09:05:10.577Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解JVM之Java内存区域">
+<meta name="twitter:description" content="JVM 内存区域模型JVM 内存区域基本上由4个区域组成：  类加载器：在JVM启动时或者类运行时，将需要的class加载到JVM中。 运行时数据区：将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块。 执行引擎：负责执行class文件中包含的字节码指令，相当于实际机器上的CPU。 本地方法调用：执行C/C++实现的本地方法的代码，并返回结果。">
+<meta name="twitter:image" content="https://iisheng.cn/images/jvm-composition.png">
+  <link rel="canonical" href="https://iisheng.cn/2019/10/22/java-memory-area/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>深入理解JVM之Java内存区域 | iisheng</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">iisheng</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/22/java-memory-area/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            深入理解JVM之Java内存区域
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-22 09:50:00" itemprop="dateCreated datePublished" datetime="2019-10-22T09:50:00+08:00">2019-10-22</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-24 17:05:10" itemprop="dateModified" datetime="2019-10-24T17:05:10+08:00">2019-10-24</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/🙃Java虚拟机/" itemprop="url" rel="index">
+                    <span itemprop="name">🙃Java虚拟机</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="JVM-内存区域模型"><a href="#JVM-内存区域模型" class="headerlink" title="JVM 内存区域模型"></a>JVM 内存区域模型</h3><p>JVM 内存区域基本上由4个区域组成：</p>
+<ul>
+<li>类加载器：在JVM启动时或者类运行时，将需要的class加载到JVM中。</li>
+<li>运行时数据区：将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块。</li>
+<li>执行引擎：负责执行class文件中包含的字节码指令，相当于实际机器上的CPU。</li>
+<li>本地方法调用：执行C/C++实现的本地方法的代码，并返回结果。</li>
+</ul>
+<p><img src="/images/jvm-composition.png" alt></p>
+<a id="more"></a>
+<h3 id="Java-运行时数据区域"><a href="#Java-运行时数据区域" class="headerlink" title="Java 运行时数据区域"></a>Java 运行时数据区域</h3><h4 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h4><p>Java 线程私有，类似于操作系统里的 PC 计数器，它可以看做是当前线程所执行的字节码的行号指示器。</p>
+<ul>
+<li>如果线程正在执行的是一个 Java 方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的是 Native 方法，这个计数器值则为空（Undefined）。</li>
+<li>此内存区域是唯一一个在 Java 虚拟机规范中没有规定任何 OutOfMemoryError 情况的区域。</li>
+</ul>
+<h4 id="Java虚拟机栈"><a href="#Java虚拟机栈" class="headerlink" title="Java虚拟机栈"></a>Java虚拟机栈</h4><p>Java线程私有，虚拟机栈描述的是 Java 方法执行的内存模型：</p>
+<ul>
+<li>每个方法在执行的时候，都会创建一个栈帧用于存储局部变量、操作数、动态链接、方法出口等信息。</li>
+<li>每个方法调用都意味着一个栈帧在虚拟机栈中入栈到出栈的过程。</li>
+</ul>
+<h4 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h4><p>和 Java 虚拟机栈的作用类似，区别是该区域为 JVM 提供使用 Native 方法的服务。</p>
+<h4 id="Java堆"><a href="#Java堆" class="headerlink" title="Java堆"></a>Java堆</h4><p>所有线程共享的一块区域，垃圾收集器管理的主要区域。</p>
+<ul>
+<li>目前主要的垃圾回收算法都是分代收集算法，所以 Java 堆中还可以细分为：新生代和老年代；再细致一点的有 Eden 空间、From Survivor 空间、To Survivor 空间等，默认情况下新生代按照 8:1:1 的比例来分配。</li>
+<li>根据 Java 虚拟机规范的规定，Java 堆可以处于物理上不连续的内存空间中，只要逻辑上是连续的即可，就像我们的磁盘一样。</li>
+</ul>
+<h4 id="元数据（方法区）"><a href="#元数据（方法区）" class="headerlink" title="元数据（方法区）"></a>元数据（方法区）</h4><p>各个线程共享的一个区域，用于存储虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
+<ul>
+<li>虽然 Java 虚拟机规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫做 Non-Heap（非堆），目的应该是与 Java 堆区分开来。</li>
+</ul>
+<h4 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h4><p>是元数据的一部分，用于存放编译器生成的各种字面量和符号引用。</p>
+<h4 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h4><p>并不是虚拟机运行时数据的一部分。JDK1.4引入了NIO，它可以使用Native函数库直接分配堆外内存。直接内存的分配不会受到Java堆大小的限制，但是会受到本机内存的限制。也可能导致<code>OutOfMemoryError</code>出现。</p>
+<h3 id="Java对象的内存布局"><a href="#Java对象的内存布局" class="headerlink" title="Java对象的内存布局"></a>Java对象的内存布局</h3><p>在HotSpot虚拟机中，对象在内存中存储的布局可以分为3块区域：</p>
+<ul>
+<li>对象头（Header）</li>
+<li>实例数据（Instance Data）</li>
+<li>对齐填充（Padding）</li>
+</ul>
+<h4 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h4><p>HotSpot虚拟机对象头包括两部分信息，第一部分用于存储对象自身的运行时数据，如哈希码、GC分代年龄、锁状态标志位、线程持有的锁、偏向线程ID、偏向时间戳等，官方称为“Mark Word”。</p>
+<p>对象头的另一部分是类型指针，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。</p>
+<h4 id="实例数据"><a href="#实例数据" class="headerlink" title="实例数据"></a>实例数据</h4><p>是对象真正存储的有效信息，也是程序代码中所定义的各种类型的字段内容。无论是从父类继承下来的，还是在子类中定义的，都需要记录下来。</p>
+<h4 id="对齐填充"><a href="#对齐填充" class="headerlink" title="对齐填充"></a>对齐填充</h4><p>并不是必然存在，仅仅起着占位符的作用。</p>
+<h3 id="对象的访问"><a href="#对象的访问" class="headerlink" title="对象的访问"></a>对象的访问</h3><p>Java对象需要通过栈上的reference数据来操作堆上的具体对象。对象的具体访问方式取决于虚拟机的实现。主流的访问方式有使用句柄和直接指针两种。</p>
+<h4 id="使用句柄访问对象"><a href="#使用句柄访问对象" class="headerlink" title="使用句柄访问对象"></a>使用句柄访问对象</h4><p><img src="/images/handle-visit-object.png" alt></p>
+<h4 id="使用直接指针访问对象"><a href="#使用直接指针访问对象" class="headerlink" title="使用直接指针访问对象"></a>使用直接指针访问对象</h4><p><img src="/images/direct-pointer-visit-object.png" alt></p>
+<h3 id="栈帧"><a href="#栈帧" class="headerlink" title="栈帧"></a>栈帧</h3><p><strong>栈帧</strong>是用来存储数据和部分过程结果的数据结构，同时也用来处理动态链接（dynamic linking）、方法返回值和异常分派（dispatch exception）。</p>
+<p>栈帧随着方法调用而创建，随着方法结束而销毁。栈帧的存储空间<br>由创建它的线程分配在Java虚拟机栈之中。每一个栈帧都有一个本地变量表、操作数栈和指向当前方法所属的类的运行时常量池的引用。</p>
+<h4 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h4><p>每个栈帧内部都包含一组称为局部变量表的变量列表。</p>
+<p>一个局部变量表可以保存一个类型为boolean、byte、char、short、int、float、reference或returnAddress的数据，两个局部变量可以保存一个类型为long或double的数据。</p>
+<p>局部变量使用索引来进行定位访问，首个局部变量的索引值为0。</p>
+<p>Java虚拟机使用局部变量表来完成方法调用时的参数传递。当调用类方法时，它的参数将会依次传递到局部变量表中从0开始的连续位置上。当调用实例对象方法时，第0个局部变量一定会用来存储该实例方法所在对象的引用（即this关键字）。后续的其他参数将会传递至局部变量表中从1开始的连续位置上。</p>
+<h4 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h4><p>每个栈帧内部包含一个称为<strong>操作数栈</strong>的后进先出栈。</p>
+<p>随着方法执行和字节码指令的执行，会从局部变量表或对象实例的字段中复制常量或变量写入到操作数栈，再随着计算的进行将栈中元素出栈到局部变量表或者返回给方法调用者，也就是出栈/入栈操作。</p>
+<h4 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h4><p>在class文件里，一个方法若想调用其他方法，或者访问成员变量，则需要通过符号引用（symbolic reference）来表示，动态链接的作用就是将这些以符号引用所表示的方法转换为对实际方法的直接引用。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Java内存区域/" rel="tag"><i class="fa fa-tag"></i> Java内存区域</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/20/interview-mysql/" rel="next" title="面试准备系列之MySQL">
+                  <i class="fa fa-chevron-left"></i> 面试准备系列之MySQL
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-内存区域模型"><span class="nav-number">1.</span> <span class="nav-text">JVM 内存区域模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-运行时数据区域"><span class="nav-number">2.</span> <span class="nav-text">Java 运行时数据区域</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#程序计数器"><span class="nav-number">2.1.</span> <span class="nav-text">程序计数器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java虚拟机栈"><span class="nav-number">2.2.</span> <span class="nav-text">Java虚拟机栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地方法栈"><span class="nav-number">2.3.</span> <span class="nav-text">本地方法栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java堆"><span class="nav-number">2.4.</span> <span class="nav-text">Java堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元数据（方法区）"><span class="nav-number">2.5.</span> <span class="nav-text">元数据（方法区）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行时常量池"><span class="nav-number">2.6.</span> <span class="nav-text">运行时常量池</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接内存"><span class="nav-number">2.7.</span> <span class="nav-text">直接内存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java对象的内存布局"><span class="nav-number">3.</span> <span class="nav-text">Java对象的内存布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象头"><span class="nav-number">3.1.</span> <span class="nav-text">对象头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例数据"><span class="nav-number">3.2.</span> <span class="nav-text">实例数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对齐填充"><span class="nav-number">3.3.</span> <span class="nav-text">对齐填充</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的访问"><span class="nav-number">4.</span> <span class="nav-text">对象的访问</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用句柄访问对象"><span class="nav-number">4.1.</span> <span class="nav-text">使用句柄访问对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用直接指针访问对象"><span class="nav-number">4.2.</span> <span class="nav-text">使用直接指针访问对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈帧"><span class="nav-number">5.</span> <span class="nav-text">栈帧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#局部变量表"><span class="nav-number">5.1.</span> <span class="nav-text">局部变量表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作数栈"><span class="nav-number">5.2.</span> <span class="nav-text">操作数栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态链接"><span class="nav-number">5.3.</span> <span class="nav-text">动态链接</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="iisheng">
+  <p class="site-author-name" itemprop="name">iisheng</p>
+  <div class="site-description" itemprop="description">男儿当知耻而后勇。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/iisheng" title="GitHub &rarr; https://github.com/iisheng" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://iisheng.cn" title="https://iisheng.cn">后端成长之路</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://tech.meituan.com/" title="https://tech.meituan.com/" rel="noopener" target="_blank">美团点评</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://howtodoinjava.com/" title="https://howtodoinjava.com/" rel="noopener" target="_blank">How to do in Java</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iisheng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">
+      
+    主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+<script src="/js/utils.js?v=7.4.1"></script>
+<script src="/js/schemes/muse.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+
+
+<script type="text/javascript" src="/js/src/snow.js"></script>
+
+<!-- 样式二（飘动的彩带） -->
+<script src="https://g.joyinshare.com/hc/piao.js" type="text/javascript"></script>

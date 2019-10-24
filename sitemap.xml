@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iisheng.cn/2019/10/19/interview-java-jvm/</loc>
+    
+    <lastmod>2019-10-24T09:49:45.325Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://iisheng.cn/2019/09/24/interview-java-basic/</loc>
+    
+    <lastmod>2019-10-24T09:46:09.970Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://iisheng.cn/2019/10/22/java-memory-area/</loc>
+    
+    <lastmod>2019-10-24T09:05:10.577Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://iisheng.cn/2019/10/20/interview-mysql/</loc>
     
     <lastmod>2019-10-23T14:54:37.478Z</lastmod>
@@ -173,20 +194,6 @@
     <loc>https://iisheng.cn/2019/10/18/interview-java-concurrency/</loc>
     
     <lastmod>2019-10-20T07:23:30.906Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://iisheng.cn/2019/10/19/interview-java-jvm/</loc>
-    
-    <lastmod>2019-10-20T07:23:20.022Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://iisheng.cn/2019/09/24/interview-java-basic/</loc>
-    
-    <lastmod>2019-10-20T07:23:00.352Z</lastmod>
     
   </url>
   
