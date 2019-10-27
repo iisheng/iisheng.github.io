@@ -261,6 +261,234 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/25/b+tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/10/25/b+tree/" class="post-title-link" itemprop="url">MySQL索引 底层数据结构 B+树是什么</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-25 12:25:00" itemprop="dateCreated datePublished" datetime="2019-10-25T12:25:00+08:00">2019-10-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-27 16:09:53" itemprop="dateModified" datetime="2019-10-27T16:09:53+08:00">2019-10-27</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😨数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">😨数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Innodb索引底层数据结构式B+树。所以介绍索引实现原理之前，我们来看一下什么是B+树。看B+树之前我们，要了解一下二叉查找树和平衡二叉树。</p>
+<h3 id="什么是二叉查找树？"><a href="#什么是二叉查找树？" class="headerlink" title="什么是二叉查找树？"></a>什么是二叉查找树？</h3><p>二叉查找树，又叫做二叉排序树，也叫做二叉搜索树。</p>
+<p>二叉查找树或者使用一颗空树；或者是具有下列性质的二叉树</p>
+<ul>
+<li>若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
+<li>若他的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
+<li>它的左右子树也分别为二叉搜索树。</li>
+</ul>
+<p>可以看出来，二叉查找树中序遍历可以得到一个关键字的有序序列。二叉查找树既拥有类似折半查找的特性，又采用了链表做存储结构，因此是动态查找表的一种适宜表示。</p>
+<p>在二叉查找树上查找其关键字等于给定值结点的过程，恰是走了一条从根结点到该结点的路径的过程。所以，含有n个结点的二叉查找树夫人平均查找长度和树的形态有关。</p>
+<p>当先后插入的关键字有序时，构成的二叉查找树蜕变为单支树。<br>所以，需要对二叉查找树 进行 <strong>平衡化</strong>处理，成为二叉平衡树。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/10/25/b+tree/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/23/java-class-load-mechanism/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iisheng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/10/23/java-class-load-mechanism/" class="post-title-link" itemprop="url">深入理解JVM之Java类加载机制</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-23 09:50:00" itemprop="dateCreated datePublished" datetime="2019-10-23T09:50:00+08:00">2019-10-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-27 14:44:57" itemprop="dateModified" datetime="2019-10-27T14:44:57+08:00">2019-10-27</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/🙃Java虚拟机/" itemprop="url" rel="index">
+                    <span itemprop="name">🙃Java虚拟机</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Class文件结构"><a href="#Class文件结构" class="headerlink" title="Class文件结构"></a>Class文件结构</h3><p>任何一个Class文件都对应着唯一一个类或者接口的定义信息</p>
+<ul>
+<li>魔数：确定这个文件是否是一个能被虚拟机接受的Class文件</li>
+<li>版本号：低版本不能执行高版本Class文件，高版本可以执行低版本</li>
+<li>常量池：Class文件中的资源仓库</li>
+<li>访问标志：用于识别一些类或者接口层次的访问信息</li>
+<li>类索引、父类索引、索引集合：确定类的继承关系</li>
+<li>字段表：用于描述接口或者类中声明的变量</li>
+<li>方法表：用于描述方法上声明的变量</li>
+<li>属性表：Class文件、字段表、方法表都可以携带自己的属性表集合，以用于描述某些场景专有的信息</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/10/23/java-class-load-mechanism/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/22/java-memory-area/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1177,228 +1405,11 @@
   
 
     
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/09/17/greedy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="男儿当知耻而后勇。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2019/09/17/greedy/" class="post-title-link" itemprop="url">常用算法总结之贪心算法</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-17 09:50:00" itemprop="dateCreated datePublished" datetime="2019-09-17T09:50:00+08:00">2019-09-17</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-20 23:42:29" itemprop="dateModified" datetime="2019-10-20T23:42:29+08:00">2019-10-20</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/😒算法/" itemprop="url" rel="index">
-                    <span itemprop="name">😒算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="贪心算法思想"><a href="#贪心算法思想" class="headerlink" title="贪心算法思想"></a>贪心算法思想</h3><p><strong>贪心算法</strong>就是这样的算法，它在每一步都做出当时看起来最佳的选择。也就是说<strong>它总是做出局部最优的选择，寄希望这样的选择导致全局最优解。</strong></p>
-<blockquote>
-<p>贪心算法并不保证得到最优解，但很多问题确实可以求得最优解。</p>
-</blockquote>
-<h3 id="我们可以按如下步骤设计贪心算法："><a href="#我们可以按如下步骤设计贪心算法：" class="headerlink" title="我们可以按如下步骤设计贪心算法："></a>我们可以按如下步骤设计贪心算法：</h3><ol>
-<li>将最优化问题转化为这样的形式：对其做出一次选择后，只剩下一个子问题需要求解。</li>
-<li>证明做出贪心选择后，原问题总是存在最优解，即贪心选择总是安全的。</li>
-<li>证明做出选择后，剩余的子问题满足性质：其最优解与贪心选择组合即可得到原问题的最优解，这样就得到了最优子结构。</li>
-</ol>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/09/17/greedy/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/09/10/dp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="男儿当知耻而后勇。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2019/09/10/dp/" class="post-title-link" itemprop="url">常用算法总结之动态规划</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-10 09:50:00" itemprop="dateCreated datePublished" datetime="2019-09-10T09:50:00+08:00">2019-09-10</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-20 22:49:42" itemprop="dateModified" datetime="2019-10-20T22:49:42+08:00">2019-10-20</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/😒算法/" itemprop="url" rel="index">
-                    <span itemprop="name">😒算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="动态规划算法思想"><a href="#动态规划算法思想" class="headerlink" title="动态规划算法思想"></a>动态规划算法思想</h4><p>动态规划（dynamic programming）与分治方法相似，都是通过组合子问题的解来求解原问题（在这里，programming 指的是一种表格法）。分治法将问题划分为互不相交的子问题，再将他们的解组合起来，求出原问题的解。与之相反，动态规划应用于子问题重叠的情况，即<strong>不同的子问题具有公共的子问题</strong>（子问题的求解释递归进行的，将其划分为更小的子子问题）。在这种情况下，分治法会做许多不必要的工作，它会反复求解那些公共子问题。而动态规划算法对每个子问题只求解一次，将其解保存在一个表格中，从而无需每次求解一个子问题时都重新计算，避免了这种不必要的计算工作。</p>
-<h4 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h4><p>动态规划方法通常用来求解<strong>最优化问题</strong>。这类问题可以有很多可行解，每个解都有一个值，我们希望寻找具有最优值（最小值或最大值）的解。我们称这样的解为问题的一个最优解（an optimal solution），而不是最优解（the optimal solution），因为可能有多个解都达到最优值。</p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/09/10/dp/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1444,7 +1455,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1470,7 +1481,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

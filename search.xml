@@ -1,6 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>MySQL索引 底层数据结构 B+树是什么</title>
+    <url>/2019/10/25/b+tree/</url>
+    <content><![CDATA[<p>Innodb索引底层数据结构式B+树。所以介绍索引实现原理之前，我们来看一下什么是B+树。看B+树之前我们，要了解一下二叉查找树和平衡二叉树。</p>
+<h3 id="什么是二叉查找树？"><a href="#什么是二叉查找树？" class="headerlink" title="什么是二叉查找树？"></a>什么是二叉查找树？</h3><p>二叉查找树，又叫做二叉排序树，也叫做二叉搜索树。</p>
+<p>二叉查找树或者使用一颗空树；或者是具有下列性质的二叉树</p>
+<ul>
+<li>若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
+<li>若他的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
+<li>它的左右子树也分别为二叉搜索树。</li>
+</ul>
+<p>可以看出来，二叉查找树中序遍历可以得到一个关键字的有序序列。二叉查找树既拥有类似折半查找的特性，又采用了链表做存储结构，因此是动态查找表的一种适宜表示。</p>
+<p>在二叉查找树上查找其关键字等于给定值结点的过程，恰是走了一条从根结点到该结点的路径的过程。所以，含有n个结点的二叉查找树夫人平均查找长度和树的形态有关。</p>
+<p>当先后插入的关键字有序时，构成的二叉查找树蜕变为单支树。<br>所以，需要对二叉查找树 进行 <strong>平衡化</strong>处理，成为二叉平衡树。</p>
+<a id="more"></a>
+<h3 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h3><p>平衡二叉树（Balanced Binary Tree）又称AVL树。它或者是一颗空树，或者是具有下列性质的二叉树：它的左子树和右子树都是平衡二叉树，且左子树和右子树的深度之差的绝对值不超过1。</p>
+<p>如果二叉查找树是AVL树，则它的深度和logn是同数量级的。因此，它的平均查找长度也和logn同数量级。</p>
+<h3 id="B-Tree平衡多路查找树"><a href="#B-Tree平衡多路查找树" class="headerlink" title="B-Tree平衡多路查找树"></a>B-Tree平衡多路查找树</h3><p>B-Tree是一种平衡的多路查找树。一颗m阶的的B-树，或为满足下列特性的m叉树：</p>
+<ul>
+<li>树中每个结点最多有m棵子树；</li>
+<li>若根结点不是叶子结点，则至少有两棵子树；</li>
+<li>除根之外的所有非终端结点至少有【m/2】棵子树；</li>
+<li>所有非终端结点中包含信息数据；</li>
+<li>所有叶子结点都出现在同一层次上，并且不带信息。</li>
+</ul>
+<p>由B-树定义可知，在B-树上进行查找的过程和二叉查找树的查找类似。B-树查找包含两种基本操作：</p>
+<ul>
+<li>在B-树中找结点；</li>
+<li>在结点中找关键字。</li>
+</ul>
+<h3 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h3><p>B+树是应文件系统所需而出的一种B-树的变形树。一棵m阶的B+树和m阶的B-树的差异在于：</p>
+<ul>
+<li>有n棵子树的结点中含有n个关键字。</li>
+<li>所有叶子结点中包含了全部关键字的信息，以及指向这些关键字记录的指针，且叶子结点本身依关键字的大小自小而大顺序链接。</li>
+<li>所有非终端结点可以看成是索引部分，结点中仅含有其子树中的最大（或最小）关键字。</li>
+</ul>
+<p>B+树上的查找类似B-树。只是在查找时，不管查找成功与否，每次查找都是走了一条从根到叶子结点的路径。</p>
+]]></content>
+      <categories>
+        <category>😨数据结构</category>
+      </categories>
+      <tags>
+        <tag>B+树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>深入理解JVM之Java类加载机制</title>
+    <url>/2019/10/23/java-class-load-mechanism/</url>
+    <content><![CDATA[<h3 id="Class文件结构"><a href="#Class文件结构" class="headerlink" title="Class文件结构"></a>Class文件结构</h3><p>任何一个Class文件都对应着唯一一个类或者接口的定义信息</p>
+<ul>
+<li>魔数：确定这个文件是否是一个能被虚拟机接受的Class文件</li>
+<li>版本号：低版本不能执行高版本Class文件，高版本可以执行低版本</li>
+<li>常量池：Class文件中的资源仓库</li>
+<li>访问标志：用于识别一些类或者接口层次的访问信息</li>
+<li>类索引、父类索引、索引集合：确定类的继承关系</li>
+<li>字段表：用于描述接口或者类中声明的变量</li>
+<li>方法表：用于描述方法上声明的变量</li>
+<li>属性表：Class文件、字段表、方法表都可以携带自己的属性表集合，以用于描述某些场景专有的信息</li>
+</ul>
+<a id="more"></a>
+<h4 id="常量池详细介绍"><a href="#常量池详细介绍" class="headerlink" title="常量池详细介绍"></a>常量池详细介绍</h4><p>由于常量池中常量的数量是不固定的，所以在常量池的入口需要放置一项u2类型的数据，代表常量池容量计数值（constant_pool_count）。<strong>这个容量计数是从1开始的</strong>，第0项位置是用来表达<strong>不引用任何一个常量池项目</strong>的含义。</p>
+<p>常量池主要存放两大类常量，字面量（Literal）和符号引用（Symbolic References）。字面量比较接近Java语言层面常量的概念，如文本字符串、声明为final的常量值等。而符号引用则属于编译原理方面的概念，包括了下面三类常量：</p>
+<ul>
+<li>类和接口的元限定名（Full Qualified Name）</li>
+<li>字段的名称和描述符（Descriptor）</li>
+<li>方法名称和描述符</li>
+</ul>
+<p>在Class文件中不会保存各个方法、字段的最终内存布局信息，因此这些字段、方法的符号引用不经过运行期转换的话无法得到真正的内存入口地址，也就无法直接被虚拟机使用。当虚拟机运行时，需要从常量池获得对应的符号引用，再在类创建时或运行时解析、翻译到具体的内存地址之中。</p>
+<h3 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h3><p>类从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个证明周期包括：加载（Loading）、验证（Verification）、准备（Preparation）、解析（Resolution）、初始化（Initialization）、使用（Using）和卸载（Unloading）7个阶段。其中验证、准备、解析3个部分统称为连接（Linking）。</p>
+<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>在加载阶段，虚拟机会完成以下三件事情：</p>
+<ul>
+<li>通过一个类的全限定名来获取定义此类的二进制字节流。</li>
+<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构。</li>
+<li>在内存中生成一个代表这个类的<code>java.lang.Class</code>对象，作为方法区这个类的各种数据的访问入口。</li>
+</ul>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>验证是连接阶段的第一步，这一阶段的目的是为了确保Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身安全。</p>
+<p>验证阶段大致会完成以下4个阶段的检验动作：</p>
+<ul>
+<li>文件格式验证</li>
+<li>元数据验证</li>
+<li>字节码验证</li>
+<li>符号引用验证</li>
+</ul>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>准备阶段是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的内存都将在方法区中进行分配。</p>
+<p>首先，这时候进行内存分配的仅包括类变量（被<code>static</code>修饰的变量），而不包括实例变量，实例变量将会在对象实例化时随着对象一起分配在Java堆中。</p>
+<p>其次，这里所说的初始值，通常情况是数据类型的零值。</p>
+<p>相对的，有一些特殊情况：如果类字段的字段属性表中存在<code>ConstantValue</code>，那在准备阶段变量就会初始化为<code>ConstantValue</code>属性所指的值。</p>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程。</p>
+<h5 id="符合引用（Symbolic-References）"><a href="#符合引用（Symbolic-References）" class="headerlink" title="符合引用（Symbolic References）"></a>符合引用（Symbolic References）</h5><p>符号引用以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义的定位到目标即可。</p>
+<h5 id="直接引用（Direct-References）"><a href="#直接引用（Direct-References）" class="headerlink" title="直接引用（Direct References）"></a>直接引用（Direct References）</h5><p>直接引用可以是直接指向目标的指针、相对偏移量或是一个能间接定位到目标的句柄。如果有了直接引用，那引用的目标必定已经在内存中。</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>是类加载过程的最后一步。在准备阶段，变量已经赋过一次系统要求的初始值。而在初始化阶段，则根据程序员的代码去初始化类变量和其他资源。</p>
+<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><p>虚拟机设计团队把类加载阶段中的“通过一个类的全限定名来获取描述此类的二进制字节流”这个动作放到Java虚拟机外部实现，以便让应用程序自己决定如何去获取所需要的类。实现这个动作的代码模块称为“类加载器”。</p>
+<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><p>从Java虚拟机的角度来讲，只存在两种不同的类加载器：一种是启动类加载器（Bootstrap ClassLoader），这个类加载器使用C++实现，是虚拟机自身的一部分；另一种就是所有其他类加载器，这些类加载器都是由Java实现的，独立于虚拟机外部，并且全都继承自抽象类<code>java.lang.ClassLoader</code>。</p>
+<p>从Java开发人员的角度，类加载器可以分为以下三种：</p>
+<ul>
+<li>启动类加载器（Bootstrap ClassLoader），这个类加载器负责将<code>JAVA_HOME/lib</code>类库加载到虚拟机内存中。</li>
+<li>扩展类加载器：（Extension ClassLoader）:它负责加载<code>JAVA_HOME/lib/ext</code>类库加载到虚拟机内存中。</li>
+<li>应用程序类加载器（Application ClassLoader）:它负责加载用户类路径上所指定的类库。</li>
+</ul>
+<h4 id="双亲委派模型工作过程："><a href="#双亲委派模型工作过程：" class="headerlink" title="双亲委派模型工作过程："></a>双亲委派模型工作过程：</h4><p>如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把这个请求派给父类加载器去完成，每一层的加载器都是如此，因此所有的加载请求最终都应该传送到顶层的启动类加载器中，只有当父加载器反馈自己无法完成这个加载请求（它的搜索范围中没有找到所需的类）时，子加载器才会尝试自己去加载。</p>
+<h4 id="双亲委派模型优点："><a href="#双亲委派模型优点：" class="headerlink" title="双亲委派模型优点："></a>双亲委派模型优点：</h4><p>Java类随着它的加载器一起具备了一种带有优先级的层次关系。例如<code>java.lang.Object</code>，无论哪一个类加载器要加载这个类，最终都会委派给处于模型最顶端的启动类加载器进行加载，因此<code>Object</code>类在程序的各种类加载器环境中都是同一个类。</p>
+]]></content>
+      <categories>
+        <category>🙃Java虚拟机</category>
+      </categories>
+      <tags>
+        <tag>Java类加载机制</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>深入理解JVM之Java内存区域</title>
     <url>/2019/10/22/java-memory-area/</url>
     <content><![CDATA[<h3 id="JVM-内存区域模型"><a href="#JVM-内存区域模型" class="headerlink" title="JVM 内存区域模型"></a>JVM 内存区域模型</h3><p>JVM 内存区域基本上由4个区域组成：</p>
