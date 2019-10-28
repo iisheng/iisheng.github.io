@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iisheng.cn/2019/10/27/java-gc-algorithm/</loc>
+    
+    <lastmod>2019-10-28T02:53:40.365Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://iisheng.cn/2019/10/25/b+tree/</loc>
     
     <lastmod>2019-10-27T08:09:53.697Z</lastmod>
