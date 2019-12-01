@@ -30,8 +30,8 @@
     exturl: false,
     sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
@@ -249,6 +249,7 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -266,7 +267,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="男儿当知耻而后勇。">
+      <meta itemprop="description" content="善思而不纠结，珍惜而不贪婪。">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -326,6 +327,14 @@
             </span>
           
 
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
           
 
         </div>
@@ -525,7 +534,7 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="iisheng">
   <p class="site-author-name" itemprop="name">iisheng</p>
-  <div class="site-description" itemprop="description">男儿当知耻而后勇。</div>
+  <div class="site-description" itemprop="description">善思而不纠结，珍惜而不贪婪。</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -633,6 +642,29 @@
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
 
 
 
@@ -654,7 +686,7 @@
   <script src="/lib/anime.min.js?v=3.1.0"></script>
 <script src="/js/utils.js?v=7.4.1"></script>
 <script src="/js/schemes/muse.js?v=7.4.1"></script>
-<script src="/js/next-boot.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script><script src="/js/bookmark.js?v=7.4.1"></script>
 
 
 
