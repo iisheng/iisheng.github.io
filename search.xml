@@ -1,6 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>一篇文章掌握Maven</title>
+    <url>/2019/12/07/maven/</url>
+    <content><![CDATA[<h3 id="Maven是什么？"><a href="#Maven是什么？" class="headerlink" title="Maven是什么？"></a>Maven是什么？</h3><p>Maven，这个单词来源于犹太语，意味着知识的积累。最初在Jakarta Turbine 项目中用来简化构造项目流程。最终，形成给予Java项目的构建和管理的工具。</p>
+<h3 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h3><p>安装比较简单，官网下载，配置环境即可。这里推荐一下，安装之后配置仓库镜像，可以加快访问速度。</p>
+<p>编辑<code>settings.xml</code>，在<code>&lt;/mirrors&gt;</code>之前添加<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;mirror&gt;</span><br><span class="line">  &lt;id&gt;nexus-aliyun&lt;/id&gt;</span><br><span class="line">  &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</span><br><span class="line">  &lt;name&gt;Nexus aliyun&lt;/name&gt;</span><br><span class="line">  &lt;url&gt;http:<span class="comment">//maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;</span></span><br><span class="line">&lt;/mirror&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Maven-创建项目"><a href="#Maven-创建项目" class="headerlink" title="Maven 创建项目"></a>Maven 创建项目</h3><h4 id="创建基本的Java项目"><a href="#创建基本的Java项目" class="headerlink" title="创建基本的Java项目"></a>创建基本的Java项目</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mvn archetype:generate \</span><br><span class="line"> -DgroupId=com.mycompany.app \</span><br><span class="line"> -DartifactId=my-app \</span><br><span class="line"> -DarchetypeArtifactId=maven-archetype-quickstart \</span><br><span class="line"> -DinteractiveMode=<span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+<p>使用其他工具创建项目也如出一辙。</p>
+<a id="more"></a>
+<h3 id="Maven项目结构"><a href="#Maven项目结构" class="headerlink" title="Maven项目结构"></a>Maven项目结构</h3><p><img src="https://img.iisheng.cn/maven-project-directory.png" alt></p>
+<h3 id="Maven-基本概念"><a href="#Maven-基本概念" class="headerlink" title="Maven 基本概念"></a>Maven 基本概念</h3><h4 id="POM（Project-Object-Model）"><a href="#POM（Project-Object-Model）" class="headerlink" title="POM（Project Object Model）"></a>POM（Project Object Model）</h4><p>POM的全称是Project Object Model，用通俗点的话说就是对要构建的项目进行建模，将要构建的项目看成是一个对象（Object）。</p>
+<p>我们可以用我们熟悉的一个Java代码来描述一下这个对象。<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.iisheng.maven;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> iisheng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019/12/05 15:12:01</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProjectObject</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 表示组织或者组织的项目唯一的标识符</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String groupId;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 表示项目内部组件的标识</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String artifactId;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 打包方式</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String packaging;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 表示该artifact 版本号</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String version;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 依赖的其他项目</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Set&lt;ProjectObject&gt; dependencies;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 父级项目</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> ProjectObject parent;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 子模块项目</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Set&lt;ProjectObject&gt; modules;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 下面几个属性 仅仅用于生成文档</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 项目展示名字</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 项目网址</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String url;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 项目描述</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Lifecycle（生命周期）"><a href="#Lifecycle（生命周期）" class="headerlink" title="Lifecycle（生命周期）"></a>Lifecycle（生命周期）</h4><p>在Maven中一次构建过程就是一个Lifecycle，这个Lifecycle分为多个阶段，每个阶段叫做Phase。有三种构建的生命周期，分别是<code>default</code>、<code>clean</code>、<code>site</code>。<code>default</code>用于部署项目，<code>clean</code>用于清理项目，而<code>site</code>用于创建项目文档。</p>
+<p><code>default</code>Lifecycle包含如下Phase:</p>
+<ul>
+<li>validate：校验项目和一些必要信息是可用的</li>
+<li>compile：编译项目源码</li>
+<li>test：执行源码的单元测试模块</li>
+<li>package：将项目打包，比如打包成jar文件</li>
+<li>verify：对集成测试的结果进行检查，以确保满足质量标准</li>
+<li>install：将软件包安装到本地仓库中</li>
+<li>deploy：将软件包部署到远程仓库</li>
+</ul>
+<h4 id="maven-常用命令介绍"><a href="#maven-常用命令介绍" class="headerlink" title="maven 常用命令介绍"></a>maven 常用命令介绍</h4><p>清理项目产生的临时文件，一般是模块下的target目录<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mvn clean</span><br></pre></td></tr></table></figure></p>
+<p>项目打包工具，会在模块下的target目录生成jar或者war等文件<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mvn <span class="keyword">package</span></span><br></pre></td></tr></table></figure></p>
+<p>测试命令或者执行src/test/java下面的测试用例<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mvn test</span><br></pre></td></tr></table></figure></p>
+<p>模块安装命令，将打包的jar或者war文件复制到本地仓库，使用-Dmaven.test.skip=true 跳过测试<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mvn install</span><br></pre></td></tr></table></figure></p>
+<p>发布命令，将打包的文件发布到maven仓库<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mvn deploy</span><br></pre></td></tr></table></figure></p>
+<p>maven 多个命令同时使用<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mvn clean <span class="keyword">package</span> -U -Dmaven.test.skip=<span class="keyword">true</span> -P test</span><br></pre></td></tr></table></figure></p>
+<h4 id="Phase和Goals"><a href="#Phase和Goals" class="headerlink" title="Phase和Goals"></a>Phase和Goals</h4><p>Lifecycle只规定了项目构建的流程，即先执行<code>validate</code>，再<code>compile</code>等一系列Phase，但并没有定义每一个Phase具体做什么。这里Phase的作用类似于Java中的接口，而Phase的具体实现在Goals里面。</p>
+<p>一个Phase必须绑定一个或多个Goals，才能执行具体的构建流程。为了让用户不用任何配置就能使用Maven项目，Maven默认为一些核心声明周期的Phase绑定了Goals。</p>
+<p>如果需要自定义绑定，可以在<code>pom.xml</code>文件中配置。</p>
+<h3 id="Maven核心概念"><a href="#Maven核心概念" class="headerlink" title="Maven核心概念"></a>Maven核心概念</h3><h4 id="Maven坐标"><a href="#Maven坐标" class="headerlink" title="Maven坐标"></a>Maven坐标</h4><p>Maven坐标主要是为了标识项目的唯一性。由下面几个属性组成：</p>
+<ul>
+<li>groupId：组织或者组织的项目名称</li>
+<li>artifactId：项目中的具体模块</li>
+<li>version：项目版本</li>
+<li>packaging：项目打包方式</li>
+<li>classifier：用于区分从同一POM构建的具有不同内容的构件</li>
+</ul>
+<h4 id="Maven仓库"><a href="#Maven仓库" class="headerlink" title="Maven仓库"></a>Maven仓库</h4><p>存储管理构件（JAR、WAR等）的地方。</p>
+<p>一般分为以下三类：</p>
+<ul>
+<li>本地仓库：默认是<code>~/.m2/repository</code> 目录，可在配置文件中配置其他目录</li>
+<li>私服：内网的Maven仓库</li>
+<li>中央仓库：Maven社区提供的仓库，包含大量的常用库</li>
+</ul>
+<h4 id="Maven依赖"><a href="#Maven依赖" class="headerlink" title="Maven依赖"></a>Maven依赖</h4><p>在<code>pom.xml</code>配置项目依赖，比如<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p><code>scope</code>用来控制依赖和编译、测试、运行的classpath的关系。有下面三种关系：</p>
+<ul>
+<li>compile：默认编译依赖范围。对于编译、测试、运行三种classpath都有效</li>
+<li>test：测试依赖范围。只对测试classpath有效</li>
+<li>provided：已提供依赖范围。编译、测试classpath有效，对于运行无效。</li>
+<li>runtime：运行时提供</li>
+<li>test：仅用于测试，且不可传递</li>
+<li>system：类似于provided，但必须显示提供JAR</li>
+<li>import：仅在<code>dependencyManagement</code>下支持。</li>
+</ul>
+<h5 id="传递依赖"><a href="#传递依赖" class="headerlink" title="传递依赖"></a>传递依赖</h5><p>Maven是通过<strong>传递依赖</strong>解析JAR包依赖，比如我项目中引入junit，在解析我的项目的时候，不仅仅仅有junit，还有junit依赖的JAR包。</p>
+<p><img src="https://img.iisheng.cn/maven-dependency.png" alt></p>
+<h5 id="包冲突时怎么产生的？"><a href="#包冲突时怎么产生的？" class="headerlink" title="包冲突时怎么产生的？"></a>包冲突时怎么产生的？</h5><p>假设 A-&gt;B-&gt;C-&gt;D1， E-&gt;F-&gt;D2，D1、D2 分别为 D 的不同版本。</p>
+<p>如果 <code>pom.xml</code> 文件中引入了 A 和 E 之后，按照 Maven 传递依赖原则，工程内需要引入的实际 JAR 包将会有：A B C D1 和 E F D2，因此 D1、D2 将会产生包冲突。</p>
+<h5 id="如何解决包冲突？"><a href="#如何解决包冲突？" class="headerlink" title="如何解决包冲突？"></a>如何解决包冲突？</h5><p>Maven解析<code>pom.xml</code>的时候，同一个JAR包只会保留一个。</p>
+<p>对于包冲突，Maven处理策略：</p>
+<ul>
+<li>最短路径优先：Maven面对 D1 D2，会选择最短路径的那个，即D2。因为，E-&gt;F-&gt;D2 比 A-&gt;B-&gt;C-&gt;D1 路径短。</li>
+<li>最先声明优先：如果路径一样，就选择最先声明的JAR包。</li>
+</ul>
+<h5 id="如何移除依赖？"><a href="#如何移除依赖？" class="headerlink" title="如何移除依赖？"></a>如何移除依赖？</h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line">        &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;groupId&gt;org.hamcrest&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;hamcrest-core&lt;/artifactId&gt;</span><br><span class="line">        &lt;/exclusion&gt;</span><br><span class="line">    &lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Maven聚合"><a href="#Maven聚合" class="headerlink" title="Maven聚合"></a>Maven聚合</h4><p>模块化，各个模块看起来更清晰。更主要的优点是，在项目根目录构建项目的时候，下面所有module里面的项目都会跟着同时构建。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;modules&gt;</span><br><span class="line">    &lt;module&gt;study-common&lt;/module&gt;</span><br><span class="line">    &lt;module&gt;study-dao&lt;/module&gt;</span><br><span class="line">    &lt;module&gt;study-service&lt;/module&gt;</span><br><span class="line">	&lt;module&gt;study-web&lt;/module&gt;</span><br><span class="line">&lt;/modules&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Maven继承"><a href="#Maven继承" class="headerlink" title="Maven继承"></a>Maven继承</h4><p>继承为了消除重复。可以把很多相同的配置提取出来。</p>
+<p>子模块通过<code>parent</code>标签配置，继承父模块属性。父模块通过<code>dependencyManagement</code>标签进行管理。</p>
+<p>多模块版本号可以通过maven命令操作，在项目根目录执行</p>
+<h5 id="设置新版本号"><a href="#设置新版本号" class="headerlink" title="设置新版本号"></a>设置新版本号</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mvn versions:set -DnewVersion=<span class="number">0.0</span>.2-SNAPSHOT</span><br></pre></td></tr></table></figure>
+<h5 id="回滚设置新版本号操作"><a href="#回滚设置新版本号操作" class="headerlink" title="回滚设置新版本号操作"></a>回滚设置新版本号操作</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mvn versions:revert</span><br></pre></td></tr></table></figure>
+<h5 id="提交设置新版本号操作"><a href="#提交设置新版本号操作" class="headerlink" title="提交设置新版本号操作"></a>提交设置新版本号操作</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">mvn versions:commit</span><br></pre></td></tr></table></figure>
+<p>Maven多模块项目结构，以及Maven属性继承配置等，可以参考这个项目<a href="https://github.com/iisheng/mybatis-study" target="_blank" rel="noopener">iisheng/mybatis-study</a></p>
+]]></content>
+      <categories>
+        <category>😳工具</category>
+      </categories>
+      <tags>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>深入理解JVM之垃圾回收算法</title>
     <url>/2019/10/27/java-gc-algorithm/</url>
     <content><![CDATA[<h3 id="判断对象是否死亡的方法"><a href="#判断对象是否死亡的方法" class="headerlink" title="判断对象是否死亡的方法"></a>判断对象是否死亡的方法</h3><h4 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h4><p>给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被引用。</p>

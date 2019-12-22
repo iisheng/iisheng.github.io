@@ -58,13 +58,13 @@
   <meta name="description" content="善思而不纠结，珍惜而不贪婪。">
 <meta name="keywords" content="iisheng, 后端成长之路">
 <meta property="og:type" content="website">
-<meta property="og:title" content="iisheng">
+<meta property="og:title" content="后端成长之路">
 <meta property="og:url" content="https://iisheng.cn/index.html">
-<meta property="og:site_name" content="iisheng">
+<meta property="og:site_name" content="后端成长之路">
 <meta property="og:description" content="善思而不纠结，珍惜而不贪婪。">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iisheng">
+<meta name="twitter:title" content="后端成长之路">
 <meta name="twitter:description" content="善思而不纠结，珍惜而不贪婪。">
   <link rel="canonical" href="https://iisheng.cn/">
 
@@ -80,7 +80,7 @@
   };
 </script>
 
-  <title>iisheng</title>
+  <title>后端成长之路</title>
   
 
 
@@ -126,7 +126,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">iisheng</span>
+        <span class="site-title">后端成长之路</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -262,6 +262,116 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/12/07/maven/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="善思而不纠结，珍惜而不贪婪。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="后端成长之路">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/12/07/maven/" class="post-title-link" itemprop="url">一篇文章掌握Maven</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-07 20:35:00" itemprop="dateCreated datePublished" datetime="2019-12-07T20:35:00+08:00">2019-12-07</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😳工具/" itemprop="url" rel="index">
+                    <span itemprop="name">😳工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">评论次数：</span>
+    
+    <a title="valine" href="/2019/12/07/maven/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/07/maven/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Maven是什么？"><a href="#Maven是什么？" class="headerlink" title="Maven是什么？"></a>Maven是什么？</h3><p>Maven，这个单词来源于犹太语，意味着知识的积累。最初在Jakarta Turbine 项目中用来简化构造项目流程。最终，形成给予Java项目的构建和管理的工具。</p>
+<h3 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h3><p>安装比较简单，官网下载，配置环境即可。这里推荐一下，安装之后配置仓库镜像，可以加快访问速度。</p>
+<p>编辑<code>settings.xml</code>，在<code>&lt;/mirrors&gt;</code>之前添加<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;</span><br><span class="line">  &lt;id&gt;nexus-aliyun&lt;/id&gt;</span><br><span class="line">  &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</span><br><span class="line">  &lt;name&gt;Nexus aliyun&lt;/name&gt;</span><br><span class="line">  &lt;url&gt;http:<span class="comment">//maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;</span></span><br><span class="line">&lt;/mirror&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Maven-创建项目"><a href="#Maven-创建项目" class="headerlink" title="Maven 创建项目"></a>Maven 创建项目</h3><h4 id="创建基本的Java项目"><a href="#创建基本的Java项目" class="headerlink" title="创建基本的Java项目"></a>创建基本的Java项目</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate \</span><br><span class="line"> -DgroupId=com.mycompany.app \</span><br><span class="line"> -DartifactId=my-app \</span><br><span class="line"> -DarchetypeArtifactId=maven-archetype-quickstart \</span><br><span class="line"> -DinteractiveMode=<span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+<p>使用其他工具创建项目也如出一辙。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/12/07/maven/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/27/java-gc-algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -271,7 +381,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
+      <meta itemprop="name" content="后端成长之路">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -388,7 +498,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
+      <meta itemprop="name" content="后端成长之路">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -504,7 +614,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
+      <meta itemprop="name" content="后端成长之路">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -620,7 +730,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
+      <meta itemprop="name" content="后端成长之路">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -733,7 +843,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
+      <meta itemprop="name" content="后端成长之路">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -842,7 +952,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
+      <meta itemprop="name" content="后端成长之路">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -950,7 +1060,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
+      <meta itemprop="name" content="后端成长之路">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1062,7 +1172,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
+      <meta itemprop="name" content="后端成长之路">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1178,7 +1288,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
+      <meta itemprop="name" content="后端成长之路">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1310,112 +1420,6 @@
   
 
     
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/10/02/interview-java-collection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="善思而不纠结，珍惜而不贪婪。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iisheng">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            
-            <a href="/2019/10/02/interview-java-collection/" class="post-title-link" itemprop="url">面试准备系列之Java集合</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-02 09:50:00" itemprop="dateCreated datePublished" datetime="2019-10-02T09:50:00+08:00">2019-10-02</time>
-            </span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/😜面试系列/" itemprop="url" rel="index">
-                    <span itemprop="name">😜面试系列</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">评论次数：</span>
-    
-    <a title="valine" href="/2019/10/02/interview-java-collection/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/02/interview-java-collection/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Java集合框架都有哪些？"><a href="#Java集合框架都有哪些？" class="headerlink" title="Java集合框架都有哪些？"></a>Java集合框架都有哪些？</h3><h4 id="实现Collection接口的，存放特定元素的集合的对象"><a href="#实现Collection接口的，存放特定元素的集合的对象" class="headerlink" title="实现Collection接口的，存放特定元素的集合的对象"></a>实现<code>Collection</code>接口的，存放特定元素的集合的对象</h4><p><img src="https://static001.geekbang.org/resource/image/67/c7/675536edf1563b11ab7ead0def1215c7.png" alt></p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/02/interview-java-collection/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
   </div>
 
   
@@ -1466,7 +1470,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1492,7 +1496,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
