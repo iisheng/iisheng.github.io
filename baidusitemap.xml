@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://iisheng.cn/2020/02/28/git/</loc>
+    <lastmod>2020-02-28</lastmod>
+  </url>  <url>
     <loc>https://iisheng.cn/2019/12/07/maven/</loc>
     <lastmod>2019-12-22</lastmod>
   </url>  <url>
@@ -80,9 +83,6 @@
     <lastmod>2019-10-20</lastmod>
   </url>  <url>
     <loc>https://iisheng.cn/2019/04/15/vim/</loc>
-    <lastmod>2019-10-20</lastmod>
-  </url>  <url>
-    <loc>https://iisheng.cn/2019/03/04/git/</loc>
     <lastmod>2019-10-20</lastmod>
   </url>  <url>
     <loc>https://iisheng.cn/2019/10/17/interview-spring-mvc/</loc>
