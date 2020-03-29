@@ -25,10 +25,10 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '7.4.1',
     exturl: false,
-    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
     bookmark: {"enable":true,"color":"#222","save":"auto"},
@@ -55,17 +55,17 @@
   };
 </script>
 
-  <meta name="description" content="人生如逆水行舟，不进则退。">
-<meta name="keywords" content="iisheng, 如逆水行舟">
+  <meta name="description" content="欢迎关注公众号【如逆水行舟】">
+<meta name="keywords" content="iisheng, opensheng, open_sheng, 如逆水行舟">
 <meta property="og:type" content="website">
 <meta property="og:title" content="如逆水行舟">
 <meta property="og:url" content="https://iisheng.cn/index.html">
 <meta property="og:site_name" content="如逆水行舟">
-<meta property="og:description" content="人生如逆水行舟，不进则退。">
+<meta property="og:description" content="欢迎关注公众号【如逆水行舟】">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如逆水行舟">
-<meta name="twitter:description" content="人生如逆水行舟，不进则退。">
+<meta name="twitter:description" content="欢迎关注公众号【如逆水行舟】">
   <link rel="canonical" href="https://iisheng.cn/">
 
 
@@ -113,6 +113,7 @@
   </style>
 </noscript>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -218,8 +219,6 @@
     
   </ul>
 
-    
-
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -254,6 +253,8 @@
     <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
+            
+
           <div class="content">
             
 
@@ -266,8 +267,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -339,7 +340,6 @@
 
       
           <h3 id="Git简单介绍"><a href="#Git简单介绍" class="headerlink" title="Git简单介绍"></a>Git简单介绍</h3><p>Git是一个分布式版本控制软件，最初由Linus Torvalds创作，于2005年以GPL发布。最初目的是为更好地管理Linux内核开发而设计。</p>
-<h3 id="Git文件状态变化图解"><a href="#Git文件状态变化图解" class="headerlink" title="Git文件状态变化图解"></a>Git文件状态变化图解</h3><p><img src="https://img.iisheng.cn/lifecycle.png" alt></p>
           <!--noindex-->
           
             <div class="post-button">
@@ -373,8 +373,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -446,10 +446,6 @@
 
       
           <h3 id="Maven是什么？"><a href="#Maven是什么？" class="headerlink" title="Maven是什么？"></a>Maven是什么？</h3><p>Maven，这个单词来源于犹太语，意味着知识的积累。最初在Jakarta Turbine 项目中用来简化构造项目流程。最终，形成给予Java项目的构建和管理的工具。</p>
-<h3 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h3><p>安装比较简单，官网下载，配置环境即可。这里推荐一下，安装之后配置仓库镜像，可以加快访问速度。</p>
-<p>编辑<code>settings.xml</code>，在<code>&lt;/mirrors&gt;</code>之前添加<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;</span><br><span class="line">  &lt;id&gt;nexus-aliyun&lt;/id&gt;</span><br><span class="line">  &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</span><br><span class="line">  &lt;name&gt;Nexus aliyun&lt;/name&gt;</span><br><span class="line">  &lt;url&gt;http:<span class="comment">//maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;</span></span><br><span class="line">&lt;/mirror&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="Maven-创建项目"><a href="#Maven-创建项目" class="headerlink" title="Maven 创建项目"></a>Maven 创建项目</h3><h4 id="创建基本的Java项目"><a href="#创建基本的Java项目" class="headerlink" title="创建基本的Java项目"></a>创建基本的Java项目</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate \</span><br><span class="line"> -DgroupId=com.mycompany.app \</span><br><span class="line"> -DartifactId=my-app \</span><br><span class="line"> -DarchetypeArtifactId=maven-archetype-quickstart \</span><br><span class="line"> -DinteractiveMode=<span class="keyword">false</span></span><br></pre></td></tr></table></figure>
-<p>使用其他工具创建项目也如出一辙。</p>
           <!--noindex-->
           
             <div class="post-button">
@@ -483,8 +479,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -559,14 +555,6 @@
 <blockquote>
 <p>很难解决对象之间相互循环引用的问题。</p>
 </blockquote>
-<h4 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h4><p>通过一系列叫做“GC Roots”的对象作为起点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连时，则证明对象是不可用的。</p>
-<p>在Java语言中，可作为GC Roots的对象包括下面几种：</p>
-<ul>
-<li>虚拟机栈（栈帧中的本地变量表）中的引用对象</li>
-<li>方法区中类静态属性引用的对象</li>
-<li>方法区中常量引用的对象</li>
-<li>本地方法栈中JNI（即一般的Native方法）引用的对象</li>
-</ul>
           <!--noindex-->
           
             <div class="post-button">
@@ -600,8 +588,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -674,15 +662,6 @@
       
           <p>Innodb索引底层数据结构式B+树。所以介绍索引实现原理之前，我们来看一下什么是B+树。看B+树之前我们，要了解一下二叉查找树和平衡二叉树。</p>
 <h3 id="什么是二叉查找树？"><a href="#什么是二叉查找树？" class="headerlink" title="什么是二叉查找树？"></a>什么是二叉查找树？</h3><p>二叉查找树，又叫做二叉排序树，也叫做二叉搜索树。</p>
-<p>二叉查找树或者使用一颗空树；或者是具有下列性质的二叉树</p>
-<ul>
-<li>若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
-<li>若他的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
-<li>它的左右子树也分别为二叉搜索树。</li>
-</ul>
-<p>可以看出来，二叉查找树中序遍历可以得到一个关键字的有序序列。二叉查找树既拥有类似折半查找的特性，又采用了链表做存储结构，因此是动态查找表的一种适宜表示。</p>
-<p>在二叉查找树上查找其关键字等于给定值结点的过程，恰是走了一条从根结点到该结点的路径的过程。所以，含有n个结点的二叉查找树夫人平均查找长度和树的形态有关。</p>
-<p>当先后插入的关键字有序时，构成的二叉查找树蜕变为单支树。<br>所以，需要对二叉查找树 进行 <strong>平衡化</strong>处理，成为二叉平衡树。</p>
           <!--noindex-->
           
             <div class="post-button">
@@ -716,8 +695,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -789,16 +768,6 @@
 
       
           <h3 id="Class文件结构"><a href="#Class文件结构" class="headerlink" title="Class文件结构"></a>Class文件结构</h3><p>任何一个Class文件都对应着唯一一个类或者接口的定义信息</p>
-<ul>
-<li>魔数：确定这个文件是否是一个能被虚拟机接受的Class文件</li>
-<li>版本号：低版本不能执行高版本Class文件，高版本可以执行低版本</li>
-<li>常量池：Class文件中的资源仓库</li>
-<li>访问标志：用于识别一些类或者接口层次的访问信息</li>
-<li>类索引、父类索引、索引集合：确定类的继承关系</li>
-<li>字段表：用于描述接口或者类中声明的变量</li>
-<li>方法表：用于描述方法上声明的变量</li>
-<li>属性表：Class文件、字段表、方法表都可以携带自己的属性表集合，以用于描述某些场景专有的信息</li>
-</ul>
           <!--noindex-->
           
             <div class="post-button">
@@ -832,8 +801,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -905,13 +874,6 @@
 
       
           <h3 id="JVM-内存区域模型"><a href="#JVM-内存区域模型" class="headerlink" title="JVM 内存区域模型"></a>JVM 内存区域模型</h3><p>JVM 内存区域基本上由4个区域组成：</p>
-<ul>
-<li>类加载器：在JVM启动时或者类运行时，将需要的class加载到JVM中。</li>
-<li>运行时数据区：将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块。</li>
-<li>执行引擎：负责执行class文件中包含的字节码指令，相当于实际机器上的CPU。</li>
-<li>本地方法调用：执行C/C++实现的本地方法的代码，并返回结果。</li>
-</ul>
-<p><img src="/images/jvm-composition.png" alt></p>
           <!--noindex-->
           
             <div class="post-button">
@@ -945,8 +907,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1054,8 +1016,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1162,8 +1124,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1274,8 +1236,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1422,9 +1384,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="iisheng">
+    <img class="site-author-image" itemprop="image" src="https://img.iisheng.cn/qrcode_344.jpg" alt="iisheng">
   <p class="site-author-name" itemprop="name">iisheng</p>
-  <div class="site-description" itemprop="description">人生如逆水行舟，不进则退。</div>
+  <div class="site-description" itemprop="description">欢迎关注公众号【如逆水行舟】</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -1487,11 +1449,23 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="https://iisheng.cn" title="https://iisheng.cn">如逆水行舟</a>
+          <a href="https://iisheng.cn/" title="https://iisheng.cn/">如逆水行舟</a>
         </li>
       
         <li class="links-of-blogroll-item">
-          <a href="https://tech.meituan.com/" title="https://tech.meituan.com/" rel="noopener" target="_blank">美团点评</a>
+          <a href="https://tech.meituan.com/" title="https://tech.meituan.com/" rel="noopener" target="_blank">美团技术团队</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://jm.taobao.org/" title="http://jm.taobao.org/" rel="noopener" target="_blank">阿里中间件团队</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://ifeve.com/" title="http://ifeve.com/" rel="noopener" target="_blank">并发编程网</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://tech.youzan.com/" title="https://tech.youzan.com/" rel="noopener" target="_blank">有赞技术团队</a>
         </li>
       
         <li class="links-of-blogroll-item">
@@ -1526,9 +1500,7 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">
-      
-    主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.1
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
   </div>
 
         
@@ -1575,7 +1547,8 @@
   
   <script src="/lib/anime.min.js?v=3.1.0"></script>
 <script src="/js/utils.js?v=7.4.1"></script>
-<script src="/js/schemes/muse.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
 <script src="/js/next-boot.js?v=7.4.1"></script><script src="/js/bookmark.js?v=7.4.1"></script>
 
 
@@ -1651,7 +1624,7 @@ NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min
 </body>
 </html>
 
-<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<script type="text/javascript" src="/js/clicklove.js"></script>
 
 <script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
 <script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
@@ -1664,7 +1637,12 @@ NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min
 <script type="text/javascript">
   var windowWidth = $(window).width();
   if (windowWidth > 480) {
-    document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+    document.write('<script type="text/javascript" src="/js/snow.js"><\/script>');
   }
 </script>
+
+
+<!-- 看板娘 -->
+<script src="/live2d-widget/autoload.js"></script>
+
 

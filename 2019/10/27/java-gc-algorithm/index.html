@@ -25,10 +25,10 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '7.4.1',
     exturl: false,
-    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
     bookmark: {"enable":true,"color":"#222","save":"auto"},
@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="判断对象是否死亡的方法引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被引用。  很难解决对象之间相互循环引用的问题。  可达性分析算法通过一系列叫做“GC Roots”的对象作为起点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任">
+  <meta name="description" content="判断对象是否死亡的方法引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被引用。  很难解决对象之间相互循环引用的问题。">
 <meta name="keywords" content="垃圾回收算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解JVM之垃圾回收算法">
 <meta property="og:url" content="https://iisheng.cn/2019/10/27/java-gc-algorithm/index.html">
 <meta property="og:site_name" content="如逆水行舟">
-<meta property="og:description" content="判断对象是否死亡的方法引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被引用。  很难解决对象之间相互循环引用的问题。  可达性分析算法通过一系列叫做“GC Roots”的对象作为起点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任">
+<meta property="og:description" content="判断对象是否死亡的方法引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被引用。  很难解决对象之间相互循环引用的问题。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://iisheng.cn/images/hotspot-garbage-collector.png">
-<meta property="og:updated_time" content="2019-10-28T02:53:40.365Z">
+<meta property="og:updated_time" content="2020-03-29T08:43:55.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解JVM之垃圾回收算法">
-<meta name="twitter:description" content="判断对象是否死亡的方法引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被引用。  很难解决对象之间相互循环引用的问题。  可达性分析算法通过一系列叫做“GC Roots”的对象作为起点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任">
+<meta name="twitter:description" content="判断对象是否死亡的方法引用计数法给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被引用。  很难解决对象之间相互循环引用的问题。">
 <meta name="twitter:image" content="https://iisheng.cn/images/hotspot-garbage-collector.png">
   <link rel="canonical" href="https://iisheng.cn/2019/10/27/java-gc-algorithm/">
 
@@ -116,6 +116,7 @@
   </style>
 </noscript>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -221,8 +222,6 @@
     
   </ul>
 
-    
-
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -257,6 +256,8 @@
     <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
+            
+
           <div class="content">
             
 
@@ -269,8 +270,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -354,6 +355,7 @@
 <blockquote>
 <p>很难解决对象之间相互循环引用的问题。</p>
 </blockquote>
+<a id="more"></a>
 <h4 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h4><p>通过一系列叫做“GC Roots”的对象作为起点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连时，则证明对象是不可用的。</p>
 <p>在Java语言中，可作为GC Roots的对象包括下面几种：</p>
 <ul>
@@ -362,7 +364,6 @@
 <li>方法区中常量引用的对象</li>
 <li>本地方法栈中JNI（即一般的Native方法）引用的对象</li>
 </ul>
-<a id="more"></a>
 <h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>引用分为强引用（Strong Reference）、软引用（Soft Reference）、弱引用（Weak Reference）、虚引用（Phantom Reference）4种，这4种引用强度依次减弱。</p>
 <h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>强引用就是指在程序中普遍存在的，类似<code>Object obj = new Object();</code>这类的引用，只要强引用还存在，垃圾收集器永远不会回收掉被引用的对象。</p>
 <h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p>软引用是用来描述一些还有用但并非必须的对象。对于软引用关联着的对象，在系统将要发生内存溢出异常之前，将会把这些对象列进回收范围之中进行第二次回收。如果这次回收还没有足够的内存，才会抛出内存溢出异常。在JDK 1.2之后 使用<code>SoftReference</code>类来实现软引用。</p>
@@ -530,9 +531,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="iisheng">
+    <img class="site-author-image" itemprop="image" src="https://img.iisheng.cn/qrcode_344.jpg" alt="iisheng">
   <p class="site-author-name" itemprop="name">iisheng</p>
-  <div class="site-description" itemprop="description">人生如逆水行舟，不进则退。</div>
+  <div class="site-description" itemprop="description">欢迎关注公众号【如逆水行舟】</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -595,11 +596,23 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="https://iisheng.cn" title="https://iisheng.cn">如逆水行舟</a>
+          <a href="https://iisheng.cn/" title="https://iisheng.cn/">如逆水行舟</a>
         </li>
       
         <li class="links-of-blogroll-item">
-          <a href="https://tech.meituan.com/" title="https://tech.meituan.com/" rel="noopener" target="_blank">美团点评</a>
+          <a href="https://tech.meituan.com/" title="https://tech.meituan.com/" rel="noopener" target="_blank">美团技术团队</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://jm.taobao.org/" title="http://jm.taobao.org/" rel="noopener" target="_blank">阿里中间件团队</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://ifeve.com/" title="http://ifeve.com/" rel="noopener" target="_blank">并发编程网</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://tech.youzan.com/" title="https://tech.youzan.com/" rel="noopener" target="_blank">有赞技术团队</a>
         </li>
       
         <li class="links-of-blogroll-item">
@@ -634,9 +647,7 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">
-      
-    主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.1
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
   </div>
 
         
@@ -683,7 +694,8 @@
   
   <script src="/lib/anime.min.js?v=3.1.0"></script>
 <script src="/js/utils.js?v=7.4.1"></script>
-<script src="/js/schemes/muse.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
 <script src="/js/next-boot.js?v=7.4.1"></script><script src="/js/bookmark.js?v=7.4.1"></script>
 
 
@@ -759,7 +771,7 @@ NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min
 </body>
 </html>
 
-<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<script type="text/javascript" src="/js/clicklove.js"></script>
 
 <script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
 <script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
@@ -772,7 +784,12 @@ NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min
 <script type="text/javascript">
   var windowWidth = $(window).width();
   if (windowWidth > 480) {
-    document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+    document.write('<script type="text/javascript" src="/js/snow.js"><\/script>');
   }
 </script>
+
+
+<!-- 看板娘 -->
+<script src="/live2d-widget/autoload.js"></script>
+
 

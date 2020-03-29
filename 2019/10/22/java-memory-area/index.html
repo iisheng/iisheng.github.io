@@ -25,10 +25,10 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '7.4.1',
     exturl: false,
-    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
     bookmark: {"enable":true,"color":"#222","save":"auto"},
@@ -55,21 +55,21 @@
   };
 </script>
 
-  <meta name="description" content="JVM 内存区域模型JVM 内存区域基本上由4个区域组成：  类加载器：在JVM启动时或者类运行时，将需要的class加载到JVM中。 运行时数据区：将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块。 执行引擎：负责执行class文件中包含的字节码指令，相当于实际机器上的CPU。 本地方法调用：执行C/C++实现的本地方法的代码，并返回结果。">
+  <meta name="description" content="JVM 内存区域模型JVM 内存区域基本上由4个区域组成：">
 <meta name="keywords" content="Java内存区域">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解JVM之Java内存区域">
 <meta property="og:url" content="https://iisheng.cn/2019/10/22/java-memory-area/index.html">
 <meta property="og:site_name" content="如逆水行舟">
-<meta property="og:description" content="JVM 内存区域模型JVM 内存区域基本上由4个区域组成：  类加载器：在JVM启动时或者类运行时，将需要的class加载到JVM中。 运行时数据区：将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块。 执行引擎：负责执行class文件中包含的字节码指令，相当于实际机器上的CPU。 本地方法调用：执行C/C++实现的本地方法的代码，并返回结果。">
+<meta property="og:description" content="JVM 内存区域模型JVM 内存区域基本上由4个区域组成：">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://iisheng.cn/images/jvm-composition.png">
 <meta property="og:image" content="https://iisheng.cn/images/handle-visit-object.png">
 <meta property="og:image" content="https://iisheng.cn/images/direct-pointer-visit-object.png">
-<meta property="og:updated_time" content="2019-10-24T09:05:10.577Z">
+<meta property="og:updated_time" content="2020-03-29T08:46:06.004Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解JVM之Java内存区域">
-<meta name="twitter:description" content="JVM 内存区域模型JVM 内存区域基本上由4个区域组成：  类加载器：在JVM启动时或者类运行时，将需要的class加载到JVM中。 运行时数据区：将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块。 执行引擎：负责执行class文件中包含的字节码指令，相当于实际机器上的CPU。 本地方法调用：执行C/C++实现的本地方法的代码，并返回结果。">
+<meta name="twitter:description" content="JVM 内存区域模型JVM 内存区域基本上由4个区域组成：">
 <meta name="twitter:image" content="https://iisheng.cn/images/jvm-composition.png">
   <link rel="canonical" href="https://iisheng.cn/2019/10/22/java-memory-area/">
 
@@ -118,6 +118,7 @@
   </style>
 </noscript>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -223,8 +224,6 @@
     
   </ul>
 
-    
-
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -259,6 +258,8 @@
     <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
+            
+
           <div class="content">
             
 
@@ -271,8 +272,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
-      <meta itemprop="description" content="人生如逆水行舟，不进则退。">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -353,6 +354,7 @@
 
       
         <h3 id="JVM-内存区域模型"><a href="#JVM-内存区域模型" class="headerlink" title="JVM 内存区域模型"></a>JVM 内存区域模型</h3><p>JVM 内存区域基本上由4个区域组成：</p>
+<a id="more"></a>
 <ul>
 <li>类加载器：在JVM启动时或者类运行时，将需要的class加载到JVM中。</li>
 <li>运行时数据区：将内存划分成若干个区以模拟实际机器上的存储、记录和调度功能模块。</li>
@@ -360,7 +362,6 @@
 <li>本地方法调用：执行C/C++实现的本地方法的代码，并返回结果。</li>
 </ul>
 <p><img src="/images/jvm-composition.png" alt></p>
-<a id="more"></a>
 <h3 id="Java-运行时数据区域"><a href="#Java-运行时数据区域" class="headerlink" title="Java 运行时数据区域"></a>Java 运行时数据区域</h3><h4 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h4><p>Java 线程私有，类似于操作系统里的 PC 计数器，它可以看做是当前线程所执行的字节码的行号指示器。</p>
 <ul>
 <li>如果线程正在执行的是一个 Java 方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的是 Native 方法，这个计数器值则为空（Undefined）。</li>
@@ -504,9 +505,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="iisheng">
+    <img class="site-author-image" itemprop="image" src="https://img.iisheng.cn/qrcode_344.jpg" alt="iisheng">
   <p class="site-author-name" itemprop="name">iisheng</p>
-  <div class="site-description" itemprop="description">人生如逆水行舟，不进则退。</div>
+  <div class="site-description" itemprop="description">欢迎关注公众号【如逆水行舟】</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -569,11 +570,23 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="https://iisheng.cn" title="https://iisheng.cn">如逆水行舟</a>
+          <a href="https://iisheng.cn/" title="https://iisheng.cn/">如逆水行舟</a>
         </li>
       
         <li class="links-of-blogroll-item">
-          <a href="https://tech.meituan.com/" title="https://tech.meituan.com/" rel="noopener" target="_blank">美团点评</a>
+          <a href="https://tech.meituan.com/" title="https://tech.meituan.com/" rel="noopener" target="_blank">美团技术团队</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://jm.taobao.org/" title="http://jm.taobao.org/" rel="noopener" target="_blank">阿里中间件团队</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://ifeve.com/" title="http://ifeve.com/" rel="noopener" target="_blank">并发编程网</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://tech.youzan.com/" title="https://tech.youzan.com/" rel="noopener" target="_blank">有赞技术团队</a>
         </li>
       
         <li class="links-of-blogroll-item">
@@ -608,9 +621,7 @@
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">
-      
-    主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.1
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
   </div>
 
         
@@ -657,7 +668,8 @@
   
   <script src="/lib/anime.min.js?v=3.1.0"></script>
 <script src="/js/utils.js?v=7.4.1"></script>
-<script src="/js/schemes/muse.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
 <script src="/js/next-boot.js?v=7.4.1"></script><script src="/js/bookmark.js?v=7.4.1"></script>
 
 
@@ -733,7 +745,7 @@ NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min
 </body>
 </html>
 
-<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<script type="text/javascript" src="/js/clicklove.js"></script>
 
 <script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
 <script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
@@ -746,7 +758,12 @@ NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min
 <script type="text/javascript">
   var windowWidth = $(window).width();
   if (windowWidth > 480) {
-    document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+    document.write('<script type="text/javascript" src="/js/snow.js"><\/script>');
   }
 </script>
+
+
+<!-- 看板娘 -->
+<script src="/live2d-widget/autoload.js"></script>
+
 
