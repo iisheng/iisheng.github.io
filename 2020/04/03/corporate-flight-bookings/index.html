@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="以清晰，易于理解的思维，讲解航班预订统计和拼车，这两道题。欢迎大家一起来刷题。">
+<meta name="keywords" content="LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="航班预订统计，听说这题有的人看了题解还没懂？">
+<meta property="og:url" content="https://iisheng.cn/2020/04/03/corporate-flight-bookings/index.html">
+<meta property="og:site_name" content="如逆水行舟">
+<meta property="og:description" content="以清晰，易于理解的思维，讲解航班预订统计和拼车，这两道题。欢迎大家一起来刷题。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img.iisheng.cn/wechat-screenshot.png">
+<meta property="og:updated_time" content="2020-04-03T14:53:40.322Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="航班预订统计，听说这题有的人看了题解还没懂？">
+<meta name="twitter:description" content="以清晰，易于理解的思维，讲解航班预订统计和拼车，这两道题。欢迎大家一起来刷题。">
+<meta name="twitter:image" content="https://img.iisheng.cn/wechat-screenshot.png">
+  <link rel="canonical" href="https://iisheng.cn/2020/04/03/corporate-flight-bookings/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>航班预订统计，听说这题有的人看了题解还没懂？ | 如逆水行舟</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">如逆水行舟</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2020/04/03/corporate-flight-bookings/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="如逆水行舟">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            航班预订统计，听说这题有的人看了题解还没懂？
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-03 20:35:00" itemprop="dateCreated datePublished" datetime="2020-04-03T20:35:00+08:00">2020-04-03</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/😒工具/" itemprop="url" rel="index">
+                    <span itemprop="name">😒工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">评论次数：</span>
+    
+    <a title="valine" href="/2020/04/03/corporate-flight-bookings/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/03/corporate-flight-bookings/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <center>以清晰，易于理解的思维，讲解<a href="https://leetcode-cn.com/problems/corporate-flight-bookings/" target="_blank" rel="noopener">航班预订统计</a>和<a href="https://leetcode-cn.com/problems/car-pooling/" target="_blank" rel="noopener">拼车</a>，这两道题。欢迎大家一起来刷题。</center>
+
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前几天，有一哥们发我一个LeetCode题目链接，紧跟着附上了自己的提交记录，一个<code>2ms</code>，另一个<code>1451ms</code>…</p>
+<p><img src="https://img.iisheng.cn/wechat-screenshot.png" alt></p>
+<p>我一看，这题有点意思啊，不同的思路竟然时间差这么多。搞它。</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>这里有<code>n</code>个航班，它们分别从<code>1</code>到<code>n</code>进行编号。</p>
+<p>我们这儿有一份航班预订表，表中第<code>i</code>条预订记录<code>bookings[i] = [i, j, k]</code>意味着我们在从<code>i</code>到<code>j</code>的每个航班上预订了<code>k</code>个座位。</p>
+<p>请你返回一个长度为<code>n</code>的数组<code>answer</code>，按航班编号顺序返回每个航班上预订的座位数。</p>
+<p>示例：</p>
+<blockquote>
+<p>输入：bookings = [ [1,2,10], [2,3,20], [2,5,25] ], n = 5</p>
+<p>输出：[10,55,45,25,25]</p>
+</blockquote>
+<h2 id="O-m-n-解法"><a href="#O-m-n-解法" class="headerlink" title="O(m*n)解法"></a>O(m*n)解法</h2><p>根据题意初始化长度为<code>n</code>的<code>answer</code>数组，代表<code>1</code>到<code>n</code>号航班预订的座位数量，外层遍历 <code>bookings</code>，内层遍历<code>bookings[i] = [i, j, k]</code>，计算航班号<code>i</code>到<code>j</code>的座位数量，即当前座位数量加<code>k</code>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] corpFlightBookings(</span><br><span class="line">        <span class="keyword">int</span>[][] bookings, <span class="keyword">int</span> n) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] answer = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历整个bookings数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span>[] b : bookings) &#123;</span><br><span class="line">        <span class="comment">// 内层循环把每个航班预订数加上</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = b[<span class="number">0</span>] - <span class="number">1</span>;</span><br><span class="line">             i &lt;= b[<span class="number">1</span>] - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            answer[i] += b[<span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="O-n-解法"><a href="#O-n-解法" class="headerlink" title="O(n)解法"></a>O(n)解法</h2><h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><code>O(m*n)</code>解法中关键一点，内层循环我们一直重复的在<code>[i, j]</code>之间加上<code>k</code>，怎么将这循环变成<code>O(1)</code>，成为问题的关键！</p>
+<p><code>[i, j]</code>之间加上<code>k</code>，这让我想到了等差数列，这不就是公差为<code>k</code>的等差数列吗？然后呢？</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>设<code>answer[i]</code>表示第<code>i</code>个航班预订的座位数。定义一个差分数组<code>d[]</code>，<code>d[i]</code>表示第<code>i</code>个航班与第<code>i-1</code>个航班预订座位的差值，即<code>d[i] = answer[i] - answer[i - 1]</code>。</p>
+<p>这样，我们每次遍历到<code>bookings[i] = [i, j, k]</code>，就只需要将<code>d[i]</code>增加<code>k</code>，<code>d[j + 1]</code>减少<code>k</code>即可，因为<code>i</code>到<code>j</code>之间，航班预订数量是没有变化的。</p>
+<p>最后，计算<code>answer[i] = answer[i - 1] + d[i]</code>，返回<code>answer</code>即可。</p>
+<h3 id="推演"><a href="#推演" class="headerlink" title="推演"></a>推演</h3><p>好吧，这样说可能有人没懂，我们按照题目的例子推演一次：</p>
+<ul>
+<li>初始航班预订数量数组 <code>answer = [0,0,0,0,0]</code>，差分数组<code>d = [0,0,0,0,0]</code></li>
+<li>当遍历到<code>bookings[0] = [1,2,10]</code>的时候，差分数组第1位加10，第3位减10，变成<code>d = [10,0,-10,0,0]</code></li>
+<li>同理，当遍历到<code>bookings[1] = [2,3,20]</code>的时候，差分数组变成<code>d = [10,20,-10,-20,0]</code></li>
+<li>当遍历到<code>bookings[2] = [2,5,25]</code>的时候，差分数组变成<code>d = [10,45,-10,-20,0]</code>，第6位要减25，我们也不需要了</li>
+<li>最后计算<code>answer</code>数组的值，<code>answer[0] = d[0] = 10</code>，<code>answer[1] = d[1] + answer[0] = 45 + 10 = 55</code>，<code>answer[2] = d[2] + answer[1] = -10 + 55 = 45</code>…</li>
+<li>最最后发现，只申请一个数组表示<code>d[]</code>和<code>answer[]</code>就可以了，over！</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] corpFlightBookings(</span><br><span class="line">        <span class="keyword">int</span>[][] bookings, <span class="keyword">int</span> n) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] answer = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历bookings 计算航班i+1 对航班i 变化的预订数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span>[] b : bookings) &#123;</span><br><span class="line">        <span class="comment">// 增加的预订数</span></span><br><span class="line">        answer[b[<span class="number">0</span>] - <span class="number">1</span>] += b[<span class="number">2</span>];</span><br><span class="line">        <span class="comment">// 防止数组越界</span></span><br><span class="line">        <span class="keyword">if</span> (b[<span class="number">1</span>] &lt; n) &#123;</span><br><span class="line">            <span class="comment">// 减少的预订数量</span></span><br><span class="line">            answer[b[<span class="number">1</span>]] -= b[<span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 航班i的预订数等于,i-1的预订数，加i时刻变化的预定数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        answer[i] += answer[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="拼车"><a href="#拼车" class="headerlink" title="拼车"></a>拼车</h2><blockquote>
+<p>你以为这就完了吗？不要太天真。再来看一下这个题，或许会给你带来新思路。</p>
+</blockquote>
+<h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>假设你是一位顺风车司机，车上最初有 <code>capacity</code> 个空座位可以用来载客。由于道路的限制，车 只能 向一个方向行驶（也就是说，不允许掉头或改变方向，你可以将其想象为一个向量）。</p>
+<p>这儿有一份行程计划表 <code>trips[][]</code>，其中 <code>trips[i] = [num_passengers, start_location, end_location]</code> 包含了你的第 <code>i</code> 次行程信息：</p>
+<p>必须接送的乘客数量；<br>乘客的上车地点；<br>以及乘客的下车地点。<br>这些给出的地点位置是从你的 初始 出发位置向前行驶到这些地点所需的距离（它们一定在你的行驶方向上）。</p>
+<p>请你根据给出的行程计划表和车子的座位数，来判断你的车是否可以顺利完成接送所用乘客的任务（当且仅当你可以在所有给定的行程中接送所有乘客时，返回 <code>true</code>，否则请返回 <code>false</code>）。</p>
+<p>示例 1：</p>
+<blockquote>
+<p>输入：trips = [[2,1,5],[3,3,7]], capacity = 4</p>
+<p>输出：false</p>
+</blockquote>
+<p>示例 2：</p>
+<blockquote>
+<p>输入：trips = [[2,1,5],[3,3,7]], capacity = 5</p>
+<p>输出：true</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li>你可以假设乘客会自觉遵守 “先下后上” 的良好素质</li>
+<li><code>trips.length &lt;= 1000</code></li>
+<li><code>1 &lt;= trips[i][0] &lt;= 100</code></li>
+</ul>
+<h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>这道题实际上就是问，车的座位数量是否能满足每个行程<code>i</code>的乘客，即每个乘客都坐上座位，能则返回<code>true</code>，否则返回<code>false</code>。</p>
+<p>如果我们能计算出，行程<code>i</code>，要乘车的乘客的数量，然后跟<code>capacity</code>对比一下，就能得到答案了。</p>
+<p>很显然，<strong>要乘车的乘客的数量 = 车上原来乘客的数量 - 下车乘客数量 + 上车乘客数量</strong>。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>我们可以用数组或者Map记录，行程<code>i</code>，下车乘客的数量和上车乘客的数量，然后行程开始到结束，计算要乘车的乘客数量，并与<code>capacity</code>比较。</p>
+<h3 id="代码实现Map版"><a href="#代码实现Map版" class="headerlink" title="代码实现Map版"></a>代码实现Map版</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">carPooling</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">int</span>[][] trips, <span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用TreeMap 是为了让元素根据key排序</span></span><br><span class="line">    TreeMap&lt;Integer, Integer&gt; map =</span><br><span class="line">            <span class="keyword">new</span> TreeMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span>[] t : trips) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = map.getOrDefault(t[<span class="number">1</span>], <span class="number">0</span>) + t[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// 上车乘客数量</span></span><br><span class="line">        map.put(t[<span class="number">1</span>], v);</span><br><span class="line">        v = map.getOrDefault(t[<span class="number">2</span>], <span class="number">0</span>) - t[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// 下车乘客数量</span></span><br><span class="line">        map.put(t[<span class="number">2</span>], v);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Map.Entry&lt;Integer, Integer&gt; entry</span><br><span class="line">            : map.entrySet()) &#123;</span><br><span class="line">        Integer value = entry.getValue();</span><br><span class="line">        <span class="comment">// 当前数量=之前数量+变化的数量</span></span><br><span class="line">        cur += value;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cur &gt; capacity) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="代码实现数组版"><a href="#代码实现数组版" class="headerlink" title="代码实现数组版"></a>代码实现数组版</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">carPooling</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">int</span>[][] trips, <span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 最远行程 数组长度</span></span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span>[] t : trips) &#123;</span><br><span class="line">        max = Math.max(max, t[<span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 所有要乘车的乘客数量</span></span><br><span class="line">    <span class="keyword">int</span>[] passengers = <span class="keyword">new</span> <span class="keyword">int</span>[max + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span>[] t : trips) &#123;</span><br><span class="line">        passengers[t[<span class="number">1</span>]] += t[<span class="number">0</span>];</span><br><span class="line">        passengers[t[<span class="number">2</span>]] -= t[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> passenger : passengers) &#123;</span><br><span class="line">        <span class="comment">// 当前数量 = 之前数量 + 变化的数量</span></span><br><span class="line">        cur += passenger;</span><br><span class="line">        <span class="keyword">if</span> (cur &gt; capacity) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="回头"><a href="#回头" class="headerlink" title="回头"></a>回头</h3><p><strong>拼车</strong>的代码与场景感觉好理解一些，因为生活中我们就是这样，先下后上，能不能坐上座，就看车上原来有多少人，还有下车多少人。</p>
+<p>我们再回来来看<strong>航班预订统计</strong>这题，实际上跟<strong>拼车</strong>是完全一样的题目。</p>
+<p>我看到有人问，计算<code>bookings[i] = [i, j, k]</code>预订变化数量的时候，为啥是第<code>j + 1</code>的位置要减<code>k</code>，而不是<code>j</code>的位置呢？因为，<code>j - 1</code>的位置，航班预订座位数量应该加<code>k</code>，而<code>j</code>的位置，航班预订座位数量也加<code>k</code>，所以<code>j</code>和<code>j - 1</code>之间数量是没有变化的。但是，<code>j + 1</code>的位置航班数量不再加<code>k</code>了，所以<code>j + 1</code>相对于<code>j</code>位置航班预订数量是减少<code>k</code>的。</p>
+<p>而<strong>拼车</strong>这道题，<code>trips[i][j]</code>，在<code>j</code>位置，车到站了，乘客就下车了，再坐一站就过站了…</p>
+<p>总之，两道题本质是完全一样的，只不过略微有些细节不同。</p>
+
+    </div>
+
+    
+    
+    
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="https://img.iisheng.cn/qrcode_344.jpg" alt="iisheng wechat" style="width: 200px; max-width: 100%;">
+  <div>微信扫码关注 如逆水行舟 不进则退</div>
+</div>
+
+      
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/LeetCode/" rel="tag"><i class="fa fa-tag"></i> LeetCode</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/04/03/arraylist/" rel="next" title="ArrayList源码解析，老哥，来一起复习一哈？">
+                  <i class="fa fa-chevron-left"></i> ArrayList源码解析，老哥，来一起复习一哈？
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">2.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-m-n-解法"><span class="nav-number">3.</span> <span class="nav-text">O(m*n)解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-n-解法"><span class="nav-number">4.</span> <span class="nav-text">O(n)解法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-number">4.1.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">4.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推演"><span class="nav-number">4.3.</span> <span class="nav-text">推演</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">4.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拼车"><span class="nav-number">5.</span> <span class="nav-text">拼车</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-1"><span class="nav-number">5.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目分析"><span class="nav-number">5.2.</span> <span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">5.3.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现Map版"><span class="nav-number">5.4.</span> <span class="nav-text">代码实现Map版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现数组版"><span class="nav-number">5.5.</span> <span class="nav-text">代码实现数组版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回头"><span class="nav-number">5.6.</span> <span class="nav-text">回头</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" src="https://img.iisheng.cn/qrcode_344.jpg" alt="iisheng">
+  <p class="site-author-name" itemprop="name">iisheng</p>
+  <div class="site-description" itemprop="description">欢迎关注公众号【如逆水行舟】</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/iisheng" title="GitHub &rarr; https://github.com/iisheng" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://iisheng.cn/" title="https://iisheng.cn/">如逆水行舟</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://tech.meituan.com/" title="https://tech.meituan.com/" rel="noopener" target="_blank">美团技术团队</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://jm.taobao.org/" title="http://jm.taobao.org/" rel="noopener" target="_blank">阿里中间件团队</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://ifeve.com/" title="http://ifeve.com/" rel="noopener" target="_blank">并发编程网</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://tech.youzan.com/" title="https://tech.youzan.com/" rel="noopener" target="_blank">有赞技术团队</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://howtodoinjava.com/" title="https://howtodoinjava.com/" rel="noopener" target="_blank">How to do in Java</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iisheng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+<script src="/js/utils.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script><script src="/js/bookmark.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+
+<style type="text/css">
+    div.info{
+        display: none;
+    }
+</style>
+
+<script>
+NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'rg3ENNSz9NdUgFiPGNmaBQ4g-gzGzoHsz',
+    appKey: 'QsUTkeEptiC7SxxVFOyBpMp9',
+    placeholder: 'Show me the code...',
+    avatar: 'wavatar',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  }, Window.Valine);
+});
+</script>
+
+
+
+
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
+<script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="https://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+
+
+<!-- 样式二（飘动的彩带） -->
+<!-- <script src="https://g.joyinshare.com/hc/piao.js" type="text/javascript"></script> -->
+
+<!-- 雪花特效 -->
+<script type="text/javascript">
+  var windowWidth = $(window).width();
+  if (windowWidth > 480) {
+    document.write('<script type="text/javascript" src="/js/snow.js"><\/script>');
+  }
+</script>
+
+
+<!-- 看板娘 -->
+<script src="/live2d-widget/autoload.js"></script>
+
+

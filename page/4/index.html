@@ -263,7 +263,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/03/18/arraylist/">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/04/01/restful/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="iisheng">
@@ -278,7 +278,7 @@
         <h1 class="post-title" itemprop="name headline">
           
             
-            <a href="/2019/03/18/arraylist/" class="post-title-link" itemprop="url">JDK源码解析之ArrayList</a>
+            <a href="/2019/04/01/restful/" class="post-title-link" itemprop="url">RestFul API设计指南</a>
           
         </h1>
 
@@ -293,7 +293,123 @@
                 
               
 
-              <time title="创建时间：2019-03-18 13:54:04" itemprop="dateCreated datePublished" datetime="2019-03-18T13:54:04+08:00">2019-03-18</time>
+              <time title="创建时间：2019-04-01 09:50:00" itemprop="dateCreated datePublished" datetime="2019-04-01T09:50:00+08:00">2019-04-01</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/🙄设计思想/" itemprop="url" rel="index">
+                    <span itemprop="name">🙄设计思想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">评论次数：</span>
+    
+    <a title="valine" href="/2019/04/01/restful/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/01/restful/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="RESTful是什么"><a href="#RESTful是什么" class="headerlink" title="RESTful是什么"></a>RESTful是什么</h3><p>REST（Representational State Transfe）是一种架构风格，遵循REST原则的架构我们就称为RESTful架构。Representational State Transfe 直译过来就是【表现层状态转化】，其实它省略了主语，表现层指的是【资源】的表现层，通俗的讲就是：资源在网络中以某种形式进行状态转移。</p>
+<h3 id="为什么要用RESTful"><a href="#为什么要用RESTful" class="headerlink" title="为什么要用RESTful"></a>为什么要用RESTful</h3><p>RESTful 给人的感觉是优雅、规范、易懂，一个结构清晰、易于理解的API完全可以省略许多无意义的沟通和文档。大家都使用相同的标准，有利于团队的整体效率。</p>
+<h3 id="接口设计"><a href="#接口设计" class="headerlink" title="接口设计"></a>接口设计</h3><p>一般接口就是增删改查，RESTful API就像通用的模板，我们以文章（Article）举例，那么基础的URL就有一下几种：</p>
+<ul>
+<li><code>GET /articles:</code> 文章列表</li>
+<li><code>GET /articles/id:</code> 文章详情</li>
+<li><code>POST /articles:</code> 创建文章</li>
+<li><code>PUT /articles/id:</code> 修改文章</li>
+<li><code>DELETE /articles/id:</code> 删除文章</li>
+</ul>
+<p>RESTful 中使用GET、POST、PUT和DELETE来分别表示资源的查询、创建、更新和删除，并且除了POST其他三种都具备幂等性（多次请求效果相同），POST和PUT最大的区别就是幂等性，所以PUT也可以用于创建，只要在创建前就确定好资源的id。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/04/01/restful/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://iisheng.cn/2019/03/25/servlet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iisheng">
+      <meta itemprop="description" content="欢迎关注公众号【如逆水行舟】">
+      <meta itemprop="image" content="https://img.iisheng.cn/qrcode_344.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="如逆水行舟">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            
+            <a href="/2019/03/25/servlet/" class="post-title-link" itemprop="url">Servlet源码解析</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-25 09:50:00" itemprop="dateCreated datePublished" datetime="2019-03-25T09:50:00+08:00">2019-03-25</time>
             </span>
           
             <span class="post-meta-item">
@@ -323,8 +439,8 @@
       </span>
       <span class="post-meta-item-text">评论次数：</span>
     
-    <a title="valine" href="/2019/03/18/arraylist/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/03/18/arraylist/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/03/25/servlet/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/03/25/servlet/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -339,13 +455,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>JDK版本 JDK 8</p>
-<h3 id="ArrayList类图"><a href="#ArrayList类图" class="headerlink" title="ArrayList类图"></a>ArrayList类图</h3><p>ArrayList继承AbstractList，实现了List，Collection接口。</p>
-<p><img src="/images/arraylist-class-diagram.png" alt></p>
+          <h3 id="一个简单的Servlet请求"><a href="#一个简单的Servlet请求" class="headerlink" title="一个简单的Servlet请求"></a>一个简单的Servlet请求</h3><ol>
+<li>新建HelloController继承HttpServlet</li>
+<li>在web.xml中，注册HelloController，或者使用@WebServlet注解注册HelloController</li>
+<li>重写doGet()，doPost()或者其他doXxx()方法</li>
+</ol>
+<h3 id="Servlet请求参数"><a href="#Servlet请求参数" class="headerlink" title="Servlet请求参数"></a>Servlet请求参数</h3><p>HttpServletRequest和HttpServletResponse是doXxx()方法的默认参数。</p>
+<h3 id="HttpServletRequest"><a href="#HttpServletRequest" class="headerlink" title="HttpServletRequest"></a>HttpServletRequest</h3><p>HttpServletRequest代表浏览器发送给服务器的请求报文。该对象由web服务器创建（如Tomcat），最终作为参数传递到doXxx()或者其他方法中，我们可以在doXxx()方法中直接使用</p>
+<ol>
+<li><p>获取用户发送的请求参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getParmater(<span class="string">"name"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取项目的名字</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getContextPath();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2019/03/18/arraylist/#more" rel="contents">
+              <a class="btn" href="/2019/03/25/servlet/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -637,7 +765,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -650,7 +778,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -663,7 +791,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://iisheng.cn/2020/04/03/corporate-flight-bookings/</loc>
+    <lastmod>2020-04-03</lastmod>
+  </url>  <url>
+    <loc>https://iisheng.cn/2020/04/03/arraylist/</loc>
+    <lastmod>2020-04-03</lastmod>
+  </url>  <url>
     <loc>https://iisheng.cn/2019/10/22/java-memory-area/</loc>
     <lastmod>2020-03-29</lastmod>
   </url>  <url>
@@ -74,9 +80,6 @@
     <lastmod>2019-10-20</lastmod>
   </url>  <url>
     <loc>https://iisheng.cn/2019/03/25/servlet/</loc>
-    <lastmod>2019-10-20</lastmod>
-  </url>  <url>
-    <loc>https://iisheng.cn/2019/03/18/arraylist/</loc>
     <lastmod>2019-10-20</lastmod>
   </url>  <url>
     <loc>https://iisheng.cn/2019/04/01/restful/</loc>

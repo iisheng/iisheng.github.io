@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iisheng.cn/2020/04/03/corporate-flight-bookings/</loc>
+    
+    <lastmod>2020-04-03T14:53:40.322Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://iisheng.cn/2020/04/03/arraylist/</loc>
+    
+    <lastmod>2020-04-03T14:53:07.462Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://iisheng.cn/2019/10/22/java-memory-area/</loc>
     
     <lastmod>2020-03-29T08:46:06.004Z</lastmod>
@@ -194,13 +208,6 @@
     <loc>https://iisheng.cn/2019/03/25/servlet/</loc>
     
     <lastmod>2019-10-20T08:23:22.311Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://iisheng.cn/2019/03/18/arraylist/</loc>
-    
-    <lastmod>2019-10-20T08:23:22.306Z</lastmod>
     
   </url>
   
