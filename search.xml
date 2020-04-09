@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>航班预订统计，听说这题有的人看了题解还没懂？</title>
-    <url>/2020/04/03/corporate-flight-bookings/</url>
+    <url>/2020/04/09/corporate-flight-bookings/</url>
     <content><![CDATA[<center>以清晰，易于理解的思维，讲解<a href="https://leetcode-cn.com/problems/corporate-flight-bookings/" target="_blank" rel="noopener">航班预订统计</a>和<a href="https://leetcode-cn.com/problems/car-pooling/" target="_blank" rel="noopener">拼车</a>，这两道题。欢迎大家一起来刷题。</center>
 
 <a id="more"></a>
@@ -69,7 +69,7 @@
 <p>总之，两道题本质是完全一样的，只不过略微有些细节不同。</p>
 ]]></content>
       <categories>
-        <category>😒工具</category>
+        <category>😒算法</category>
       </categories>
       <tags>
         <tag>LeetCode</tag>
