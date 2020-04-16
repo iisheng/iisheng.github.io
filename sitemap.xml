@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iisheng.cn/2020/04/16/builder-pattern/</loc>
+    
+    <lastmod>2020-04-16T15:15:16.626Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://iisheng.cn/2020/04/09/corporate-flight-bookings/</loc>
     
     <lastmod>2020-04-11T07:04:09.954Z</lastmod>
