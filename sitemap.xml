@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iisheng.cn/2020/04/30/uml/</loc>
+    
+    <lastmod>2020-04-29T16:03:26.328Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://iisheng.cn/2020/04/16/builder-pattern/</loc>
     
     <lastmod>2020-04-16T15:15:16.626Z</lastmod>
@@ -173,13 +180,6 @@
     <loc>https://iisheng.cn/2019/10/02/interview-java-collection/</loc>
     
     <lastmod>2019-10-20T10:58:43.446Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://iisheng.cn/2019/05/06/uml/</loc>
-    
-    <lastmod>2019-10-20T09:36:12.189Z</lastmod>
     
   </url>
   
