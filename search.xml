@@ -1,6 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>我就想加个索引，怎么就这么难？</title>
+    <url>/2020/06/11/add-index/</url>
+    <content><![CDATA[<blockquote class="blockquote-center"><p><strong>领导让我SQL优化，我直接把服务干挂了…</strong></p>
+</blockquote>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>MySQL</code>大表加字段或者加索引，是有一定风险的。</p>
+<p>大公司一般有<code>DBA</code>，会帮助开发解决这个痛点，可是<code>DBA</code>是怎么做的呢？</p>
+<p>小公司没有<code>DBA</code>，作为开发我们的责任就更大了。那么我们怎么才能安全的加个索引呢？</p>
+<p>今天，我们通过模拟案例以及原理分析，去弄清楚<code>MySQL</code>中<code>DDL</code>的风险，以及如何避免事故发生。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="软件以及项目"><a href="#软件以及项目" class="headerlink" title="软件以及项目"></a>软件以及项目</h3><ol>
+<li>安装本地版本MySQL。</li>
+<li>一个简单的增删改查项目。</li>
+<li>使用JMeter进行并发请求测试。</li>
+</ol>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 如果存在user表则删除</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span>  <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建user表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`user`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'自增主键'</span>,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'姓名'</span>,</span><br><span class="line">  <span class="string">`age`</span> <span class="built_in">int</span>(<span class="number">2</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'年龄'</span>,</span><br><span class="line">  <span class="string">`address`</span> <span class="built_in">varchar</span>(<span class="number">30</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'地址'</span>,</span><br><span class="line">  <span class="string">`description`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'描述'</span>,</span><br><span class="line">  <span class="string">`test_id`</span> <span class="built_in">bigint</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'测试 id'</span>,</span><br><span class="line">  <span class="string">`create_time`</span> <span class="built_in">timestamp</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'创建时间'</span>,</span><br><span class="line">  <span class="string">`modify_time`</span> <span class="built_in">timestamp</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'修改时间'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4 <span class="keyword">COMMENT</span>=<span class="string">'mysql ddl测试表'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="创建存储过程"><a href="#创建存储过程" class="headerlink" title="创建存储过程"></a>创建存储过程</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 如果存在test存储过程则删除</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`test`</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建无参存储过程，名称为test</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> <span class="keyword">test</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="comment"># 声明变量</span></span><br><span class="line">    <span class="keyword">DECLARE</span> i <span class="built_in">INT</span>;</span><br><span class="line">    <span class="comment"># 变量赋值</span></span><br><span class="line">    <span class="keyword">SET</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="comment"># 结束循环的条件: 当i等于100万时跳出while循环</span></span><br><span class="line">    WHILE i &lt; 1000000 DO</span><br><span class="line">    <span class="comment"># 往t_test表添加数据</span></span><br><span class="line">    <span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`test`</span>.user (<span class="string">`name`</span>, <span class="string">`age`</span>, <span class="string">`address`</span>, </span><br><span class="line">                             <span class="string">`description`</span>, <span class="string">`test_id`</span>, <span class="string">`create_time`</span>, <span class="string">`modify_time`</span>)</span><br><span class="line">    <span class="keyword">VALUES</span> (<span class="string">'iisheng'</span>, <span class="number">26</span>, <span class="string">'北京'</span>, <span class="string">'如逆水行舟'</span>, <span class="keyword">LAST_INSERT_ID</span>() + <span class="number">1</span>, </span><br><span class="line">            <span class="string">'2020-05-17 16:01:44'</span>, <span class="string">'2020-05-17 16:01:51'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 循环一次, i加1</span></span><br><span class="line">    <span class="keyword">SET</span> i = i + <span class="number">1</span>;</span><br><span class="line">    <span class="comment"># 结束while循环</span></span><br><span class="line">    <span class="keyword">END</span> <span class="keyword">WHILE</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>下面的创建存储过程语句，是在<code>IDE</code>内选择代码块执行的，如果在<code>Terminal</code>中执行，需要使用<code>DELIMITER</code>关键字，更改语句结束标志。</p>
+</blockquote>
+<h3 id="调用存储过程，生成百万数据"><a href="#调用存储过程，生成百万数据" class="headerlink" title="调用存储过程，生成百万数据"></a>调用存储过程，生成百万数据</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CALL</span> <span class="keyword">test</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="开启慢SQL日志"><a href="#开启慢SQL日志" class="headerlink" title="开启慢SQL日志"></a>开启慢SQL日志</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看MySQL是否开启慢日志记录</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'slow_query_log'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启慢SQL日志记录</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> slow_query_log = <span class="string">'ON'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看慢SQL日志位置</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'slow_query_log_file'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看执行多久的SQL才算慢SQL</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'long_query_time'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置慢SQL执行时间 只有新session才生效</span></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> long_query_time = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通常情况下这些会在MySQL的配置文件中配置，启动时生效。</p>
+</blockquote>
+<h3 id="几个有用的SQL语句"><a href="#几个有用的SQL语句" class="headerlink" title="几个有用的SQL语句"></a>几个有用的SQL语句</h3><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 展示哪些线程正在运行</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">PROCESSLIST</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看正在执行的事务</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.INNODB_TRX;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看正在锁的事务</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.INNODB_LOCKS;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看正在等待锁的事务</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.INNODB_LOCK_WAITS;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示innodb存储引擎状态的大量信息，包含死锁日志</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">ENGINE</span> <span class="keyword">INNODB</span> <span class="keyword">STATUS</span> ;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示数据库最大连接数的配置</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'max_connections'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看存在哪些触发器</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.TRIGGERS;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看MySQL版本</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">VERSION</span>();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>后面我们会主要用前两条。</p>
+</blockquote>
+<h2 id="事故现场"><a href="#事故现场" class="headerlink" title="事故现场"></a>事故现场</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ol>
+<li>我创建的<code>user</code>表除了主键是没有其他索引的。</li>
+<li>测试的<code>user</code>表数据量为一百万。</li>
+<li>测试<code>MySQL</code>版本为<code>5.7.28</code>。</li>
+<li>测试项目的逻辑：随机get()、list()、update()、create()，每个操作都开启事务，并且休眠500毫秒。</li>
+</ol>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><blockquote>
+<p>运行测试项目</p>
+</blockquote>
+<p><img src="https://img.iisheng.cn/project-start-success.png" alt="项目启动图"></p>
+<p>这里我们可以看到，项目已经正常启动了。</p>
+<blockquote>
+<p><code>postman</code>调用一下接口</p>
+</blockquote>
+<p><img src="https://img.iisheng.cn/postman-success.png?1" alt="接口请求图"></p>
+<p>这里我们随便测试一个接口，请求时间2秒左右。</p>
+<blockquote>
+<p>执行JMeter的Test Plan，观察项目日志</p>
+</blockquote>
+<p><img src="https://img.iisheng.cn/jmeter-config.png" alt="JMeter配置图"></p>
+<p>这里我们创建了四个线程组，每个线程组调用一个我们的接口。模拟10个人循环1000次的访问。</p>
+<p><img src="https://img.iisheng.cn/project-jmeter-part.png" alt="正常项目日志图"></p>
+<p>这里我们看到该请求频率下，日志无异常。</p>
+<blockquote>
+<p>慢SQL日志</p>
+</blockquote>
+<p><img src="https://img.iisheng.cn/long-sql-log.png" alt="慢SQL日志图"></p>
+<p>这里我们看到，百万级的SQL，如果没加索引SQL执行时间还是比较长的，有的已经达到了2s。</p>
+<blockquote>
+<p>加个索引，再观察项目日志</p>
+</blockquote>
+<p><img src="https://img.iisheng.cn/after-add-index-project-log.png" alt="加索引过程日志图"></p>
+<p>这里我们看到，项目已经开始报错了，大量的<code>Connection is not available, request timed out after 30001ms</code>。</p>
+<blockquote>
+<p><code>SHOW PROCESSLIST</code>一下</p>
+</blockquote>
+<p><img src="https://img.iisheng.cn/alter-table-waiting.png" alt="PROCESSLIST图"></p>
+<p>这里我们看到，有大量的<code>Waiting for table metadata lock</code>。</p>
+<blockquote>
+<p><code>postman</code>再次调用一下接口</p>
+</blockquote>
+<p><img src="https://img.iisheng.cn/request-fail.png" alt="请求接口报错图"></p>
+<p>这个时候，调用接口已经报错了，响应时间也比较久。此时，服务对用户来说，已经基本不可用了。</p>
+<h2 id="为什么会这样？"><a href="#为什么会这样？" class="headerlink" title="为什么会这样？"></a>为什么会这样？</h2><blockquote>
+<p>我就想加个索引，怎么就这么难？</p>
+</blockquote>
+<p>看吧，就因为我加了个索引，服务就挂了，我没加之前还是好好的。遇到问题，我们要冷静，不是我们的锅坚决不能背，真的是我们的问题，下次一定要记得改正。那么，此刻的服务为什么就不可用了呢？</p>
+<p>首先我们要知道，在<code>InnoDB</code>事务中，锁是在需要的时候才加上的，但并不是不需要了就立刻释放，而是要等到事务结束时才释放。这个就是<strong>两阶段锁协议</strong>。</p>
+<p>然后，在<code>MySQL5.5</code>版本中引入了<code>MDL(Metadata Lock)</code>，当对一个表做增删改查操作的时候，加<code>MDL</code>读锁；当要对表做结构变更操作的时候，加<code>MDL</code>写锁。</p>
+<p>我们可以简单的尝试一下下面的情况。</p>
+<p><img src="https://img.iisheng.cn/ddl-lock-example.png" alt="DDL锁等待图"></p>
+<p><code>Session A</code>开启一个事务，执行了一个简单的查询语句。此时，<code>Session B</code>，执行另一个查询语句，可以成功。接着，<code>Session C</code>执行了一个<code>DDL</code>操作，加了个字段，因为<code>Session A</code>的事务没有提交，而且<code>Session A</code>持有<code>MDL</code>读锁，<code>Session C</code>获取不到<code>MDL</code>写锁，所以<code>Session C</code>堵塞等待<code>MDL</code>写锁。又由于<code>MDL</code>写锁获取优先级高于<code>MDL</code>读锁，因此<code>Session D</code>这个时候也获取不到<code>MDL</code>读锁，等待<code>Session C</code>获取到<code>MDL</code>写锁之后它才能获取到<code>MDL</code>读锁。</p>
+<p>我们发现，DDL操作之前如果存在长事务，一直不提交，DDL操作就会一直被堵塞，还会间接的影响后面其他的查询，导致所有的查询都被堵塞。</p>
+<p>这也就是为什么我们把服务干挂的原因了。</p>
+<h2 id="目前主流解决方案"><a href="#目前主流解决方案" class="headerlink" title="目前主流解决方案"></a>目前主流解决方案</h2><p>针对上面出现的情况，我们怎么解决呢？</p>
+<h3 id="MySQL5-6的Online-DDL"><a href="#MySQL5-6的Online-DDL" class="headerlink" title="MySQL5.6的Online DDL"></a>MySQL5.6的<code>Online DDL</code></h3><p><code>MySQL</code>从<code>5.6</code>开始，支持<code>Online DDL</code>。类似于这种的语句<code>ALTER TABLE user ADD INDEX idx_test_id (test_id), ALGORITHM=INPLACE, LOCK=NONE</code>在普通的<code>ALTER TABLE</code>或者<code>CREATE INDEX</code>语句后面添加<code>ALGORITHM</code>参数和<code>LOCK</code>参数。</p>
+<blockquote>
+<p>实际上，<code>ALTERT TABLE</code>语句如果不加<code>ALGORITHM</code>参数，默认就会选择<code>ALGORITHM=INPLACE</code>的形式，如果执行的语句支持<code>INPLACE</code>，否则，会使用<code>ALGORITHM=COPY</code>。</p>
+</blockquote>
+<p>以前写<code>SQL</code>只会<code>ALTER TABLE</code>不知道后面还可以加<code>ALGORITHM</code>参数，后来知道了<code>Online DDL</code>，知道了可以加<code>ALGORITHM=INPLACE</code>，结果两种写法有的时候是一样的…</p>
+<p><img src="https://img.iisheng.cn/dev-mysql.png" alt="MySQL官网截图"></p>
+<p>这里顺便提一句，学习的途径有很多，但是官网，的确可以多看看。</p>
+<h3 id="使用pt-online-schema-change"><a href="#使用pt-online-schema-change" class="headerlink" title="使用pt-online-schema-change"></a>使用<code>pt-online-schema-change</code></h3><blockquote>
+<p>简单说一下怎么安装这个东西</p>
+</blockquote>
+<p>首先官网下载，然后校验以及安装，执行下面命令<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">perl Makefile.PL</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+<p>然后使用<code>CPAN</code>安装相关依赖（适用<code>Unix</code>），<code>CentOS</code>下直接<code>yum</code>更简单</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">perl -MCPAN -e shell</span><br><span class="line"><span class="meta">cpan&gt;</span> install DBI</span><br><span class="line"><span class="meta">cpan&gt;</span> install DBD::mysql</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>我自己Mac安装没啥问题，公司Mac安装失败了，然后升级了一下Perl版本就可以了。</p>
+</blockquote>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pt-online-schema-change --charset=utf8 --no-check-replication-filters --no-version-check --user=user --password=pass --host=host_addr  P=3306,D=database,t=table --alter "ADD INDEX idx_name(field_name)" --execute</span><br></pre></td></tr></table></figure>
+<h3 id="我的脚本添加索引"><a href="#我的脚本添加索引" class="headerlink" title="我的脚本添加索引"></a>我的脚本添加索引</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pt-online-schema-change --charset=utf8 --no-check-replication-filters --no-version-check --user=root --password=mGy6GAzdawFPTJ7R --host=127.0.0.1  P=3306,D=test,t=user --alter "add INDEX idx_test_id(test_id)" --execute</span><br></pre></td></tr></table></figure>
+<h2 id="使用pt-osc测试"><a href="#使用pt-osc测试" class="headerlink" title="使用pt-osc测试"></a>使用<code>pt-osc</code>测试</h2><p><img src="https://img.iisheng.cn/pt-osc-success02.png" alt="pt-osc执行图"></p>
+<p>这里我们看到，<code>pt-osc</code>创建触发器的时候卡在那了。实际上这里也是在等待锁。</p>
+<p>最终成功了，但是整个过程时间比较久。过程中我们也发现了一些死锁的日志。</p>
+<p><img src="https://img.iisheng.cn/pt-osc-deadlock.png" alt="pt-osc死锁日志"></p>
+<p>其实，这个跟我的代码有一定的关系，我的测试代码随机数生成的范围是<code>[0, 20000]</code>，然后我根据生成的随机数，去查询数据库，锁的冲突会比较多。把范围修改为<code>[0, 1000000]</code>会好很多。</p>
+<h2 id="再看Online-DDL"><a href="#再看Online-DDL" class="headerlink" title="再看Online DDL"></a>再看<code>Online DDL</code></h2><p>因为刚才我们发现了，自己代码写的有一些问题，所以我们刚才的结论也有一些影响。我们把随机数的范围改到100万，重新测试一遍。</p>
+<p><img src="https://img.iisheng.cn/online-ddl-success.png" alt="Online DDL 成功"></p>
+<p>这次<code>Online DDL</code>也成功了。但是也是有一些连接超时的日志。之前的测试如果一直执行下去，也会成功，只不过堵塞时间太长，对用户影响太大，我就停止算执行失败了。</p>
+<blockquote>
+<p>实际效果跟机器性能也是有一些关系的，这里的关键点在于拿<code>MDL</code>写锁的等待时间，这个时间稍微久一些就会对用户造成很大的影响。</p>
+</blockquote>
+<h2 id="pt-osc执行过程"><a href="#pt-osc执行过程" class="headerlink" title="pt-osc执行过程"></a><code>pt-osc</code>执行过程</h2><ol>
+<li>创建一个和原表表结构一样的临时表(<code>_tablename_new</code>)，执行<code>alter</code>修改临时表表结构。</li>
+<li>在原表上创建3个与<code>insert</code> <code>delete</code> <code>update</code>对应的触发器，用于<code>copy</code>数据的过程中，在原表的更新操作，更新到新表。</li>
+<li>从原表拷贝数据到临时表，拷贝过程中在原表进行的写操作都会更新到新建的临时表。</li>
+<li><code>rename</code>原数据表为<code>old</code>表，把新表<code>rename</code>为原表名，并将<code>old</code>表删除。</li>
+<li>删除触发器。</li>
+</ol>
+<p>这里面创建、删除触发器和<code>rename</code>表的时候都会尝试获取<code>DML</code>写锁，如果获取不到会等待。就是我们看到的<code>Waiting for table metadata lock</code>。</p>
+<p>所以，这些时间段如果长时间获取不到锁，就会一直堵塞，还是会出现问题的。</p>
+<h2 id="Online-DDL执行过程"><a href="#Online-DDL执行过程" class="headerlink" title="Online DDL执行过程"></a><code>Online DDL</code>执行过程</h2><ol>
+<li>拿<code>MDL</code>写锁</li>
+<li>降级成<code>MDL</code>读锁</li>
+<li>真正做<code>DDL</code></li>
+<li>升级成<code>MDL</code>写锁</li>
+<li>释放<code>MDL</code>锁</li>
+</ol>
+<p><code>1、4</code>如果没有锁冲突，执行时间非常短。第3步占用了<code>DDL</code>绝大部分时间，这期间这个表可以正常读写数据，因此称为<strong>online</strong>。</p>
+<p>但是，如果拿锁的时候没拿到，或者升级<code>MDL</code>写锁不能成功，就会等待，我们又会看到<code>Waiting for table metadata lock</code>，然后就接着的一系列问题了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>加个索引，说难也难，说不难也不难。如果数据量大，又存在长事务，加索引的过程又有用户访问，<code>Online DDL</code>和<code>pt-osc</code>都不能保证对业务没有影响。但是如果我们<code>SQL</code>的执行时间比较短，或者我们加索引的时候，对应的业务没有多少请求。那么我们就可以很快的加完索引。</p>
+<p>加字段也是类似的过程，但是如果我们能保证没有慢<code>SQL</code>，那么就不会存在长事务，那么执行时间就会很快，对用户就可以做到几乎没有影响。至于选择<code>Online DDL</code>还是<code>pt-osc</code>就要看他们的一些限制以及自己的场景需求了。感兴趣的同学，自己尝试一下。</p>
+<h2 id="最后想说"><a href="#最后想说" class="headerlink" title="最后想说"></a>最后想说</h2><p>当万丈高楼崩塌的时候，超人也不能将它复原。我们应该做的，是有一个好的规范，好的认知，好的监控，在问题没有出现的时候，就将问题扼杀在摇篮中。而不是让问题，日渐壮大，大到覆水难收…</p>
+<p><sub>参考文献：</sub><br><br><sub>[1]:《MySQL实战45讲》</sub><br><br><sub>[2]: <a href="https://dev.mysql.com/doc/refman/5.7/en/" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/</a></sub><br><br><sub>[3]: <a href="https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html" target="_blank" rel="noopener">https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html</a></sub><br></p>
+]]></content>
+      <categories>
+        <category>😶数据库</category>
+      </categories>
+      <tags>
+        <tag>DDL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>UML科普文，一篇文章掌握14种UML图</title>
     <url>/2020/04/30/uml/</url>
     <content><![CDATA[<blockquote class="blockquote-center"><p><strong>22张图讲解UML2.0的14种图…</strong></p>
